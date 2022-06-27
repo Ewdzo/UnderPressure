@@ -16,11 +16,14 @@ function getRandomKey() {
     return key = { name: String.fromCharCode(keyCode), code: keyCode }; 
 }
 
-key = getRandomKey();
+// Key Chooser 
 
-//
+function setKey() { 
+    key = getRandomKey();
+    console.log(`Press ${key.name}`);
+};
 
-console.log(`Press ${key.name}`)
+// Key Press Listener
 
 window.addEventListener("keydown", checkKeyPressed, false);
 
@@ -31,4 +34,9 @@ function checkKeyPressed(event) {
     else {
         console.log('Not that one')
     }
+    setKey();
 }
+
+// First Run
+
+setKey();
