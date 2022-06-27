@@ -3,7 +3,7 @@
 let scoreboard;
 let score = 0;
 let streak = 0;
-let keyName = getRandomKey();
+let key;
 
 // Random Key Chooser
 
@@ -13,17 +13,19 @@ function getRandomInteger() {
 
 function getRandomKey() {
     keyCode = getRandomInteger();
-    return key = { keyName: String.fromCharCode(keyCode), keyCode: keyCode }; 
+    return key = { name: String.fromCharCode(keyCode), code: keyCode }; 
 }
+
+key = getRandomKey();
 
 //
 
-console.log(`Press ${keyName}`)
+console.log(`Press ${key.name}`)
 
 window.addEventListener("keydown", checkKeyPressed, false);
 
 function checkKeyPressed(event) {
-    if (event.keyCode == '65') {
+    if (event.keyCode == key.code) {
         console.log('Congrats');
     }
     else {
