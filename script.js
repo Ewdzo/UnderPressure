@@ -1,14 +1,34 @@
 // Variables 
 
-let scoreboard;
+const scoreboard = document.getElementById('scoreboard');
+const result = document.getElementById('result');
+const input = document.getElementById('input');
 let score = 0;
 let streak = 0;
 let key;
 
+// Score and Streak
+
+function IncreaseScore(points) {
+    if (points > 0) {
+        score += points;
+    } 
+    else {
+        score += 1;
+    }
+};
+
+function updateScoreboard() {scoreboard.innerHTML = `Score: ${score} | Streak: ${streak};`};
+
+function reset () {
+    score = 0;
+    streak = 0;
+}
+
 // Random Key Chooser
 
 function getRandomInteger() {
-    return Math.floor(Math.random() * (25) ) + 65;
+    return Math.floor(Math.random()*(25)) + 65;
 };
 
 function getRandomKey() {
@@ -20,7 +40,7 @@ function getRandomKey() {
 
 function setKey() { 
     key = getRandomKey();
-    console.log(`Press ${key.name}`);
+    input.innerHTML = `Press ${key.name}`;
 };
 
 // Key Press Listener
@@ -29,14 +49,18 @@ window.addEventListener("keydown", checkKeyPressed, false);
 
 function checkKeyPressed(event) {
     if (event.keyCode == key.code) {
-        console.log('Congrats');
+        result.innerHTML = 'Nice one!';
+        IncreaseScore(streak)
+        streak += 1;
     }
     else {
-        console.log('Not that one')
+        result.innerHTML = 'Not that one';
+        streak = 0;
     }
     setKey();
+    updateScoreboard();
 }
 
 // First Run
 
-setKey();
+document.getElementById('start').onclick = () => { setKey() + reset() + updateScoreboard(); };
