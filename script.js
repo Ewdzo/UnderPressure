@@ -5,6 +5,7 @@ const result = document.getElementById('result');
 const input = document.getElementById('input');
 let score = 0;
 let streak = 0;
+let expireTime = 5000;
 
 // Random Key Chooser
 
@@ -24,7 +25,7 @@ function SetKey() {
     input.innerHTML = `Press ${key.name}`;
     ClearAllTimeouts();
 
-    return expiringTime = setTimeout(MissKey, 1000);
+    return expiringTime = setTimeout(MissKey, expireTime);
     // Sets a key using GetRandomKey, displays it on the HTML, clears all timeouts from previous keys to be pressed and defines a new one to the key to be pressed
 };
 
@@ -48,9 +49,11 @@ function WrongKey() {
 function CheckKeyPressed(event) {
     if (event.keyCode == key.code) {
         RightKey();
+        expireTime -= 5;
     }
     else {
         WrongKey();
+        expireTime = 5000;
     }
     SetKey();
     UpdateScoreboard();
@@ -83,7 +86,7 @@ function MissKey () {
 };
 
 function UpdateScoreboard() {
-    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak};`
+    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms`;
     // Change the scoreboard HTML so it shows the current score and streak
 };
 
