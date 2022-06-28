@@ -6,8 +6,8 @@ As of know it works on a time-demand base, in which you will have a certain time
 
 <h1>Features:<h1> 
 
-<h3> Score, Streak, Multiplier of Points, Increasing Difficulty<h3>
+Score, Streak, Multiplier of Points, Increasing Difficulty
 
 <h1>Intended Features<h1>
 
-<h3> Hourglass, Ranking, Prompts History, Copypasta-Based Gameplay, Increased Points Reward Based on Time Remaining, Improved GUI<h3>
+Hourglass, Ranking, Prompts History, Copypasta-Based Gameplay, Increased Points Reward Based on Time Remaining, Improved GUI
