@@ -27,7 +27,7 @@ function SetKey() {
     input.innerHTML = `Press ${key.name}`;
     ClearAllTimeouts();
 
-    return expiringTime = setTimeout(MissKey, expireTime);
+    return timeout = setTimeout(MissKey, expireTime);
     // Sets a key using GetRandomKey, displays it on the HTML, clears all timeouts from previous keys to be pressed and defines a new one to the key to be pressed
 };
 
@@ -35,12 +35,20 @@ function SetKey() {
 
 // Key Listeners & Checkers
 
-function MissKey () {
+function NewKey() {
     SetKey();
+    setDifficulty();
+    UpdateScoreboard(); 
+    // Sets a new key to be pressed, checks necessity to change difficulty and updates the scoreboard
+};
+
+
+function MissKey() {
     streak = 0;
-    UpdateScoreboard();
     result.innerHTML = 'Missed one'
-    // Sets a new key to be pressed, nulify your streak, updates the scoreboard and warns you missed a key
+
+    NewKey();
+    // Sets a new key to be pressed, nulify your streak, updates the scoreboard, resets difficulty and warns you missed a key
 };
 
 function RightKey() {
@@ -53,8 +61,7 @@ function RightKey() {
 function WrongKey() {
     result.innerHTML = 'Not that one';
     streak = 0;
-    difficulty -= 1;
-    // If you miss a key, the difficulty is decreased, you lose your streak, but not points
+    // If you miss a key, you lose your streak, but not points
 };
 
 function CheckKeyPressed(event) {
@@ -65,10 +72,7 @@ function CheckKeyPressed(event) {
         WrongKey();
     }
 
-    SetKey();
-    UpdateScoreboard();
-    setDifficulty();
-    setDifficultySettings();
+    NewKey();
     // Checks if the key you pressed is equal to the one solicited, reacting accordingly to the result, defines a new key to be pressed and updates your scoreboard
 };
 
@@ -140,9 +144,7 @@ function setDifficulty() {
         default:
         console.log('Something went wrong while setting difficulty via score');
     };
-};
 
-function setDifficultySettings() {
     switch (difficulty) {
         case 1: 
             expireTime = 5000;
@@ -163,7 +165,7 @@ function setDifficultySettings() {
             expireTime = 1000;
             multiplier = 5;
             break;
-    
+        
         case (difficulty < 0):
             difficulty = 0;
             break;
