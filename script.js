@@ -182,7 +182,7 @@ function setDifficulty() {
 
     switch (difficulty) {
         case 1: 
-            expireTime = 50;
+            expireTime = 5000;
             multiplier = 1;
             break;
     
