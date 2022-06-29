@@ -7,7 +7,8 @@ let score = 0;
 let streak = 0;
 let multiplier;
 let expireTime = 5000;
-let difficulty;
+let difficulty = 1;
+let lifes = 3;
 
 // Random Key Chooser
 
@@ -39,16 +40,18 @@ function NewKey() {
     SetKey();
     setDifficulty();
     UpdateScoreboard(); 
+    DidYouLose();
     // Sets a new key to be pressed, checks necessity to change difficulty and updates the scoreboard
 };
 
 
 function MissKey() {
     streak = 0;
+    lifes -=1;
     result.innerHTML = 'Missed one'
 
     NewKey();
-    // Sets a new key to be pressed, nulify your streak, updates the scoreboard, resets difficulty and warns you missed a key
+    // Sets a new key to be pressed, nulify your streak, updates the scoreboard, decreases a life and warns you missed a key
 };
 
 function RightKey() {
@@ -61,6 +64,7 @@ function RightKey() {
 function WrongKey() {
     result.innerHTML = 'Not that one';
     streak = 0;
+    lifes -=1;
     // If you miss a key, you lose your streak, but not points
 };
 
@@ -93,21 +97,13 @@ function IncreaseScore(points) {
 };
 
 function UpdateScoreboard() {
-    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty}` ;
+    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty} | Lifes: ${lifes}` ;
     // Change the scoreboard HTML so it shows the current score and streak
 };
 
-function Reset () {
-    score = 0;
-    streak = 0;
-    UpdateScoreboard();
-    ClearAllTimeouts();
-    // Restarts the game, you score and streak are nulified, the score board is reseted and all timeouts to miss a key that are currently active are cleared
-};
 
 
-
-// Clear Miss Timeout
+// State-of-Play Functions
 
 function ClearAllTimeouts() {
     var id = window.setTimeout(function() {}, 0);
@@ -119,6 +115,45 @@ function ClearAllTimeouts() {
     // Clears all timeouts that might be active at the time
 };
 
+function Lose() {
+    ClearAllTimeouts();
+    UpdateScoreboard();
+    // WIP - SaveScore();
+    window.removeEventListener("keydown", CheckKeyPressed); // Clear listener to key press so the game stops
+
+    result.innerHTML = "You lost :("
+};
+
+function Reset() {
+    score = 0;
+    streak = 0;
+    lifes = 3;
+    UpdateScoreboard();
+    ClearAllTimeouts();
+    SetKey();
+    window.removeEventListener("keydown", CheckKeyPressed); // Clear previous listeners to key press
+    window.addEventListener("keydown", CheckKeyPressed); // Listener to key press that accionates the Key Check
+
+    result.innerHTML = "Let's Go!"
+    // Restarts the game, you score and streak are nulified, the score board is reseted and all timeouts to miss a key that are currently active are cleared
+};
+
+
+//  Life Functions
+
+function DidYouLose() {
+    switch (true) {
+        case (lifes === 0):
+            Lose();
+            break;
+
+        case (lifes < 0):
+            lifes = 0;
+            Lose();
+            break;
+
+    };
+};
 
 
 // Difficulty Effects & Causes
@@ -142,12 +177,12 @@ function setDifficulty() {
             break;
     
         default:
-        console.log('Something went wrong while setting difficulty via score');
+            console.log('Something went wrong while setting difficulty via score');
     };
 
     switch (difficulty) {
         case 1: 
-            expireTime = 5000;
+            expireTime = 50;
             multiplier = 1;
             break;
     
@@ -166,8 +201,8 @@ function setDifficulty() {
             multiplier = 5;
             break;
         
-        case (difficulty < 0):
-            difficulty = 0;
+        case (difficulty <= 0):
+            difficulty = 1;
             break;
         
         default:
@@ -179,5 +214,5 @@ function setDifficulty() {
 
 // HTML Buttons
 
-document.getElementById('start').onclick = () => { SetKey() };
-document.getElementById('reset').onclick = () => { Reset()  };
+document.getElementById('start').onclick = () => { Reset() };
+document.getElementById('reset').onclick = () => { Reset() };
