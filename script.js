@@ -3,12 +3,12 @@
 const scoreboard = document.getElementById('scoreboard');
 const result = document.getElementById('result');
 const input = document.getElementById('input');
-let score = 0;
-let streak = 0;
+let score;
+let streak;
+let difficulty;
+let expireTime;
 let multiplier;
-let expireTime = 5000;
-let difficulty = 1;
-let lifes = 3;
+let lifes;
 
 // Random Key Chooser
 
@@ -29,21 +29,12 @@ function SetKey() {
     ClearAllTimeouts();
 
     return timeout = setTimeout(MissKey, expireTime);
-    // Sets a key using GetRandomKey, displays it on the HTML, clears all timeouts from previous keys to be pressed and defines a new one to the key to be pressed
+    // Sets a key using GetRandomKey, displays it on the HTML, clears all timeouts from previous keys to be pressed and sets a new one for the key to be pressed
 };
 
 
 
 // Key Listeners & Checkers
-
-function NewKey() {
-    SetKey();
-    setDifficulty();
-    UpdateScoreboard();
-    IncreaseLife(); 
-    DidYouLose();
-    // Sets a new key to be pressed, checks necessity to change difficulty and updates the scoreboard
-};
 
 
 function MissKey() {
@@ -51,22 +42,22 @@ function MissKey() {
     lifes -=1;
     result.innerHTML = 'Missed one'
 
-    NewKey();
-    // Sets a new key to be pressed, nulify your streak, updates the scoreboard, decreases a life and warns you missed a key
+    NextKey();
+    // Sets a new key to be pressed, nulify your streak, decreases a life and warns you missed a key
 };
 
 function RightKey() {
     result.innerHTML = 'Nice one!';
-    IncreaseScore(multiplier);
+    score += multiplier;
     streak += 1;
-    // If you get a key right, you win 1 points times your streak, your streak is increased by one and the difficulty is increased
+    // You win 1 points times the current difficulty multiplier and your streak is increased by one
 };
 
 function WrongKey() {
     result.innerHTML = 'Not that one';
     streak = 0;
     lifes -=1;
-    // If you miss a key, you lose your streak, but not points
+    // If you miss a key, you lose your streak and one life
 };
 
 function CheckKeyPressed(event) {
@@ -77,8 +68,8 @@ function CheckKeyPressed(event) {
         WrongKey();
     }
 
-    NewKey();
-    // Checks if the key you pressed is equal to the one solicited, reacting accordingly to the result, defines a new key to be pressed and updates your scoreboard
+    NextKey();
+    // Checks if the key you pressed is equal to the one solicited, reacting accordingly to the result, and asks for the next key to be pressed
 };
 
 window.addEventListener("keydown", CheckKeyPressed); // Listener to key press that accionates the Key Check
@@ -87,18 +78,8 @@ window.addEventListener("keydown", CheckKeyPressed); // Listener to key press th
 
 // Score and Streak
 
-function IncreaseScore(points) {
-    if (points > 0) {
-        score += points;
-    } 
-    else {
-        score += 1;
-    }
-    // Increases your score in one point, if the points to be increased is zero is increases one instead
-};
-
 function UpdateScoreboard() {
-    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty} | Lifes: ${lifes}` ;
+    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty} | Lifes: ${lifes} | Multiplier ${multiplier}` ;
     // Change the scoreboard HTML so it shows the current score and streak
 };
 
@@ -116,27 +97,39 @@ function ClearAllTimeouts() {
     // Clears all timeouts that might be active at the time
 };
 
+function NextKey() {
+    SetKey();
+    setDifficulty();
+    UpdateScoreboard();
+    IncreaseLife(); 
+    DidYouLose();
+    // Sets a new key to be pressed, checks necessity to change difficulty, checks if you gained a new life and updates the scoreboard
+};
+
 function Lose() {
     ClearAllTimeouts();
     UpdateScoreboard();
-    // WIP - SaveScore();
+    // WIP - SaveHighscore();
     window.removeEventListener("keydown", CheckKeyPressed); // Clear listener to key press so the game stops
 
     result.innerHTML = "You lost :("
+
+    // Clear all current active timeouts and listeners, updates the scoreboard and alert you lost
 };
 
 function Reset() {
     score = 0;
     streak = 0;
     lifes = 3;
+    setDifficulty();
     UpdateScoreboard();
     ClearAllTimeouts();
     SetKey();
-    window.removeEventListener("keydown", CheckKeyPressed); // Clear previous listeners to key press
-    window.addEventListener("keydown", CheckKeyPressed); // Listener to key press that accionates the Key Check
+    window.removeEventListener("keydown", CheckKeyPressed); // Disable previous listeners to key press
+    window.addEventListener("keydown", CheckKeyPressed); // Enable a listener to key press to play the game
 
     result.innerHTML = "Let's Go!"
-    // Restarts the game, you score and streak are nulified, the score board is reseted and all timeouts to miss a key that are currently active are cleared
+    // Restarts your score, lifes, streak and the difficulty, the score board is reseted and all timeouts to miss a key that are currently active are cleared
 };
 
 
@@ -152,8 +145,8 @@ function DidYouLose() {
             lifes = 0;
             Lose();
             break;
-
     };
+    // Checks if you lost based on your current life, if you have more than 0, it does nothing and let you keep playing
 };
 
 function IncreaseLife() {
@@ -164,6 +157,7 @@ function IncreaseLife() {
     if (lifes > 3) {
         lifes = 3;
     };
+    // Every 50 keys pressed in a streak you gain a life, maximum lifes is equal to 3
 };
 
 
@@ -190,6 +184,7 @@ function setDifficulty() {
         default:
             console.log('Something went wrong while setting difficulty via score');
     };
+    // Checks your current streak to define the difficulty
 
     switch (difficulty) {
         case 1: 
@@ -219,6 +214,7 @@ function setDifficulty() {
         default:
             console.log('Something went wrong while setting difficulty');
     };
+    // Checks the difficulty to change the game settings accordingly
 };
 
 
@@ -226,4 +222,4 @@ function setDifficulty() {
 // HTML Buttons
 
 document.getElementById('start').onclick = () => { Reset(); };
-document.body.onload = () => { UpdateScoreboard() };
+document.body.onload = () => { Reset() + Lose() + UpdateScoreboard() };
