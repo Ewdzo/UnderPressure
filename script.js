@@ -9,6 +9,7 @@ let difficulty;
 let expireTime;
 let multiplier;
 let lifes;
+let highScore = 0;
 
 // Random Key Chooser
 
@@ -79,8 +80,14 @@ window.addEventListener("keydown", CheckKeyPressed); // Listener to key press th
 // Score and Streak
 
 function UpdateScoreboard() {
-    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty} | Lifes: ${lifes} | Multiplier ${multiplier}` ;
-    // Change the scoreboard HTML so it shows the current score and streak
+    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty} | Lifes: ${lifes} | Multiplier: ${multiplier} | Highscore: ${highScore}` ;
+    // Change the scoreboard HTML so it shows the current score, streak, time between keys, difficulty, lifes, multiplier and highscore
+};
+
+function SaveHighscore() {
+    if (score > highScore) {
+        highScore = score;
+    }
 };
 
 
@@ -108,8 +115,8 @@ function NextKey() {
 
 function Lose() {
     ClearAllTimeouts();
+    SaveHighscore();
     UpdateScoreboard();
-    // WIP - SaveHighscore();
     window.removeEventListener("keydown", CheckKeyPressed); // Clear listener to key press so the game stops
 
     result.innerHTML = "You lost :("
