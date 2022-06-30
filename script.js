@@ -39,7 +39,8 @@ function SetKey() {
 function NewKey() {
     SetKey();
     setDifficulty();
-    UpdateScoreboard(); 
+    UpdateScoreboard();
+    IncreaseLife(); 
     DidYouLose();
     // Sets a new key to be pressed, checks necessity to change difficulty and updates the scoreboard
 };
@@ -155,6 +156,16 @@ function DidYouLose() {
     };
 };
 
+function IncreaseLife() {
+    if (streak % 50 === 0 && streak != 0 ) {
+        lifes += 1;
+    };
+
+    if (lifes > 3) {
+        lifes = 3;
+    };
+};
+
 
 // Difficulty Effects & Causes
 
@@ -214,5 +225,5 @@ function setDifficulty() {
 
 // HTML Buttons
 
-document.getElementById('start').onclick = () => { Reset() };
-document.getElementById('reset').onclick = () => { Reset() };
+document.getElementById('start').onclick = () => { Reset(); };
+document.body.onload = () => { UpdateScoreboard() };
