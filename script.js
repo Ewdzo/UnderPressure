@@ -9,7 +9,7 @@ let difficulty;
 let expireTime;
 let multiplier;
 let lifes;
-let highScore = 0;
+let highscore = 0;
 
 // Random Key Chooser
 
@@ -80,16 +80,26 @@ window.addEventListener("keydown", CheckKeyPressed); // Listener to key press th
 // Score and Streak
 
 function UpdateScoreboard() {
-    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty} | Lifes: ${lifes} | Multiplier: ${multiplier} | Highscore: ${highScore}` ;
+    scoreboard.innerHTML = `Score: ${score} | Streak: ${streak} | Time Between Keys: ${expireTime}ms | Difficulty: ${difficulty} | Lifes: ${lifes} | Multiplier: ${multiplier} | Highscore: ${highscore}` ;
     // Change the scoreboard HTML so it shows the current score, streak, time between keys, difficulty, lifes, multiplier and highscore
 };
 
 function SaveHighscore() {
-    if (score > highScore) {
-        highScore = score;
-    }
+    if (score > highscore) {
+        highscore = score;
+    };
+
+    for (i = 0; i < highscore; i++) {
+        localStorage.setItem(storedHighscore, highscore); 
+    };
 };
 
+var storedHighscore = highscore;
+
+function LoadHistory() {
+    highscore = localStorage.getItem(storedHighscore);
+    UpdateScoreboard();
+} 
 
 
 // State-of-Play Functions
@@ -176,7 +186,7 @@ function setDifficulty() {
             difficulty = 1;
             break;
         
-        case (streak < 350):
+        case (streak < 100):
             difficulty = 2;
             break;
         
@@ -229,4 +239,4 @@ function setDifficulty() {
 // HTML Buttons
 
 document.getElementById('start').onclick = () => { Reset(); };
-document.body.onload = () => { Reset() + Lose() + UpdateScoreboard() };
+document.body.onload = () => { LoadHistory() + Reset() + ClearAllTimeouts() + UpdateScoreboard() };
