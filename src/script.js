@@ -238,5 +238,7 @@ function setDifficulty() {
 
 // HTML Buttons
 
-document.getElementById('start').onclick = () => { Reset(); };
-document.body.onload = () => { LoadHistory() + Reset() + ClearAllTimeouts() + UpdateScoreboard() };
+// document.getElementById('start').onclick = () => { Reset(); };
+// document.body.onload = () => { LoadHistory() + Reset() + ClearAllTimeouts() + UpdateScoreboard() };
+
+console.log('OI');
