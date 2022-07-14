@@ -2,8 +2,3 @@
   margin: 0;
 }
 
-.placeholder {
-  display: flex; 
-  flex-direction: column; 
-  align-items: center;
-}
