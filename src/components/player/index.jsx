@@ -38,7 +38,4 @@ class Players {
 
 const Ewdzo = new Players(0, 0, 3, 1, 10000)
 
-
-const Player = Ewdzo;
-
-export default Player
+export default Ewdzo
