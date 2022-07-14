@@ -1,15 +1,15 @@
-import { useState } from 'react'
 import './App.css'
-import './script.js'
+import Scoreboard from './components/scoreboard'
+import Player from './components/player'
+import Prompt from './components/prompts'
 
 function App() {
 
   return (
-    <div className='placeholder'>
-    <p id="scoreboard"></p>
-    <h1><p id="input"></p></h1>
-    <p id="result"></p>
-    <button id="start">Start</button>
+    <div>
+      <Scoreboard score={Player.score} streak= {Player.streak} difficulty= {Player.difficulty} lifes= {Player.lifes} multiplier= {Player.multiplier} highscore= {Player.highscore} />
+      <Prompt />
+      {Player.name}
   </div>
   )
 }
