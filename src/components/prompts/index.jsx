@@ -6,18 +6,18 @@ class Prompts {
         this.type = "Key",
         this.message = `Type the letter ${key}`,
         this.value = 1,
-        this.difficulty = "ease",
+        this.difficulty = "easy",
         this.time = 5000,
         this.prompt = key
     }
 }
 
 function Prompt() {
-    const randomPrompt = new Prompts("A");
-    console.log(randomPrompt.prompt.charCodeAt(0))
+    const randomLetter = String.fromCharCode(Math.floor(Math.random()*(25)) + 65);
+    const randomPrompt = new Prompts(randomLetter);
 
     return (
-        <div id="prompt">{randomPrompt.message}</div>
+        randomPrompt
     ) 
 };
 
