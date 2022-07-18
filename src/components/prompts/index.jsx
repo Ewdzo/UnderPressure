@@ -8,13 +8,14 @@ class Prompts {
         this.value = 1,
         this.difficulty = "easy",
         this.time = 5000,
-        this.prompt = key
+        this.code = key.toLowerCase()
     }
 }
 
 function Prompt() {
-    const randomLetter = String.fromCharCode(Math.floor(Math.random()*(25)) + 65);
-    const randomPrompt = new Prompts(randomLetter);
+    const randomNumber = (Math.floor(Math.random()*(25)) + 65)
+    const randomLetter = String.fromCharCode(randomNumber)
+    const randomPrompt = new Prompts(randomLetter)
 
     return (
         randomPrompt
