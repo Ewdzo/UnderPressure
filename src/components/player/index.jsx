@@ -1,63 +1,82 @@
-import { Component } from "react";
+import './scoreboard.css'
+import { useState } from "react";
 
-class Player extends Component {
-    state = {
-        name: "Null",
-        difficulty: "Easy",
-        score: 0,
-        streak: 0,
-        lifes: 3,
-        multiplier: 1,
-        highscore: 0}
-};
+function PlayerStats() {
 
-const newPlayer = (new Player).state
-export default newPlayer
+    const [score, setScore] = useState(0)
+    const [difficulty, setDifficulty] = useState('Easy')
+    const [streak, setStreak] = useState(0)
+    const [lifes, setLifes] = useState(3)
+    const [multiplier, setMultiplier] = useState(1)
+    const [highscore, setHighscore] = useState(0)
 
 
-// Functions
+    const incrementScore = value => {
+    setScore(prevScore => prevScore + value)
+    };
 
-const incrementScore = (player, value) => {
-   player.score = player.score + value
-};
+    const decrementScore = value => {
+        setScore(prevScore => prevScore - value)
+    };
 
-const decrementScore = (player, value) => {
-    player.score = player.score - value
-};
+    const incrementStreak = () => {
+        setStreak(prevStreak => prevStreak + 1)
+    };
 
-const incrementStreak = player => {
-    player.streak = player.streak + 1
-};
+    const resetStreak = () => {
+        setStreak(0)
+    };
 
-const resetStreak = player => {
-    player.streak = 0
-};
+    const incrementLife = value => {
+        setLifes(prevLifes => prevLifes + value)
+    };
 
-const incrementLife = (player, value) => {
-    player.lifes = player.streak + value
-};
+    const decrementLife = value => {
+        setLifes(prevLifes => prevLifes - value)
+    };
 
-const decrementLife = (player, value) => {
-    player.lifes = player.streak - value
-};
+    const incrementMultiplier = value => {
+        setMultiplier(prevMultiplier => prevMultiplier + value)
+    };
 
-const incrementMultiplier = (player, value) => {
-    player.multiplier = player.multiplier + value
-};
+    const decrementMultiplier = value => {
+        setMultiplier(prevMultiplier => prevMultiplier - value)
+    };
 
-const decrementMultiplier = (player, value) => {
-    player.multiplier = player.multiplier - value
-};
+    const resetMultiplier = value => {
+        setMultiplier(0)
+    };
 
-const resetMultiplier = player => {
-    player.multiplier = 0
-};
-
-
-function setHighscore(player) {
-    if (player.score > player.highscore) {
-        player.highscore = player.score
+    const defineHighscore = () => {
+        if (highscore < score) {
+            highscore = score}
     }
+
+    const [name, setName] = useState('Ewdzo')
+
+    const player = {
+        name: name,
+        difficulty: difficulty,
+        score: score,
+        streak: streak,
+        lifes: lifes,
+        multiplier: multiplier,
+        highscore: highscore
+    }
+
+    return(
+        <div id='scoreboard' style={{display: 'block'}}>
+            <div id='scoremulti'>
+                <div id='score'>Score: {player.score}</div>
+                <div id='multiplier'>{player.multiplier}x</div>
+            </div>
+            <div id='streak'>Streak: {player.streak}</div>
+            <div id='difficulty'>Difficulty: {player.difficulty}</div>
+            <div id='lifes'>Lifes: {player.lifes}</div>
+            <div id='highscore'>Highscore: {player.highscore}</div> 
+        </div>
+    )
 }
 
-export { incrementScore, decrementScore, incrementStreak, resetStreak, incrementLife, decrementLife, incrementMultiplier, decrementMultiplier, resetMultiplier, setHighscore };
+export default PlayerStats
+// export { incrementScore, decrementScore, incrementStreak, resetStreak, incrementLife, decrementLife, incrementMultiplier, decrementMultiplier, resetMultiplier, setHighscore };
