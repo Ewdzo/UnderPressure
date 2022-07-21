@@ -1,5 +1,4 @@
 import './App.css'
-import PromptDiv from './components/prompts'
 import {useState} from 'react'
 import PlayerStats from './components/player'
 
@@ -8,9 +7,8 @@ function App() {
 
   return (
     <>
-      <PlayerStats />
       {playing
-        ? <PromptDiv />
+        ? <PlayerStats />
         : <div id='prompt'><button onClick={() => {setPlaying(true)}}>Test</button></div> }
     </>
   )
