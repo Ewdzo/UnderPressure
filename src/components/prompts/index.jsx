@@ -1,5 +1,4 @@
 import './prompts.css'
-import { useState, useEffect } from 'react'
 
 class Prompts {
     constructor(key) {
