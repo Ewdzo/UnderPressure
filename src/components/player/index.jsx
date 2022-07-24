@@ -57,6 +57,18 @@ function PlayerStats() {
             setHighscore(score)}
     };
 
+    const resetPrompt = () => {
+        setPrompt({time: 5000})
+    }
+
+    const resetGame = () => {
+        resetLife()
+        resetStreak()
+        resetMultiplier()
+        resetScore()
+        resetPrompt()
+    }
+
     const player = {
         name: name,
         difficulty: difficulty,
@@ -134,11 +146,7 @@ function PlayerStats() {
                 <p>{prompt.message}</p>
                 <button onClick={ 
                     function() {
-                        resetLife()
-                        resetStreak()
-                        resetMultiplier()
-                        resetScore()
-                        setPrompt({time: 5000})
+                        resetGame()
                     }}>
                     Start
                     </button>
