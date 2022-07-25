@@ -5,6 +5,7 @@ import generatePrompt from '../prompts';
 
 function PlayerStats() {
 
+
     const [name, setName] = useState('PlayerTest');
     const [score, setScore] = useState(0);
     const [difficulty, setDifficulty] = useState(0);
@@ -12,9 +13,10 @@ function PlayerStats() {
     const [lifes, setLifes] = useState(3);
     const [multiplier, setMultiplier] = useState(1);
     const [highscore, setHighscore] = useState(0);
-    const [prompt, setPrompt] = useState({time: 5000});
+    const [prompt, setPrompt] = useState({message: 'Press Any Key to Start', time: 5000});
     const lifesRef = useRef(lifes);
     lifesRef.current = lifes;
+
 
     const incrementScore = value => {
     setScore(prevScore => prevScore + value)
@@ -78,58 +80,61 @@ function PlayerStats() {
         multiplier: multiplier,
         highscore: highscore
     };
+
+    const newPrompt = () => {
+        if (lifesRef.current == 0 ) {
+            setPrompt({message: 'You Lost'})
+        }
+
+        else {
+            setPrompt(generatePrompt());
+            var id = window.setTimeout(function() {}, 0);
+            while (id--) {
+                window.clearTimeout(id);
+            };
+        
+            const timer = setTimeout(function() {
+                if (lifesRef.current > 0) {
+                    resetStreak()
+                    newPrompt()
+                    decrementLife(1)
+                };
+            },  prompt.time);
+        };
+    };
+
+    const checkKey = event => {
+        if (prompt.code == undefined) {
+            newPrompt()
+        }
+        else if (event.keyCode == prompt.code && lifesRef.current > 0) {
+            incrementScore(prompt.value * multiplier);
+            incrementStreak(1)
+            newPrompt()
+        }
+        else if (event.keyCode != prompt.code && lifesRef.current > 0) {
+            resetStreak()
+            newPrompt()
+            decrementLife(1)
+        }
+        else if (event.keyCode != prompt.code || event.keyCode == prompt.code  && lifesRef.current == 0) {
+            newPrompt()
+            
+        }
+    };
     
     useEffect(() => {
-        
-        function newPrompt() {
-            if (lifesRef.current > 1) {
-                setPrompt(generatePrompt());
-                var id = window.setTimeout(function() {}, 0);
-                while (id--) {
-                    window.clearTimeout(id);
-                };
-            
-                const timer = setTimeout(function() {
-                    if (lifesRef.current > 0) {
-                        resetStreak()
-                        newPrompt()
-                        decrementLife(1)
-                    };
-                },  prompt.time);
-            }
-            else {
-                setPrompt({message: 'You Lost'})
-            }
-
+        if(lifesRef.current == 0 && prompt.message != 'You Lost') {
+            newPrompt()
         };
 
-        function checkKey(event) {
-            if (prompt.code == undefined) {
-                newPrompt()
-            }
-            else if (event.keyCode == prompt.code && lifesRef.current > 0) {
-                incrementScore(prompt.value * multiplier);
-                incrementStreak(1)
-                newPrompt()
-            }
-            else if (event.keyCode != prompt.code && lifesRef.current > 0) {
-                resetStreak()
-                newPrompt()
-                decrementLife(1)
-            }
-            else if (event.keyCode == prompt.code && lifesRef.current == 0 || lifesRef.current < 0) {
-                newPrompt()
-            }
-
-        };
-    
         window.addEventListener("keydown", checkKey);
         
         return () => {
         window.removeEventListener("keydown", checkKey);
         };
     }, [prompt]);
- 
+
     return(
         <>
             <div id='scoreboard' style={{display: 'block'}}>
