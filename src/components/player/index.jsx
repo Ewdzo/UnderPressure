@@ -4,8 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 
 function PlayerStats() {
-
-
+    
     const [name, setName] = useState('PlayerTest');
     const [score, setScore] = useState(0);
     const [difficulty, setDifficulty] = useState(0);
@@ -55,12 +54,12 @@ function PlayerStats() {
     };
 
     const defineHighscore = () => {
-        if (highscore < score) {
+        if (player.highscore < player.score) {
             setHighscore(score)}
     };
 
     const resetPrompt = () => {
-        setPrompt({time: 5000})
+        setPrompt({message: 'Press Any Key to Start', time: 5000})
     }
 
     const resetGame = () => {
@@ -119,14 +118,22 @@ function PlayerStats() {
         }
         else if (event.keyCode != prompt.code || event.keyCode == prompt.code  && lifesRef.current == 0) {
             newPrompt()
-            
         }
     };
     
     useEffect(() => {
         if(lifesRef.current == 0 && prompt.message != 'You Lost') {
             newPrompt()
+            defineHighscore()
         };
+
+        if(player.streak % 50 == 0 && streak != 0) {
+            incrementLife(1)
+        }
+
+        if(player.streak % (50 * multiplier) == 0 && streak != 0) {
+            incrementMultiplier(1)
+        }
 
         window.addEventListener("keydown", checkKey);
         
