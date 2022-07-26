@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 
 function App() {
-    
+
+    const initialPrompt = {message: 'Press Any Key to Start', time: 5000}
+
     const [name, setName] = useState('PlayerTest');
     const [score, setScore] = useState(0);
     const [difficulty, setDifficulty] = useState(0);
@@ -12,9 +14,11 @@ function App() {
     const [lifes, setLifes] = useState(3);
     const [multiplier, setMultiplier] = useState(1);
     const [highscore, setHighscore] = useState(0);
-    const [prompt, setPrompt] = useState({message: 'Press Any Key to Start', time: 5000});
+    const [status, setStatus] = useState('Idle')
+    const [prompt, setPrompt] = useState(initialPrompt);
     const lifesRef = useRef(lifes);
     lifesRef.current = lifes;
+
 
 
     const incrementScore = value => {
@@ -59,10 +63,12 @@ function App() {
     };
 
     const resetPrompt = () => {
-        setPrompt({message: 'Press Any Key to Start', time: 5000})
+        setPrompt(initialPrompt)
     }
 
     const resetGame = () => {
+        var id = window.setTimeout(function() {}, 0);
+        while (id--) {window.clearTimeout(id)}
         resetLife()
         resetStreak()
         resetMultiplier()
@@ -77,7 +83,8 @@ function App() {
         streak: streak,
         lifes: lifes,
         multiplier: multiplier,
-        highscore: highscore
+        highscore: highscore,
+        status: status
     };
 
     const newPrompt = () => {
@@ -122,16 +129,11 @@ function App() {
     };
     
     useEffect(() => {
-        if(lifesRef.current == 0 && prompt.message != 'You Lost') {
-            newPrompt()
-            defineHighscore()
-        };
-
-        if(player.streak % 50 == 0 && streak != 0) {
+        if(player.streak % 50 == 0 && streak != 0 && lifes < 3) {
             incrementLife(1)
         }
 
-        if(player.streak % (50 * multiplier) == 0 && streak != 0) {
+        if(player.streak % (25 * multiplier) == 0 && streak != 0) {
             incrementMultiplier(1)
         }
 
@@ -141,6 +143,25 @@ function App() {
         window.removeEventListener("keydown", checkKey);
         };
     }, [prompt]);
+
+    useEffect(() =>{
+        if(lifesRef.current == 0 && prompt.message != 'You Lost') {
+            newPrompt()
+            defineHighscore()
+            setStatus('Dead')
+        }
+        else if(player.lifes == 3 && prompt.message == initialPrompt.message){
+            setStatus('Idle')
+        }
+        else if(player.lifes != 0 && (prompt.message != initialPrompt.message)) {
+            setStatus('Playing')
+        };
+    }, [prompt, player])
+
+    useEffect(() =>{
+        if (player.status == 'Playing') {document.getElementById('start-btn').style.display = 'none'}
+        else if (player.status == 'Idle' || player.status == 'Dead') {document.getElementById('start-btn').style.display = ''};
+    }, [status])
 
     return(
         <>
@@ -156,12 +177,12 @@ function App() {
             </div>
             <div id='prompt'>
                 <p>{prompt.message}</p>
-                <button onClick={ 
+                <button id="start-btn" onClick={ 
                     function() {
                         resetGame()
-                    }}>
+                    }}> 
                     Start
-                    </button>
+                </button>
             </div>
         </>
     );
