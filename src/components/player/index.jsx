@@ -21,7 +21,7 @@ function App() {
     setScore(prevScore => prevScore + value)
     };
 
-    const resetScore = value => {
+    const resetScore = () => {
         setScore(0)
     };
 
@@ -33,12 +33,12 @@ function App() {
         setStreak(0)
     };
 
-    const resetLife = () => {
-        setLifes(3)
-    };
-
     const incrementLife = value => {
         setLifes(prevLifes => prevLifes + value)
+    };
+
+    const resetLife = () => {
+        setLifes(3)
     };
 
     const decrementLife = value => {
