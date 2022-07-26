@@ -159,8 +159,8 @@ function App() {
     }, [prompt, player])
 
     useEffect(() =>{
-        if (player.status == 'Playing') {document.getElementById('start-btn').style.display = 'none'}
-        else if (player.status == 'Idle' || player.status == 'Dead') {document.getElementById('start-btn').style.display = ''};
+        if (player.status == 'Playing' || player.status == 'Idle') {document.getElementById('start-btn').style.display = 'none'}
+        else if (player.status == 'Dead') {document.getElementById('start-btn').style.display = ''};
     }, [status])
 
     return(
@@ -181,7 +181,7 @@ function App() {
                     function() {
                         resetGame()
                     }}> 
-                    Start
+                    Reset
                 </button>
             </div>
         </>
