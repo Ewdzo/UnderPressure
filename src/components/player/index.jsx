@@ -3,7 +3,7 @@ import '../prompts/prompts.css'
 import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 
-function PlayerStats() {
+function App() {
     
     const [name, setName] = useState('PlayerTest');
     const [score, setScore] = useState(0);
@@ -167,4 +167,4 @@ function PlayerStats() {
     );
 };
 
-export default PlayerStats
+export default App

@@ -1,6 +1,6 @@
 import './App.css'
 import {useState} from 'react'
-import PlayerStats from './components/player'
+import UnderPressure from './components/player'
 
 function App() {
   const [playing, setPlaying] = useState(false);
@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       {playing
-        ? <PlayerStats />
+        ? <UnderPressure />
         : <div id='prompt'><button onClick={() => {setPlaying(true)}}>Test</button></div> }
     </>
   )
