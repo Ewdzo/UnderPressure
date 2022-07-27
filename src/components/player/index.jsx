@@ -163,14 +163,36 @@ function App() {
         else if (player.status == 'Dead') {document.getElementById('start-btn').style.display = ''};
     }, [status])
 
+// Lifes - Image
+    const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png")
+    useEffect(() =>{
+        if (lifes == 3) {
+            setCurrentLife("src/images/3_hearts.png")
+        }
+        else if (lifes == 2) {
+            setCurrentLife("src/images/2_hearts.png")
+        }
+        else if (lifes == 1) {
+            setCurrentLife("src/images/1_heart.png")
+        }
+        else if (lifes == 0) {
+            setCurrentLife("src/images/0_hearts.png")
+        }
+
+    }, [lifes])
+
+
+
     return(
+        player,
+
         <>
             <div id='scoreboard' style={{display: 'block'}}>
                 <div id='score'>Score: {player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>
                 <div id='streak'>Streak: {player.streak}</div>
                 <div id='difficulty'>Difficulty: {player.difficulty}</div>
-                <div id='lifes'>Lifes: {player.lifes}</div>
+                <div id='lifes'><img src={currentLife} alt="" /></div>
                 <div id='highscore'>Highscore: {player.highscore}</div> 
             </div>
             <div id='prompt'>
