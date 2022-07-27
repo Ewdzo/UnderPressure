@@ -166,10 +166,8 @@ function App() {
     return(
         <>
             <div id='scoreboard' style={{display: 'block'}}>
-                <div id='scoremulti'>
-                    <div id='score'>Score: {player.score}</div>
-                    <div id='multiplier'>{player.multiplier}x</div>
-                </div>
+                <div id='score'>Score: {player.score}</div>
+                <div id='multiplier'>{player.multiplier}x</div>
                 <div id='streak'>Streak: {player.streak}</div>
                 <div id='difficulty'>Difficulty: {player.difficulty}</div>
                 <div id='lifes'>Lifes: {player.lifes}</div>

@@ -3,7 +3,7 @@ import {useState} from 'react'
 import UnderPressure from './components/player'
 
 function App() {
-  const [playing, setPlaying] = useState(false);
+  const [playing, setPlaying] = useState(true);
 
   return (
     <>
