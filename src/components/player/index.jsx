@@ -129,6 +129,10 @@ function App() {
     };
     
     useEffect(() => {
+        if(player.streak == 0) {
+            setMultiplier(1)
+        }
+
         if(player.streak % 50 == 0 && streak != 0 && lifes < 3) {
             incrementLife(1)
         }
@@ -142,7 +146,7 @@ function App() {
         return () => {
         window.removeEventListener("keydown", checkKey);
         };
-    }, [prompt]);
+    }, [prompt, streak]);
 
     useEffect(() =>{
         if(lifesRef.current == 0 && prompt.message != 'You Lost') {
