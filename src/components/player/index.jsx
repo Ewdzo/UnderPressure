@@ -1,5 +1,5 @@
 import './scoreboard.css'
-import '../prompts/prompts.css'
+import './style.css'
 import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 
@@ -184,27 +184,20 @@ function App() {
 
 
     return(
-        player,
-
-        <>
-            <div id='scoreboard' style={{display: 'block'}}>
+        <div id='container'>
+            <div id='scoreboard'>
                 <div id='score'>Score: {player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>
                 <div id='streak'>Streak: {player.streak}</div>
                 <div id='difficulty'>Difficulty: {player.difficulty}</div>
                 <div id='lifes'><img src={currentLife} alt="" /></div>
                 <div id='highscore'>Highscore: {player.highscore}</div> 
-            </div>
+            </div> 
             <div id='prompt'>
                 <p>{prompt.message}</p>
-                <button id="start-btn" onClick={ 
-                    function() {
-                        resetGame()
-                    }}> 
-                    Reset
-                </button>
+                <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
             </div>
-        </>
+        </div>
     );
 };
 

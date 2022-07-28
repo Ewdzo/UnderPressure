@@ -1,5 +1,3 @@
-import './prompts.css'
-
 class Prompts {
     constructor(key) {
         this.name = `Type${key}`,

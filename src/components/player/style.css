@@ -1,0 +1,19 @@
+#container {
+    display: flex;
+    flex-direction: column;
+}
+
+#prompt {
+    position: absolute;
+    left: 30%;
+    display: flex;
+    flex-direction: column;
+  
+    width: 40%;
+    height: calc(100vh - 2px);
+  
+    justify-content: center;
+    text-align: center;
+  
+    border: solid 1px midnightblue;
+};

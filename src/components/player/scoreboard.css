@@ -1,40 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
+
 * {
     margin: 0;
+    font-family: 'Aldrich', sans-serif;
 }
 
 #scoreboard {
-    position: absolute;
+    display: flex;
+    flex-direction: column;
+
     width: 50%;
-    height: 80vh;
+    height: calc(100vh - 2px);
     margin: auto;
+
     border: 1px solid red;
 }
 
-#highscore {
-    font-size: 12px;
-    top: 35px;
-    text-align: center;
-    width: 100%;
-    position: absolute;
-}
-
-#lifes {
-    position: relative;
-    bottom: 0;
-}
-
 #lifes img {
+    display: flex;
+    margin: auto;
+
     height: 75px;
 }
 
-#difficulty {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-}
-
-#streak {
-    position: absolute;
-    bottom: 0;
-    right: 0;
+#prompt button {
+    width: 200px;
+    margin: 10px auto;
+    background-color: #172950c9;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
 }
