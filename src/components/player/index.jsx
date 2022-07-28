@@ -186,12 +186,12 @@ function App() {
     return(
         <div id='container'>
             <div id='scoreboard'>
-                <div id='score'>Score: {player.score}</div>
+                <div id='score'>{player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>
-                <div id='streak'>Streak: {player.streak}</div>
-                <div id='difficulty'>Difficulty: {player.difficulty}</div>
+                <div id='streak'>Streak<br></br>{player.streak}</div>
+                <div id='difficulty'>Difficulty<br></br>{player.difficulty}</div>
                 <div id='lifes'><img src={currentLife} alt="" /></div>
-                <div id='highscore'>Highscore: {player.highscore}</div> 
+                <div id='highscore'>Highscore<br></br>{player.highscore}</div> 
             </div> 
             <div id='prompt'>
                 <p>{prompt.message}</p>

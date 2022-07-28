@@ -3,17 +3,20 @@
 * {
     margin: 0;
     font-family: 'Aldrich', sans-serif;
+    color: white;
 }
 
 #scoreboard {
     display: flex;
     flex-direction: column;
+    position: relative;
 
-    width: 50%;
+    width: 40%;
     height: calc(100vh - 2px);
     margin: auto;
 
-    border: 1px solid red;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
 }
 
 #lifes img {
@@ -34,4 +37,37 @@
     text-decoration: none;
     display: inline-block;
     border-radius: 5px;
+}
+
+#score {
+    font-size: 35px;
+    margin: 15px auto 5px auto;
+}
+
+#multiplier {
+    margin: 0 auto;
+}
+
+#streak {
+    width: 100%;
+
+    position: absolute;
+    bottom: 0;
+
+    text-align: center
+}
+
+#difficulty {
+    position: absolute;
+    bottom: 0;
+
+    text-align: center;
+}
+
+#highscore {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    text-align: center;
 }
