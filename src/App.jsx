@@ -1,15 +1,18 @@
 import './App.css'
 import {useState} from 'react'
 import UnderPressure from './components/player'
+import MainScreen from './components/mainscreen';
 
 function App() {
-  const [playing, setPlaying] = useState(true);
+    // document.getElementById(start).onclick = {setPlaying(true)} 
+    // const [playing, setPlaying] = useState(false);
+    const playing = false;
 
   return (
     <>
       {playing
         ? <UnderPressure />
-        : <div id='prompt'><button onClick={() => {setPlaying(true)}}>Test</button></div> }
+        : <MainScreen /> }
     </>
   )
 };
