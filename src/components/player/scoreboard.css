@@ -15,8 +15,14 @@
     height: calc(100vh - 2px);
     margin: auto;
 
+    padding: 0 10px;
+
     border-left: 1px solid white;
     border-right: 1px solid white;
+}
+
+#lifes{
+    position: relative
 }
 
 #lifes img {
@@ -26,13 +32,27 @@
     height: 75px;
 }
 
+#newLife {
+    position: relative;
+    width: 100%; 
+
+    top: -10000px;
+}
+
+#newLife img {
+    height: 100px;
+    margin: auto;
+    display: flex;
+}
+
 #prompt button {
     width: 200px;
-    margin: 10px auto;
+    font-size: 18px;
+    margin: 50px auto;
     background-color: #172950c9;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 20px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -67,7 +87,7 @@
 #highscore {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 10px;
 
     text-align: center;
 }

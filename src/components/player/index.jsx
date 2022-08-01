@@ -2,6 +2,9 @@ import './scoreboard.css'
 import './style.css'
 import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
+import 'animate.css';
+
+var timer;
 
 function App() {
 
@@ -18,8 +21,6 @@ function App() {
     const [prompt, setPrompt] = useState(initialPrompt);
     const lifesRef = useRef(lifes);
     lifesRef.current = lifes;
-
-
 
     const incrementScore = value => {
     setScore(prevScore => prevScore + value)
@@ -94,12 +95,9 @@ function App() {
 
         else {
             setPrompt(generatePrompt());
-            var id = window.setTimeout(function() {}, 0);
-            while (id--) {
-                window.clearTimeout(id);
-            };
+            window.clearTimeout(timer);
         
-            const timer = setTimeout(function() {
+            timer = setTimeout(function() {
                 if (lifesRef.current > 0) {
                     resetStreak()
                     newPrompt()
@@ -135,6 +133,9 @@ function App() {
 
         if(player.streak % 50 == 0 && streak != 0 && lifes < 3) {
             incrementLife(1)
+            document.querySelector('#newLife').style.top = '0'
+            document.querySelector('#newLife').className = 'animate__animated animate__fadeInUp'
+            document.querySelector('#newLife').addEventListener('animationend', () => {document.querySelector('#newLife').className = 'animate__animated animate__fadeOut'});
         }
 
         if(player.streak % (25 * multiplier) == 0 && streak != 0) {
@@ -169,6 +170,7 @@ function App() {
 
 // Lifes - Image
     const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png")
+
     useEffect(() =>{
         if (lifes == 3) {
             setCurrentLife("src/images/3_hearts.png")
@@ -185,8 +187,6 @@ function App() {
 
     }, [lifes])
 
-
-
     return(
         <div id='container'>
             <div id='scoreboard'>
@@ -194,7 +194,8 @@ function App() {
                 <div id='multiplier'>{player.multiplier}x</div>
                 <div id='streak'>Streak<br></br>{player.streak}</div>
                 <div id='difficulty'>Difficulty<br></br>{player.difficulty}</div>
-                <div id='lifes'><img src={currentLife} alt="" /></div>
+                <div id='lifes'><img src={currentLife} alt=""/></div>
+                <div id='newLife'><img src="src/images/new_heart.png" alt="" /></div>
                 <div id='highscore'>Highscore<br></br>{player.highscore}</div> 
             </div> 
             <div id='prompt'>
