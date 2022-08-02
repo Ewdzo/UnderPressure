@@ -19,6 +19,7 @@ function App() {
     const [highscore, setHighscore] = useState(0);
     const [status, setStatus] = useState('Idle')
     const [prompt, setPrompt] = useState(initialPrompt);
+    const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png")
     const lifesRef = useRef(lifes);
     lifesRef.current = lifes;
 
@@ -167,9 +168,6 @@ function App() {
         if (player.status == 'Playing' || player.status == 'Idle') {document.getElementById('start-btn').style.display = 'none'}
         else if (player.status == 'Dead') {document.getElementById('start-btn').style.display = ''};
     }, [status])
-
-// Lifes - Image
-    const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png")
 
     useEffect(() =>{
         if (lifes == 3) {
