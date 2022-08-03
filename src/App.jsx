@@ -7,19 +7,15 @@ function App() {
   const [playing, setPlaying] = useState(1);
 
   useEffect(() => {
-    const labels = document.getElementsByTagName('label')
-
-    function setUnderline(index) {
-      for (var i=0; i != 4; i++) {
-        document.getElementsByTagName('label')[i].style.textDecoration = 'none';
-        document.getElementsByTagName('label')[index].style.textDecoration = 'underline';
-      }
-    }
+    const labels = document.getElementsByTagName('label');
 
     [...labels].forEach((label, index) => { 
-      labels[index].onclick = () => {
-        setUnderline(index)
-      }
+      labels[index].onclick = () => {for (var i = 0; i < (labels.length + 1); i++) {
+        document.getElementsByTagName('label')[index].className = 'animate__animated animate__bounce';
+        document.getElementsByTagName('label')[index].style.color = '#4894ff';
+        document.getElementsByTagName('label')[i].className = '';
+        document.getElementsByTagName('label')[i].style.color = '';
+      }}
     });
   })
 
@@ -48,8 +44,11 @@ function App() {
   )}
 
   else if (playing == 2) {
-    return (<UnderPressure />)
-  }
+    return (
+      <>
+        <UnderPressure />
+      </>
+  )}
 };
 
 export default App
