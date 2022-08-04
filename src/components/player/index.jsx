@@ -11,6 +11,7 @@ function App() {
 
     const initialPrompt = {message: 'Press Any Key to Start', time: 5000}
 
+
     const [name, setName] = useState('PlayerTest');
     const [score, setScore] = useState(0);
     const [difficulty, setDifficulty] = useState(0);
@@ -126,7 +127,14 @@ function App() {
         else if (event.keyCode != prompt.code || event.keyCode == prompt.code  && lifesRef.current == 0) {
             newPrompt()
         }
+        playSound()
     };
+
+    const playSound = () => {
+        const audio = new Audio('src/audio/key_press.mp3')
+        audio.volume = 0.2
+        audio.play();
+    }
     
     useEffect(() => {
         if(player.streak == 0) {
@@ -144,7 +152,7 @@ function App() {
             incrementMultiplier(1)
         }
 
-        window.addEventListener("keydown", checkKey);
+        window.addEventListener("keydown", checkKey); 
         
         return () => {
         window.removeEventListener("keydown", checkKey);
