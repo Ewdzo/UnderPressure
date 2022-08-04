@@ -1,8 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Aldrich&display=swap');
+@font-face {
+    font-family: 'Retro Gaming';
+    src: url('src/fonts/Retro Gaming.ttf');
+}
 
 * {
     margin: 0;
-    font-family: 'Aldrich', sans-serif;
+    font-family: 'Retro Gaming', sans-serif;
     color: white;
 }
 
@@ -33,7 +36,7 @@
     position: relative;
     width: 100%; 
 
-    top: -10000px;
+    bottom: 100%;
 }
 
 #newLife img {
