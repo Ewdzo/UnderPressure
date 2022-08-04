@@ -199,7 +199,7 @@ function App() {
                 <div id='highscore'>Highscore<br></br>{player.highscore}</div> 
             </div> 
             <div id='prompt'>
-                <p>{prompt.message}</p>
+                <h1>{prompt.message}</h1>
                 <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
             </div>
         </div>

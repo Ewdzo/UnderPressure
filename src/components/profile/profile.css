@@ -1,17 +1,22 @@
 #menu {
     position: absolute;
-  
     left: 1%;
     top: 1%;
-
     z-index: 2;
+
 }
 
-#menu input[type="checkbox"]{
+#menu > input[type="checkbox"]{
     opacity: 0;
     cursor: pointer;
 
     position: absolute;
+    height: 50px;
+    width: 50px;
+}
+
+#menu > img {
+    height: 50px;
 }
 
 
@@ -25,10 +30,12 @@
     flex-direction: column;
 
     position: absolute;
-    bottom: 100%;
+    bottom: 10000%;
     z-index: 1;
 
-    background-color: #172950;
+    background-color: #f8dd5c;
+    box-shadow: -4px -2px 12px 0px;
+
     text-align: center;
 }
 
@@ -49,7 +56,7 @@
     height: 200px;
 
     border-radius: 100%;
-    border: solid 3px #00000050;
+    border: solid 3px #000000;
 }
 
 #profile-container ul, li {
@@ -89,6 +96,7 @@
 
     display: flex;
     margin: 0 0 0 auto;
+    filter: brightness(1.7);
 }
 
 

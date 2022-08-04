@@ -33,7 +33,7 @@ function Profile() {
     if (isLogged == true) {
         return ( 
             <>
-                <div id='menu'><input id="menu-btn" type='checkbox' /><i className="fa fa-bars"></i></div>            
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/hamburger_icon.png" alt="" /></div>            
                 <div id="profile-container">
                     <a href={`https://github.com/${user}`} target='blank'><img id="profile-picture" src={`https://github.com/${user}.png`}  alt="" /></a>
                     <h1>{user}</h1>

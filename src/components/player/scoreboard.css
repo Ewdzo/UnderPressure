@@ -1,45 +1,37 @@
-@font-face {
-    font-family: 'Retro Gaming';
-    src: url('src/fonts/Retro Gaming.ttf');
-}
-
-* {
-    margin: 0;
-    font-family: 'Retro Gaming', sans-serif;
-    color: white;
-}
-
 #scoreboard {
     display: flex;
     flex-direction: column;
-    position: relative;
+    position: absolute;
+    z-index: -1;
 
-    width: 40%;
+    width: 100%;
     height: calc(100vh - 2px);
     margin: auto;
 
-    padding: 0 10px;
+    color: white;
+    font-size: 25px;
 }
 
 #lifes{
     position: relative
 }
 
-#lifes img {
+#lifes > img {
     display: flex;
     margin: auto;
 
     height: 75px;
+    opacity: 0.9;
 }
 
 #newLife {
     position: relative;
     width: 100%; 
 
-    bottom: 100%;
+    bottom: 10000%;
 }
 
-#newLife img {
+#newLife > img {
     height: 100px;
     margin: auto;
     display: flex;
@@ -49,7 +41,7 @@
     width: 200px;
     font-size: 18px;
     margin: 50px auto;
-    background-color: #172950c9;
+    background-color: #5a3bd2de;
     border: none;
     color: white;
     padding: 20px 32px;
