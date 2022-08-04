@@ -11,3 +11,10 @@ Score, Streak, Multiplier of Points, Increasing Difficulty
 <h1>Intended Features</h1>
 
 Hourglass, Ranking, Prompts History, Copypasta-Based Gameplay, Increased Points Reward Based on Time Remaining, Improved GUI
+
+<h1>Instructions</h1>
+
+```bash
+npm install
+npm run dev
+```
