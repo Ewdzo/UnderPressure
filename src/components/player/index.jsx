@@ -3,6 +3,7 @@ import '../prompts/prompts.css'
 import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 import 'animate.css';
+import Profile from '../profile';
 
 var timer;
 
@@ -187,6 +188,7 @@ function App() {
 
     return(
         <div id='container'>
+            <Profile />
             <div id='scoreboard'>
                 <div id='score'>{player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>

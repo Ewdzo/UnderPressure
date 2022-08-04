@@ -1,0 +1,121 @@
+#menu {
+    position: absolute;
+  
+    left: 1%;
+    top: 1%;
+
+    z-index: 2;
+}
+
+#menu input[type="checkbox"]{
+    opacity: 0;
+    cursor: pointer;
+
+    position: absolute;
+}
+
+
+/* Profile Container */
+
+#profile-container {
+    width: 20%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    bottom: 100%;
+    z-index: 1;
+
+    background-color: #172950;
+    text-align: center;
+}
+
+#profile-picture[src*='src/images/default_icon.png'] {
+    border: 0;
+    filter: invert();
+    background-color: #ededed;
+}
+
+#profile-container > a:nth-child(1){
+    display: flex;
+    margin: 10px auto 0px auto;
+
+    border-radius: 100%;
+}
+
+#profile-picture {
+    height: 200px;
+
+    border-radius: 100%;
+    border: solid 3px #00000050;
+}
+
+#profile-container ul, li {
+    list-style-type: none;
+    padding: 0;
+    
+    flex-grow: 1;
+
+    margin: 5px 0;
+}
+
+#profile-container > a:nth-child(3) {
+    text-decoration: none;
+}
+
+#profile-container > h1{
+    flex-grow: 1;
+}
+
+
+/* Log-Out Button */
+
+#log-out {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+
+    cursor: pointer;
+    width: 20%;
+
+    display: flex;
+    justify-content: center;
+    margin: 0 0 0 auto;
+}
+
+#log-out > img {
+    height: 80px;
+
+    display: flex;
+    margin: 0 0 0 auto;
+}
+
+
+/* Auth Button */
+
+
+#auth-btn {
+    background-color: rgb(37, 37, 37);
+    border-radius: 5px;
+    border: solid 2px rgb(248, 248, 248);
+
+    display: flex;
+    color: rgb(248, 248, 248);
+
+    align-items: center;
+    padding: 5px 10px;
+    justify-content: space-between;
+
+    width: 55%;
+    margin: 10% auto;
+}
+
+#auth-btn img {
+    padding: 5px;
+    padding-right: 8px;
+
+    height: 30px;
+    
+    filter: invert();
+}

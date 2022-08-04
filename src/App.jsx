@@ -1,33 +1,39 @@
 import './App.css';
 import UnderPressure from './components/player';
 import { useEffect, useState } from 'react';
+import Profile from './components/profile';
 
 
 function App() {
-  const [playing, setPlaying] = useState(1);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    const labels = document.getElementsByTagName('label');
+    if (playing == false) {
+      const labels = document.getElementsByTagName('label');
 
-    [...labels].forEach((label, index) => { 
-      labels[index].onclick = () => {for (var i = 0; i < (labels.length + 1); i++) {
-        document.getElementsByTagName('label')[index].className = 'animate__animated animate__bounce';
-        document.getElementsByTagName('label')[index].style.color = '#4894ff';
-        document.getElementsByTagName('label')[i].className = '';
-        document.getElementsByTagName('label')[i].style.color = '';
-      }}
-    });
+      [...labels].forEach((label, index) => { 
+        labels[index].onclick = () => {for (var i = 0; i <= (labels.length); i++) {
+          document.getElementsByTagName('label')[index].className = 'animate__animated animate__bounce';
+          document.getElementsByTagName('label')[index].style.color = '#4894ff';
+
+          if(i != (labels.length)){
+            document.getElementsByTagName('label')[i].className = '';
+            document.getElementsByTagName('label')[i].style.color = '';
+          }
+          
+        }}
+      });
+    }
   })
 
-  if (playing == 1) { 
+  if (playing == false) { 
     return (
       <>
         <div id="main">
-          <div id='menu'><a href=""><i className="fa fa-bars"></i></a></div>
-          <div id='profile'><a href=""><img src="src/images/default_icon.png" alt="" /></a></div>
+          <Profile />
           <div id='title'><h1>Under Pressure</h1></div>
           <div id='prompt'>
-              <button id="start" onClick={() => {setPlaying(2)}}>Play</button>
+              <button id="start" onClick={() => {setPlaying(true)}}>Play</button>
               <form id="difficulty-selector" action="">
                 <label htmlFor="easy">Easy</label>
                 <label htmlFor="medium">Medium</label>
@@ -43,7 +49,7 @@ function App() {
       </>
   )}
 
-  else if (playing == 2) {
+  else if (playing == true) {
     return (
       <>
         <UnderPressure />

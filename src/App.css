@@ -20,13 +20,6 @@
   font-size: 50px;
 }
 
-#menu {
-  position: absolute;
-
-  left: 15px;
-  top: 15px;
-}
-
 #difficulty-selector input[type="radio"]{
   display: none;
 }
