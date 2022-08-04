@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "preinstall": "npm --prefix ./src/server install",
     "dev": "concurrently --kill-others \"npx vite\" \"npm --prefix ./src/server/ run dev\"",
     "build": "vite build",
     "preview": "vite preview"
