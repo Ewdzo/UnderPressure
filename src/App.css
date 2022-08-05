@@ -26,8 +26,6 @@
 #title img{
   margin: 0;
   height: 250px;
-  
-  filter: brightness(1.5);
 }
 
 #difficulty-selector input[type="radio"]{
@@ -52,7 +50,6 @@
 
   width: 100%;
 
-  min-width: 100%;
   min-height: 100%;
 
   object-fit: cover;
