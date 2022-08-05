@@ -36,7 +36,7 @@ function App() {
         <div id='container'>
           <Profile />
           <div id='prompt'>
-            <div id='title'><h1>Under Pressure</h1></div>
+            <div id='title'><h1>Under Pressure</h1><img src="src/images/under_pressure.png" alt="" /></div>
             <button id="start" onClick={() => {setPlaying(true)}}>Play</button>
             <form id="difficulty-selector" action="">
               <label htmlFor="easy">Easy</label>
