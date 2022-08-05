@@ -8,9 +8,7 @@ import Profile from '../profile';
 var timer;
 
 function App() {
-
     const initialPrompt = {message: 'Press Any Key to Start', time: 5000}
-
 
     const [name, setName] = useState('PlayerTest');
     const [score, setScore] = useState(0);
