@@ -143,7 +143,7 @@ function App() {
 
         if(player.streak % 50 == 0 && streak != 0 && lifes < 3) {
             incrementLife(1)
-            document.querySelector('#newLife').style.top = '0'
+            document.querySelector('#newLife').style.transform = 'translateX(0)'
             document.querySelector('#newLife').className = 'animate__animated animate__fadeInUp'
             document.querySelector('#newLife').addEventListener('animationend', () => {document.querySelector('#newLife').className = 'animate__animated animate__fadeOut'});
         }

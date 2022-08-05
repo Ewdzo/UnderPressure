@@ -24,17 +24,17 @@
 /* Profile Container */
 
 #profile-container {
-    width: 20%;
-    height: 100vh;
+    height: fit-content;
 
-    min-width: 280px;
+    min-width: 300px;
+    min-height: 100vh;
 
     display: flex;
     flex-direction: column;
 
     position: absolute;
-    bottom: 10000%;
-    z-index: 1;
+    top: 0;
+    transform: translateY(-1000%);
 
     background: linear-gradient(0deg, #f8dd5c, #6f13915c);
     box-shadow: -4px -2px 12px 0px;
@@ -44,7 +44,7 @@
 
 #profile-container > a:nth-child(1){
     display: flex;
-    margin: 10px auto 0px auto;
+    margin: 40px auto 0px auto;
 
     border-radius: 100%;
 }
@@ -70,16 +70,19 @@
 
 #profile-container > table {
     width: 90%;
-    margin: 0 auto;
+    margin: 15px auto;
 }
 
-#profile-container > table > tr > td > img {
-    height: 100px;
+#profile-container > table > tbody > tr > td > img {
+    height: 85px;
 }
 
-#profile-container > table > tr > td {
+#profile-container > table > tbody > tr > td {
     width: 50%;
+    box-shadow: inset #00000059 0 0px 4px 0px;
+    font-size: 18px;
 }
+
 
 
 /* Log-Out Button */

@@ -28,7 +28,7 @@
     position: relative;
     width: 100%; 
 
-    bottom: 10000%;
+    transform: translateX(-1000%);
 }
 
 #newLife > img {
