@@ -1,3 +1,5 @@
+/* Menu Button */
+
 #menu {
     position: absolute;
     left: 1%;
@@ -20,20 +22,21 @@
     height: 50px;
 }
 
-
 /* Profile Container */
 
-#profile-container {
-    height: fit-content;
-
-    min-width: 300px;
-    min-height: 100vh;
+ #profile-container {
+    position: absolute;
+    top: 0;
 
     display: flex;
     flex-direction: column;
 
-    position: absolute;
-    top: 0;
+    width: 20%;
+    min-width: 300px;
+
+    height: fit-content;   
+    min-height: 100vh;
+    
     transform: translateY(-1000%);
 
     background: linear-gradient(0deg, #f8dd5c, #6f13915c);
@@ -42,17 +45,12 @@
     text-align: center;
 }
 
-#profile-container > a:nth-child(1){
-    display: flex;
-    margin: 40px auto 0px auto;
-
-    border-radius: 100%;
+#profile-container > table > tbody {
+    margin: auto;
 }
 
-#profile-container > a:nth-child(3) {
-    text-decoration: none;
-    display: flex;
-    margin: auto 0 0 0;
+#profile-container > table > tbody > tr > td > img {
+    height: 85px;
 }
 
 #profile-picture {
@@ -62,27 +60,45 @@
     border: solid 3px #000000;
 }
 
+#profile-container > table > tbody > tr > td {
+    box-shadow: inset #00000059 0 0px 4px 0px;
+} 
+
+#profile-container > table {
+    width: 80%;
+    display: flex;
+    margin: auto;
+}
+
+#profile-container > a:nth-child(1){
+    margin-top: 5vh;
+}
+
+#profile-container > a:nth-child(4) {
+    margin-top: auto;
+    margin-bottom: 15px;
+    text-decoration: none;
+}
+
 #profile-picture[src*='src/images/default_icon.png'] {
     border: 0;
     filter: invert();
     background-color: #ededed;
 }
 
-#profile-container > table {
-    width: 90%;
-    margin: 15px auto;
+#game-logo {
+    height: 500px;
+    display: flex;
+    justify-content: center;
 }
 
-#profile-container > table > tbody > tr > td > img {
-    height: 85px;
+#game-logo > img[src*='src/images/under_pressure.png'] {
+    display: flex;
+    
+    margin: auto;
+    
+    height: 200px;
 }
-
-#profile-container > table > tbody > tr > td {
-    width: 50%;
-    box-shadow: inset #00000059 0 0px 4px 0px;
-    font-size: 18px;
-}
-
 
 
 /* Log-Out Button */
@@ -92,24 +108,17 @@
     border: none;
 
     cursor: pointer;
-    width: 20%;
-
-    display: flex;
-    justify-content: center;
-    margin: auto 0 0 auto;
 }
 
 #log-out > img {
     height: 80px;
 
     display: flex;
-    margin: 0 0 0 auto;
     filter: brightness(1.7);
 }
 
 
 /* Auth Button */
-
 
 #auth-btn {
     background-color: rgb(37, 37, 37);
@@ -121,7 +130,6 @@
 
     align-items: center;
     padding: 5px 10px;
-    justify-content: space-between;
 
     width: 55%;
     margin: 10% auto;
@@ -134,4 +142,8 @@
     height: 30px;
     
     filter: invert();
+}
+
+#auth-btn > p {
+    flex-grow: 1;
 }

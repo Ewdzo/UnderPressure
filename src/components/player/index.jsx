@@ -198,16 +198,18 @@ function App() {
             <div id='scoreboard'>
                 <div id='score'>{player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>
-                <div id='streak'>Streak<br></br>{player.streak}</div>
-                <div id='difficulty'>Difficulty<br></br>{player.difficulty}</div>
                 <div id='lifes'><img src={currentLife} alt=""/></div>
                 <div id='newLife'><img src="src/images/new_heart.png" alt="" /></div>
-                <div id='highscore'>Highscore<br></br>{player.highscore}</div> 
+                <div id='prompt'>
+                    <h1>{prompt.message}</h1>
+                    <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
+                </div>
+                <div>
+                    <div id='difficulty'>Difficulty<br></br>{player.difficulty}</div>
+                    <div id='streak'>Streak<br></br>{player.streak}</div>
+                    <div id='highscore'>Highscore<br></br>{player.highscore}</div> 
+                </div>  
             </div> 
-            <div id='prompt'>
-                <h1>{prompt.message}</h1>
-                <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
-            </div>
         </div>
     );
 };

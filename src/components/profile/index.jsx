@@ -49,7 +49,6 @@ function Profile() {
     
             document.getElementById('log-out').onclick = () => logOut()
         }
-
     })
 
     if (userToken) {
@@ -86,6 +85,7 @@ function Profile() {
                 <div id="profile-container">
                     <a href=""><img id="profile-picture" src='src/images/default_icon.png'  alt="" /></a>
                     <h1>Welcome, Guest!</h1>
+                    <div id="game-logo"><img src="src/images/under_pressure.png" alt="" /></div>
                     <a href="http://localhost:8000/auth">
                         <div id="auth-btn">
                             <img id="git-logo" src="src/images/github.png" alt="" />
