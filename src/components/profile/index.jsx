@@ -48,6 +48,16 @@ function Profile() {
             }
     
             document.getElementById('log-out').onclick = () => logOut()
+
+            document.getElementById('log-out').onmouseover = () => {
+                document.getElementById('log-out-img').style.display = 'none'
+                document.getElementById('log-out-img-hover').style.display = 'flex'
+            }
+
+            document.getElementById('log-out').onmouseout = () => {
+                document.getElementById('log-out-img').style.display = 'flex'
+                document.getElementById('log-out-img-hover').style.display = 'none'
+            }
         }
     })
 
@@ -73,7 +83,7 @@ function Profile() {
                         </tr>
                         </tbody>
                     </table>
-                    <button id="log-out"><img src="src/images/log-out.png" alt="" title="Log Out"/></button>
+                    <button id="log-out"><img id="log-out-img" src="src/images/log-out.png" alt="" title="Log Out"/><img id="log-out-img-hover" src="src/images/log-out-hover.png" alt="" title="Log Out"/></button>
                 </div>
             </>
         )

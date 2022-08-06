@@ -1,5 +1,4 @@
 import './scoreboard.css'
-import '../prompts/prompts.css'
 import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 import 'animate.css';

@@ -108,13 +108,17 @@
     border: none;
 
     cursor: pointer;
+    width: 20%;
 }
 
 #log-out > img {
     height: 80px;
 
     display: flex;
-    filter: brightness(1.7);
+}
+
+#log-out > img:nth-child(2) {
+    display: none;
 }
 
 
