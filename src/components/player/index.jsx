@@ -198,15 +198,15 @@ function App() {
                 <div id='score'>{player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>
                 <div id='lifes'><img src={currentLife} alt=""/></div>
-                <div id='newLife'><img src="src/images/new_heart.png" alt="" /></div>
+                <div id='newLife'><img src="src/images/new_heart.png" alt="New Heart Icon" /></div>
                 <div id='prompt'>
                     <h1>{prompt.message}</h1>
                     <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
                 </div>
                 <div>
-                    <div id='difficulty'>Difficulty<br></br>{player.difficulty}</div>
-                    <div id='streak'>Streak<br></br>{player.streak}</div>
-                    <div id='highscore'>Highscore<br></br>{player.highscore}</div> 
+                    <div id='difficulty'><img src="src/images/difficulty.png" alt="Difficulty Icon" /> Difficulty<br></br>{player.difficulty}</div>
+                    <div id='streak'><img src="src/images/streak.png" alt="Streak Icon" /> Streak<br></br>{player.streak}</div>
+                    <div id='highscore'><img src="src/images/highscore.png" alt="Highscore Icon" /> Highscore<br></br>{player.highscore}</div> 
                 </div>  
             </div> 
         </div>

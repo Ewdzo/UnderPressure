@@ -67,3 +67,10 @@
 
     padding: 10px;
 }
+
+#difficulty > img, #streak > img, #highscore > img{
+    height: 75px;
+    display: flex;
+    margin: 0 auto;
+}
+
