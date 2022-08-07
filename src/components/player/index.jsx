@@ -6,12 +6,12 @@ import Profile from '../profile';
 
 var timer;
 
-function App() {
+function App(props) {
     const initialPrompt = {message: 'Press Any Key to Start', time: 5000}
 
     const [name, setName] = useState('PlayerTest');
     const [score, setScore] = useState(0);
-    const [difficulty, setDifficulty] = useState(0);
+    const [difficulty, setDifficulty] = useState(props.difficulty);
     const [streak, setStreak] = useState(0);
     const [lifes, setLifes] = useState(3);
     const [multiplier, setMultiplier] = useState(1);

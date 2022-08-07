@@ -2,10 +2,15 @@ import './App.css';
 import UnderPressure from './components/player';
 import { useEffect, useState } from 'react';
 import Profile from './components/profile';
+import swal from 'sweetalert';
 
 
 function App() {
   const [playing, setPlaying] = useState(false);
+  const start = () => {
+    if(document.querySelector('input[name="difficulty"]:checked')){setPlaying(true)}
+    else{swal('Choose Difficulty');}
+  }
 
   useEffect(() => {
     if (playing == false) {
@@ -37,7 +42,7 @@ function App() {
           <Profile />
           <div id='prompt'>
             <div id='title'><h1>Under Pressure</h1><img src="src/images/under_pressure.png" alt="" /></div>
-            <button id="start" onClick={() => {setPlaying(true)}}>Play</button>
+            <button id="start" onClick={start}>Play</button>
             <form id="difficulty-selector" action="">
               <label htmlFor="easy">Easy</label>
               <label htmlFor="medium">Medium</label>
@@ -57,7 +62,7 @@ function App() {
 
     return (
       <>
-        <UnderPressure />
+        <UnderPressure difficulty={document.querySelector('input[name="difficulty"]:checked').value} />
         <div id="home"><button id="home-btn" onClick={() => {setPlaying(false)}}><img src="src/images/home.png" alt="" /></button></div>
       </>
   )}
