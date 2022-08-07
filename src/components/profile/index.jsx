@@ -79,7 +79,7 @@ function Profile() {
                             <td><img src="src/images/joystick.png" alt="Joystick Icon" /><h3>Matches Played</h3><br />{userMatchs}</td>
                         </tr>
                         <tr>
-                            <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Most Played Difficulty</h3><br />{userDifficulty}</td>
+                            <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Favorite Difficulty</h3><br />{userDifficulty}</td>
                         </tr>
                         </tbody>
                     </table>
