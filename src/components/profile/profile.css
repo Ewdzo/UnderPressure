@@ -62,6 +62,7 @@
 
 #profile-container > table > tbody > tr > td {
     box-shadow: inset #00000059 0 0px 4px 0px;
+    width: 50%;
 } 
 
 #profile-container > table {

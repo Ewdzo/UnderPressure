@@ -27,7 +27,7 @@
     display: flex;
 }
 
-#prompt button {
+#prompt > button {
     width: 200px;
     padding: 20px 32px;
     margin: 50px auto;
