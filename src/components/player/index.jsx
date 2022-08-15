@@ -3,8 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 import 'animate.css';
 import Profile from '../profile';
+import Axios from "axios";
 
 var timer;
+const userToken = document.cookie.replace("userToken=", "");
 
 function App(props) {
     const initialPrompt = {message: 'Press Any Key to Start', time: 5000}
@@ -16,6 +18,8 @@ function App(props) {
     const [lifes, setLifes] = useState(3);
     const [multiplier, setMultiplier] = useState(1);
     const [highscore, setHighscore] = useState(0);
+    const [highstreak, setHighstreak] = useState(0);
+    const [highmultiplier, setHighmultiplier] = useState(0);
     const [status, setStatus] = useState('Idle')
     const [prompt, setPrompt] = useState(initialPrompt);
     const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png")
@@ -60,7 +64,20 @@ function App(props) {
 
     const defineHighscore = () => {
         if (player.highscore < player.score) {
-            setHighscore(score)}
+            setHighscore(score)
+        }
+    };
+
+    const defineHighstreak = () => {
+        if (player.highstreak < player.streak) {
+            setHighstreak(streak)
+        }
+    };
+
+    const defineHighmultiplier = () => {
+        if (player.highmultiplier < player.multiplier) {
+            setHighmultiplier(multiplier)
+        }
     };
 
     const resetPrompt = () => {
@@ -85,6 +102,8 @@ function App(props) {
         lifes: lifes,
         multiplier: multiplier,
         highscore: highscore,
+        highmultiplier: highmultiplier,
+        highstreak: highstreak,
         status: status
     };
 
@@ -125,6 +144,9 @@ function App(props) {
             newPrompt()
         }
         playSound()
+        defineHighstreak()
+        defineHighmultiplier()
+        defineHighscore()
     };
 
     const playSound = () => {
@@ -159,7 +181,18 @@ function App(props) {
     useEffect(() =>{
         if(lifesRef.current == 0 && prompt.message != 'You Lost') {
             newPrompt()
-            defineHighscore()
+            Axios.post("http://localhost:8000/update", {
+                data: {
+                    userToken: userToken, 
+                    score: player.highscore, 
+                    streak: player.highstreak,
+                    multiplier: player.highmultiplier,
+                    difficulty: player.difficulty,
+                }
+            }).then((response) => {
+                console.log(response)
+            }).catch(err => console.log(err))
+
             setStatus('Dead')
         }
         else if(player.lifes == 3 && prompt.message == initialPrompt.message){
@@ -204,7 +237,7 @@ function App(props) {
                     <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
                 </div>
                 <div>
-                    <div id='difficulty'><img src="src/images/difficulty.png" alt="Difficulty Icon" /> Difficulty<br></br>{player.difficulty}</div>
+                    <div id='difficulty'><img src="src/images/difficulty.png" alt="Difficulty Icon" />Difficulty<br></br>{player.difficulty}</div>
                     <div id='streak'><img src="src/images/streak.png" alt="Streak Icon" /> Streak<br></br>{player.streak}</div>
                     <div id='highscore'><img src="src/images/highscore.png" alt="Highscore Icon" /> Highscore<br></br>{player.highscore}</div> 
                 </div>  
