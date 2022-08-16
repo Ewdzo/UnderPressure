@@ -19,7 +19,7 @@ connection.connect(function(err) {
 });
 
 
-export const setUserStats = (userToken: string, table: string) => {
+export const createUser = (userToken: string, table: string) => {
     
     connection.query(`SELECT * from ${table}`, function (error, results, fields) {
         if (error) {

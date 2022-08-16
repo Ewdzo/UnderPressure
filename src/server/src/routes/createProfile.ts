@@ -4,7 +4,7 @@ import { CreateProfileController } from "../controllers/createProfileController"
 const createProfileRouter = Router();
 const createProfileController = new CreateProfileController();
 
-createProfileRouter.post("/", createProfileController.setUserStats)
+createProfileRouter.post("/", createProfileController.createUser)
 
 
 export { createProfileRouter };
