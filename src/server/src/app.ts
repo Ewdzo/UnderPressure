@@ -1,8 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { authGithubRouter } from "./routes/authGithub.routes";
-import { updateProfileRouter } from "./routes/updateProfile";
-import { createProfileRouter } from "./routes/createProfile";
+import { userRouter } from "./routes/user.routes";
 
 class App {
   public app: express.Application;
@@ -21,8 +20,7 @@ class App {
 
   routes() {
     this.app.use("/auth", authGithubRouter);
-    this.app.use("/update", updateProfileRouter);
-    this.app.use("/create", createProfileRouter);
+    this.app.use("/user", userRouter);
   }
 }
 
