@@ -56,7 +56,6 @@ export const createUser = (userToken: string, table: string) => {
                                     else { console.log(`User ${userName} Registered`) }
                                 })
                             }
-                            else { console.log(`${userName} is already registered.`) }
                         }
                     })
                 }
