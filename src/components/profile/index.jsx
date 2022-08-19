@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import './profile.css'
+import Axios from "axios";
 
 const userToken = document.cookie.replace("userToken=", "");
 const getGithubInfo = async () => {
@@ -13,6 +14,17 @@ const getGithubInfo = async () => {
 };
 const userInfo = await getGithubInfo();
 
+if (userToken) {
+    Axios.post("http://localhost:8000/user/create", {
+        data: {
+            userToken: userToken
+        }
+      }).then((response) => {
+        console.log(response)
+      }).catch(err => console.log(err)) 
+}
+
+
 function Profile() {
 
     const [user, setUser] = useState(userInfo.name)
@@ -20,8 +32,8 @@ function Profile() {
     const [userHighscore, setUserHighscore] = useState(0)
     const [userStreak, setUserStreak] = useState(0)
     const [userMultiplier, setUserMultiplier] = useState(0)
-    const [userMatchs, setUserMatchs] = useState(0)
-    const [userDifficulty, setUserDifficulty] = useState('')
+    const [userMatches, setUserMatches] = useState(0)
+    const [userDifficulty, setUserDifficulty] = useState('No Matches Found')
 
     useEffect(() => {
         const menuCheckbox = document.getElementById('menu-btn')
@@ -76,10 +88,10 @@ function Profile() {
                         </tr>
                         <tr>
                             <td><img src="src/images/multiplier.png" alt="Multiplier Icon" /><h3>Biggest Multiplier</h3><br />{userMultiplier}</td>
-                            <td><img src="src/images/joystick.png" alt="Joystick Icon" /><h3>Matches Played</h3><br />{userMatchs}</td>
+                            <td><img src="src/images/joystick.png" alt="Joystick Icon" /><h3>Matches Played</h3><br />{userMatches}</td>
                         </tr>
                         <tr>
-                            <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Favorite Difficulty</h3><br />{userDifficulty}</td>
+                            <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><br />{userDifficulty}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -88,7 +100,7 @@ function Profile() {
             </>
         )
     }
-    else{
+    else {
         return ( 
             <>  
                 <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/hamburger_icon.png" alt="" /></div>    

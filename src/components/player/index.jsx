@@ -11,7 +11,7 @@ const userToken = document.cookie.replace("userToken=", "");
 function App(props) {
     const initialPrompt = {message: 'Press Any Key to Start', time: 5000}
 
-    const [name, setName] = useState('PlayerTest');
+    const [name, setName] = useState('Null');
     const [score, setScore] = useState(0);
     const [difficulty, setDifficulty] = useState(props.difficulty);
     const [streak, setStreak] = useState(0);
@@ -154,7 +154,7 @@ function App(props) {
         audio.volume = 0.2
         audio.play();
     }
-    
+
     useEffect(() => {
         if(player.streak == 0) {
             setMultiplier(1)
@@ -178,21 +178,22 @@ function App(props) {
         };
     }, [prompt, streak]);
 
-    useEffect(() =>{
+    useEffect(() => {
         if(lifesRef.current == 0 && prompt.message != 'You Lost') {
+            if (userToken) {
+                Axios.post("http://localhost:8000/user/update", {
+                    data: {
+                        userToken: userToken, 
+                        score: player.highscore, 
+                        streak: player.highstreak,
+                        multiplier: player.highmultiplier,
+                        difficulty: player.difficulty,
+                    }
+                }).then((response) => {
+                    console.log(response)
+                }).catch(err => console.log(err))
+            }
             newPrompt()
-            Axios.post("http://localhost:8000/update", {
-                data: {
-                    userToken: userToken, 
-                    score: player.highscore, 
-                    streak: player.highstreak,
-                    multiplier: player.highmultiplier,
-                    difficulty: player.difficulty,
-                }
-            }).then((response) => {
-                console.log(response)
-            }).catch(err => console.log(err))
-
             setStatus('Dead')
         }
         else if(player.lifes == 3 && prompt.message == initialPrompt.message){
@@ -206,9 +207,7 @@ function App(props) {
     useEffect(() =>{
         if (player.status == 'Playing' || player.status == 'Idle') {document.getElementById('start-btn').style.display = 'none'}
         else if (player.status == 'Dead') {document.getElementById('start-btn').style.display = ''};
-    }, [status])
-
-    useEffect(() =>{
+        
         if (lifes == 3) {
             setCurrentLife("src/images/3_hearts.png")
         }
@@ -221,8 +220,7 @@ function App(props) {
         else if (lifes == 0) {
             setCurrentLife("src/images/0_hearts.png")
         }
-
-    }, [lifes])
+    }, [status, lifes])
 
     return(
         <div id='container'>
