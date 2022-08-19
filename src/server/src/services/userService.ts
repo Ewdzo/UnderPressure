@@ -36,7 +36,7 @@ export const createUser = (userToken: string, table: string) => {
                             else {
                                 connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${response.data.login}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
                                     if (error) throw error;
-                                    else { console.log('User Registered') }
+                                    else { console.log(`User ${response.data.login} Registered`) }
                                 })
                             }
                         })
@@ -50,10 +50,10 @@ export const createUser = (userToken: string, table: string) => {
                             if(results.toString() == '') {
                                 connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${response.data.login}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
                                     if (error) throw error;
-                                    else { console.log('User Registered') }
+                                    else { console.log(`User ${response.data.login} Registered`) }
                                 })
                             }
-                            else { console.log('User Already Registered') }
+                            else { console.log(`${response.data.login} is already registered.`) }
                         }
                     })
                 }
@@ -82,7 +82,7 @@ export const updateUser = (userToken: string, table: string, score: string, stre
                           else {
                               connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${response.data.login}'`, function (error, results, fields) {
                                   if(error) {throw error}
-                                  else { console.log('User Register Updated') }
+                                  else { console.log(`${response.data.login}'s Register Updated`) }
                               }) 
                           }
                       })
@@ -101,7 +101,7 @@ export const updateUser = (userToken: string, table: string, score: string, stre
                               else {
                                   connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${response.data.login}'`, function (error, results, fields) {
                                       if(error) {throw error}
-                                      else { console.log('User Register Updated') }
+                                      else { console.log(`${response.data.login}'s Register Updated`) }
                                   })
                               }
                           })
@@ -109,7 +109,7 @@ export const updateUser = (userToken: string, table: string, score: string, stre
                       else {
                           connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${response.data.login}'`, function (error, results, fields) {
                               if(error) {throw error}
-                              else { console.log('User Register Updated') }
+                              else { console.log(`${response.data.login}'s Register Updated`) }
                           })
                       }
                   }
