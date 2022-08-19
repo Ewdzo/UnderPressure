@@ -6,6 +6,7 @@ const userController = new UserController();
 
 userRouter.post("/create", userController.createUser)
 userRouter.post("/update", userController.updateUser)
+userRouter.get("/data", userController.getUserData)
 
 
 export { userRouter };

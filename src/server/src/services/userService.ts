@@ -1,5 +1,6 @@
 import { createConnection } from 'mysql'
 import Axios from 'axios'
+import { result } from 'lodash'
 
 const defaultScore = 0
 const defaultStreak = 0
@@ -28,15 +29,17 @@ export const createUser = (userToken: string, table: string) => {
         }
     })
     .then((response) => {
+        const userName = response.data.login; 
+
             connection.query(`SELECT * from ${table}`, function (error, results, fields) {
                 if (error) {
                     if (error.code == 'ER_NO_SUCH_TABLE') {
                         connection.query(`CREATE TABLE ${table}(userName varchar(255) PRIMARY KEY, userScore int, userStreak int, userMultiplier int, userMatches int, userDifficulty text)`, function (error, results, fields) {
                             if (error) throw error;
                             else {
-                                connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${response.data.login}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
+                                connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
                                     if (error) throw error;
-                                    else { console.log(`User ${response.data.login} Registered`) }
+                                    else { console.log(`User ${userName} Registered`) }
                                 })
                             }
                         })
@@ -44,23 +47,22 @@ export const createUser = (userToken: string, table: string) => {
                     else {throw error}
                 }
                 else if(results) {
-                    connection.query(`SELECT * from ${table} WHERE userName='${response.data.login}'`, function (error, results, fields) {
+                    connection.query(`SELECT * from ${table} WHERE userName='${userName}'`, function (error, results, fields) {
                         if (error) {throw error}
                         else if(results) { 
                             if(results.toString() == '') {
-                                connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${response.data.login}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
+                                connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
                                     if (error) throw error;
-                                    else { console.log(`User ${response.data.login} Registered`) }
+                                    else { console.log(`User ${userName} Registered`) }
                                 })
                             }
-                            else { console.log(`${response.data.login} is already registered.`) }
+                            else { console.log(`${userName} is already registered.`) }
                         }
                     })
                 }
             })
     })
     .catch(err => console.log(err));
-
 
 };
 
@@ -72,17 +74,19 @@ export const updateUser = (userToken: string, table: string, score: string, stre
         }
     })
     .then((response) => {connection.query(`SELECT * from ${table}`, function (error, results, fields) {
+        const userName = response.data.login; 
+
         if (error) {
           if (error.code == 'ER_NO_SUCH_TABLE') {
               connection.query(`CREATE TABLE ${table}(userName varchar(255) PRIMARY KEY, userScore int, userStreak int, userMultiplier int, userMatches int, userDifficulty text)`, function (error, results, fields) {
                   if (error) throw error;
                   else {
-                      connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${response.data.login}', ${defaultScore}, ${defaultStreak}, ${defaultMultiplier}, ${defaultMatches}, '${defaultDifficulty}' )`, function (error, results, fields) {
+                      connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', ${defaultScore}, ${defaultStreak}, ${defaultMultiplier}, ${defaultMatches}, '${defaultDifficulty}' )`, function (error, results, fields) {
                           if (error) throw error;
                           else {
-                              connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${response.data.login}'`, function (error, results, fields) {
+                              connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
                                   if(error) {throw error}
-                                  else { console.log(`${response.data.login}'s Register Updated`) }
+                                  else { console.log(`${userName}'s Register Updated`) }
                               }) 
                           }
                       })
@@ -92,24 +96,24 @@ export const updateUser = (userToken: string, table: string, score: string, stre
           else {throw error}
         }
         else if(results) {
-          connection.query(`SELECT * from ${table} WHERE userName='${response.data.login}'`, function (error, results, fields) {
+          connection.query(`SELECT * from ${table} WHERE userName='${userName}'`, function (error, results, fields) {
                   if (error) {throw error}
                   else if(results) { 
                       if(results.toString() == '') {
-                          connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${response.data.login}', ${defaultScore}, ${defaultStreak}, ${defaultMultiplier}, ${defaultMatches}, '${defaultDifficulty}' )`, function (error, results, fields) {
+                          connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', ${defaultScore}, ${defaultStreak}, ${defaultMultiplier}, ${defaultMatches}, '${defaultDifficulty}' )`, function (error, results, fields) {
                               if (error) throw error;
                               else {
-                                  connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${response.data.login}'`, function (error, results, fields) {
+                                  connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
                                       if(error) {throw error}
-                                      else { console.log(`${response.data.login}'s Register Updated`) }
+                                      else { console.log(`${userName}'s Register Updated`) }
                                   })
                               }
                           })
                       }
                       else {
-                          connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${response.data.login}'`, function (error, results, fields) {
+                          connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
                               if(error) {throw error}
-                              else { console.log(`${response.data.login}'s Register Updated`) }
+                              else { console.log(`${userName}'s Register Updated`) }
                           })
                       }
                   }
@@ -119,4 +123,30 @@ export const updateUser = (userToken: string, table: string, score: string, stre
     })
     .catch(err => console.log(err));
     
+};
+
+export const getUserData = (userToken: string, table: string, callback: Function) => {
+
+    Axios.get("https://api.github.com/user", {
+        headers: {
+            Authorization: "token " + userToken
+        }
+    })
+    .then((response) => {
+            const userName = response.data.login; 
+
+            connection.query(`SELECT * FROM ${table} WHERE userName='${userName}' && EXISTS (SELECT * from ${table} WHERE userName='${userName}');`, function (error, results, fields) {
+                if (error) {
+                    
+                    if (error.code == 'ER_NO_SUCH_TABLE') {
+                        console.log(`${table} and ${userName} not yet registered`)
+                    }
+                    else {throw error}
+                }
+                else if(results){
+                    return callback({score: results[0].userScore, streak: results[0].userStreak, multiplier: results[0].userMultiplier, matches: results[0].userMatches, difficulty: results[0].userDifficulty})
+                }
+            })
+    })
+    .catch(err => console.log(err));
 };

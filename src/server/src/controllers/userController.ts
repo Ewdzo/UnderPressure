@@ -1,5 +1,5 @@
 import { Request, response, Response } from "express";
-import { createUser, updateUser } from "../services/userService";
+import { createUser, updateUser, getUserData } from "../services/userService";
 
 
 export class UserController {
@@ -24,6 +24,17 @@ export class UserController {
         try {
             updateUser(userToken, tableName as string, score, streak, multiplier as string, difficulty);
         } catch (error) {
+            res.status(400).send({ error: error })
+        }
+    }
+    public async getUserData(req: Request, res: Response) {
+        const userToken = req.get('userToken');
+        const tableName = process.env.TABLE_NAME;
+        
+        try {
+            getUserData(userToken as string, tableName as string, (results: any) => {res.status(200).send(results)} )
+        } catch (error) {
+            console.log(error)
             res.status(400).send({ error: error })
         }
     }
