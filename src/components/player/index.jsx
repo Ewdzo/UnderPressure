@@ -6,12 +6,19 @@ import Profile from '../profile';
 import Axios from "axios";
 
 var timer;
-const userToken = document.cookie.replace("userToken=", "");
 
 function App(props) {
-    const initialPrompt = {message: 'Press Any Key to Start', time: 5000}
 
-    const [name, setName] = useState('Null');
+    const getCookie = (name) => {
+        return document.cookie.split('; ').reduce((r, v) => {
+          const parts = v.split('=')
+          return parts[0] === name ? decodeURIComponent(parts[1]) : r
+        }, '')
+    };
+    const userToken = getCookie("userToken");
+    const cookieScore = getCookie("score");
+    const initialPrompt = {message: 'Press Any Key to Start', time: 5000};
+
     const [score, setScore] = useState(0);
     const [difficulty, setDifficulty] = useState(props.difficulty);
     const [streak, setStreak] = useState(0);
@@ -23,6 +30,18 @@ function App(props) {
     const [status, setStatus] = useState('Idle')
     const [prompt, setPrompt] = useState(initialPrompt);
     const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png")
+
+    const player = {
+        difficulty: difficulty,
+        score: score,
+        streak: streak,
+        lifes: lifes,
+        multiplier: multiplier,
+        highscore: highscore,
+        highmultiplier: highmultiplier,
+        highstreak: highstreak,
+        status: status
+    };
     const lifesRef = useRef(lifes);
     lifesRef.current = lifes;
 
@@ -82,7 +101,7 @@ function App(props) {
 
     const resetPrompt = () => {
         setPrompt(initialPrompt)
-    }
+    };
 
     const resetGame = () => {
         var id = window.setTimeout(function() {}, 0);
@@ -92,19 +111,6 @@ function App(props) {
         resetMultiplier()
         resetScore()
         resetPrompt()
-    }
-
-    const player = {
-        name: name,
-        difficulty: difficulty,
-        score: score,
-        streak: streak,
-        lifes: lifes,
-        multiplier: multiplier,
-        highscore: highscore,
-        highmultiplier: highmultiplier,
-        highstreak: highstreak,
-        status: status
     };
 
     const newPrompt = () => {
@@ -126,6 +132,12 @@ function App(props) {
         };
     };
 
+    const playSound = () => {
+        const audio = new Audio('src/audio/key_press.mp3')
+        audio.volume = 0.2
+        audio.play();
+    };
+
     const checkKey = event => {
         if (prompt.code == undefined) {
             newPrompt()
@@ -134,6 +146,7 @@ function App(props) {
             incrementScore(prompt.value * multiplier);
             incrementStreak(1)
             newPrompt()
+            playSound()
         }
         else if (event.keyCode != prompt.code && lifesRef.current > 0) {
             resetStreak()
@@ -143,19 +156,34 @@ function App(props) {
         else if (event.keyCode != prompt.code || event.keyCode == prompt.code  && lifesRef.current == 0) {
             newPrompt()
         }
-        playSound()
         defineHighstreak()
         defineHighmultiplier()
         defineHighscore()
     };
 
-    const playSound = () => {
-        const audio = new Audio('src/audio/key_press.mp3')
-        audio.volume = 0.2
-        audio.play();
-    }
-
     useEffect(() => {
+        if(lifesRef.current == 0 && prompt.message != 'You Lost') {
+            if (userToken) {
+                Axios.post("http://localhost:8000/user/update", {
+                    data: {
+                        userToken: userToken, 
+                        score: player.highscore, 
+                        streak: player.highstreak,
+                        multiplier: player.highmultiplier,
+                        difficulty: player.difficulty,
+                    }
+                }).catch(err => console.log(err))
+            }
+            newPrompt()
+            setStatus('Dead')
+        }
+        else if(player.lifes == 3 && prompt.message == initialPrompt.message){
+            setStatus('Idle')
+        }
+        else if(player.lifes != 0 && (prompt.message != initialPrompt.message)) {
+            setStatus('Playing')
+        };
+
         if(player.streak == 0) {
             setMultiplier(1)
         }
@@ -176,33 +204,9 @@ function App(props) {
         return () => {
         window.removeEventListener("keydown", checkKey);
         };
-    }, [prompt, streak]);
 
-    useEffect(() => {
-        if(lifesRef.current == 0 && prompt.message != 'You Lost') {
-            if (userToken) {
-                Axios.post("http://localhost:8000/user/update", {
-                    data: {
-                        userToken: userToken, 
-                        score: player.highscore, 
-                        streak: player.highstreak,
-                        multiplier: player.highmultiplier,
-                        difficulty: player.difficulty,
-                    }
-                }).then((response) => {
-                    console.log(response)
-                }).catch(err => console.log(err))
-            }
-            newPrompt()
-            setStatus('Dead')
-        }
-        else if(player.lifes == 3 && prompt.message == initialPrompt.message){
-            setStatus('Idle')
-        }
-        else if(player.lifes != 0 && (prompt.message != initialPrompt.message)) {
-            setStatus('Playing')
-        };
-    }, [prompt, player])
+        
+    }, [prompt, streak, player]);
 
     useEffect(() =>{
         if (player.status == 'Playing' || player.status == 'Idle') {document.getElementById('start-btn').style.display = 'none'}
@@ -221,6 +225,23 @@ function App(props) {
             setCurrentLife("src/images/0_hearts.png")
         }
     }, [status, lifes])
+    
+    useEffect(() => {
+        if(userToken) {
+            Axios.get("http://localhost:8000/user/data", {
+                headers: {
+                    userToken: userToken
+                }
+            }).then((response) => {
+                console.log(response.data)
+                setUserData(response.data)
+            }).catch(err => console.log(err)) 
+        }
+        
+        if(cookieScore) {
+            setHighscore(cookieScore)
+        }
+    })
 
     return(
         <div id='container'>
