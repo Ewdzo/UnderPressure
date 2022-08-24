@@ -162,27 +162,6 @@ function App(props) {
     };
 
     useEffect(() => {
-        if(lifesRef.current == 0 && prompt.message != 'You Lost') {
-            if (userToken) {
-                Axios.post("http://localhost:8000/user/update", {
-                    data: {
-                        userToken: userToken, 
-                        score: player.highscore, 
-                        streak: player.highstreak,
-                        multiplier: player.highmultiplier,
-                        difficulty: player.difficulty,
-                    }
-                }).catch(err => console.log(err))
-            }
-            newPrompt()
-            setStatus('Dead')
-        }
-        else if(player.lifes == 3 && prompt.message == initialPrompt.message){
-            setStatus('Idle')
-        }
-        else if(player.lifes != 0 && (prompt.message != initialPrompt.message)) {
-            setStatus('Playing')
-        };
 
         if(player.streak == 0) {
             setMultiplier(1)
@@ -207,6 +186,30 @@ function App(props) {
 
         
     }, [prompt, streak, player]);
+
+    useEffect(() => {
+        if(lifesRef.current == 0 && prompt.message != 'You Lost') {
+            if (userToken) {    
+                Axios.post("http://localhost:8000/user/update", {
+                    data: {
+                        userToken: userToken, 
+                        score: player.highscore, 
+                        streak: player.highstreak,
+                        multiplier: player.highmultiplier,
+                        difficulty: player.difficulty,
+                    }
+                }).catch(err => console.log(err))
+            }
+            newPrompt()
+            setStatus('Dead')
+        }
+        else if(player.lifes == 3 && prompt.message == initialPrompt.message){
+            setStatus('Idle')
+        }
+        else if(player.lifes != 0 && (prompt.message != initialPrompt.message)) {
+            setStatus('Playing')
+        };
+    }, [player, lifes])
 
     useEffect(() =>{
         if (player.status == 'Playing' || player.status == 'Idle') {document.getElementById('start-btn').style.display = 'none'}
