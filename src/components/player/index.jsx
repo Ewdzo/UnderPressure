@@ -2,7 +2,6 @@ import './scoreboard.css'
 import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 import 'animate.css';
-import Profile from '../profile';
 import Axios from "axios";
 
 var timer;
@@ -262,7 +261,6 @@ function App(props) {
 
     return(
         <div id='container'>
-            <Profile />
             <div id='scoreboard'>
                 <div id='score'>{player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>
