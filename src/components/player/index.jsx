@@ -189,17 +189,12 @@ function App(props) {
 
     useEffect(() => {
         if(lifesRef.current == 0 && prompt.message != 'You Lost') {
-            if (userToken) {    
-                Axios.post("http://localhost:8000/user/update", {
-                    data: {
-                        userToken: userToken, 
-                        score: player.highscore, 
-                        streak: player.highstreak,
-                        multiplier: player.highmultiplier,
-                        difficulty: player.difficulty,
-                    }
-                }).catch(err => console.log(err))
-            }
+            document.cookie = `score=${player.highscore}`
+            document.cookie = `streak=${player.highstreak}`
+            document.cookie = `multiplier=${player.highmultiplier}`
+            document.cookie = `difficulty=${player.difficulty}` 
+            document.cookie = `matches=${Number(getCookie('matches')) + 1}`
+
             newPrompt()
             setStatus('Dead')
         }
@@ -229,6 +224,24 @@ function App(props) {
         }
     }, [status, lifes])
     
+    useEffect(() => {        
+        if(cookieScore) {
+            setHighscore(cookieScore)
+        }
+
+        if (userToken) {
+            Axios.post("http://localhost:8000/user/update", {
+                data: {
+                    userToken: userToken, 
+                    score: getCookie('score'), 
+                    streak: getCookie('streak'),
+                    multiplier: getCookie('multiplier'),
+                    difficulty: getCookie('difficulty'),
+                }
+            }).catch(err => console.log(err))
+        }
+    }, [document.cookie])
+
     useEffect(() => {
         if(userToken) {
             Axios.get("http://localhost:8000/user/data", {
@@ -244,11 +257,7 @@ function App(props) {
                 document.cookie = `matches=${response.matches}`
                 document.cookie = `difficulty=${response.difficulty}`
             }).catch(err => console.log(err)) 
-        }
-        
-        if(cookieScore) {
-            setHighscore(cookieScore)
-        }
+        }      
     })
 
     return(

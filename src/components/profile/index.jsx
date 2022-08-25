@@ -31,7 +31,7 @@ function Profile() {
     const cookieDifficulty = getCookie("difficulty")
 
     if (userToken) {
-        const [userData, setUserData] = useState({name: 'Null', score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
+        const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
         const [user, setUser] = useState(userGitInfo.name);
         const [avatar, setAvatar] = useState(`https://github.com/${userGitInfo.login}.png`);
         const [userHighscore, setUserHighscore] = useState(userData.score);
@@ -50,7 +50,13 @@ function Profile() {
             }
         });
 
-        if(userMatches == 0){
+        if(userMatches == 0 && userToken){
+            document.cookie = `score=${userData.score}`
+            document.cookie = `streak=${userData.streak}`
+            document.cookie = `multiplier=${userData.multiplier}`
+            document.cookie = `difficulty=${userData.difficulty}` 
+            document.cookie = `matches=${userData.matches}`
+            
             Axios.post("http://localhost:8000/user/create", {
                 data: {
                     userToken: userToken

@@ -33,10 +33,10 @@ export const createUser = (userToken: string, table: string) => {
         connection.query(`SELECT * from ${table}`, function (error, results, fields) {
             if (error) {
                 if (error.code == 'ER_NO_SUCH_TABLE') {
-                    connection.query(`CREATE TABLE ${table}(userName varchar(255) PRIMARY KEY, userScore int, userStreak int, userMultiplier int, userMatches int, userDifficulty text)`, function (error, results, fields) {
+                    connection.query(`CREATE TABLE IF NOT EXISTS ${table}(userName varchar(255) PRIMARY KEY, userScore int, userStreak int, userMultiplier int, userMatches int, userDifficulty text)`, function (error, results, fields) {
                         if (error) throw error;
                         else{
-                            connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
+                            connection.query(`INSERT IGNORE INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
                                 if (error) throw error;
                                 else { console.log(`User ${userName} Registered`) }
                             })
@@ -50,7 +50,7 @@ export const createUser = (userToken: string, table: string) => {
                     if (error) {throw error}
                     else if(results) {
                         if(results.toString() == '') {
-                            connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
+                            connection.query(`INSERT IGNORE INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', 0, 0, 0, 0, "No Matches Found")`, function (error, results, fields) {
                                 if (error) throw error;
                                 else { console.log(`User ${userName} Registered`) }
                             })
@@ -74,20 +74,7 @@ export const updateUser = (userToken: string, table: string, score: string, stre
     .then((response) => {connection.query(`SELECT * from ${table}`, function (error, results, fields) {
         const userName = response.data.login; 
 
-        if (error) {
-            if (error.code == 'ER_NO_SUCH_TABLE') {
-                connection.query(`CREATE TABLE ${table}(userName varchar(255) PRIMARY KEY, userScore int, userStreak int, userMultiplier int, userMatches int, userDifficulty text)`, function (error, results, fields) {
-                    if (error) throw error;
-                    else {
-                        connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
-                            if(error) {throw error}
-                            else { console.log(`${userName}'s Register Updated`) }
-                        }) 
-                    }
-                })
-            }
-            else {throw error}
-        }
+        if (error) {throw error}
         else if(results) {
             connection.query(`SELECT * from ${table} WHERE userName='${userName}'`, function (error, results, fields) {
                 if (error) {throw error}
