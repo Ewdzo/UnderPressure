@@ -120,3 +120,33 @@ export const getUserData = (userToken: string, table: string, callback: Function
     })
     .catch(err => console.log(err));
 };
+
+export const getUser = (userToken: string, table: string, callback: Function) => {
+
+    Axios.get("https://api.github.com/user", {
+        headers: {
+            Authorization: "token " + userToken
+        }
+    })
+    .then((response) => {
+        const userName = response.data.login; 
+
+        connection.query(`SELECT * FROM ${table} WHERE userName='${userName}' && EXISTS (SELECT * from ${table} WHERE userName='${userName}');`, function (error, results, fields) {
+            if (error) {
+                if (error.code == 'ER_NO_SUCH_TABLE') {
+                    console.log(`${table} and ${userName} not yet registered`)
+                }
+                else {throw error}
+            }
+            else if(results){
+                if(!(results.toString() == '')){
+                    return callback(`${userName} currently registered`)
+                }
+                else {
+                    return callback(`${userName} not currently registered`)
+                }     
+            }
+        })
+    })
+    .catch(err => console.log(err));
+};
