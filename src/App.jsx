@@ -62,6 +62,7 @@ function App() {
 
     return (
       <>
+        <Profile />
         <UnderPressure difficulty={document.querySelector('input[name="difficulty"]:checked').value} />
         <div id="home"><button id="home-btn" onClick={() => {setPlaying(false)}}><img src="src/images/home.png" alt="" /></button></div>
       </>
