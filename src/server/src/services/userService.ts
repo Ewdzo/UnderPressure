@@ -143,7 +143,7 @@ export const getUser = (userToken: string, table: string, callback: Function) =>
                     return callback(`${userName} currently registered`)
                 }
                 else {
-                    return callback(`${userName} not currently registered`)
+                    return callback(`${userName} is not registered`)
                 }     
             }
         })
