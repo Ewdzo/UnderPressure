@@ -16,7 +16,7 @@ function App(props) {
         }, '')
     };
     const userToken = getCookie("userToken");
-    const cookieScore = getCookie("score");
+    const cookieScore = Number(getCookie("score"));
     const initialPrompt = {message: 'Press Any Key to Start', time: 5000};
 
     const [score, setScore] = useState(0);
@@ -229,7 +229,7 @@ function App(props) {
             setHighscore(cookieScore)
         }
 
-        if (userToken) {
+        if (userToken && cookieScore) {
             Axios.post("http://localhost:8000/user/update", {
                 data: {
                     userToken: userToken, 

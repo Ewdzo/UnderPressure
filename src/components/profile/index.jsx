@@ -24,11 +24,11 @@ const userGitInfo = await getGithubInfo();
 
 
 function Profile() {
-    const cookieScore = getCookie("score")
-    const cookieStreak = getCookie("streak")
-    const cookieMultiplier = getCookie("multiplier")
-    const cookieMatches = getCookie("matches")
-    const cookieDifficulty = getCookie("difficulty")
+    const cookieScore = Number(getCookie("score"));
+    const cookieStreak = Number(getCookie("streak"));
+    const cookieMultiplier = Number(getCookie("multiplier"));
+    const cookieMatches = Number(getCookie("matches"));
+    const cookieDifficulty = getCookie("difficulty");
 
     if (userToken) {
         const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
@@ -40,29 +40,44 @@ function Profile() {
         const [userMatches, setUserMatches] = useState(userData.matches);
         const [userDifficulty, setUserDifficulty] = useState(userData.difficulty);
 
-        useEffect(() => {
-            if (cookieScore) {
-                setUserHighscore(cookieScore)
-                setUserStreak(cookieStreak)
-                setUserMultiplier(cookieMultiplier)
-                setUserMatches(cookieMatches)
-                setUserDifficulty(cookieDifficulty)
+        const updateCookie = () => {
+            if(cookieScore){
+                if(cookieScore > userHighscore){setUserHighscore(cookieScore)};
+                if(cookieStreak > userStreak){setUserStreak(cookieStreak)};
+                if(cookieMultiplier > userMultiplier){setUserMultiplier(cookieMultiplier)};
+                if(cookieMatches > userMatches){setUserMatches(cookieMatches)};
+                if(cookieDifficulty != 'No Matches Found'){setUserDifficulty(cookieDifficulty)};
             }
+        };
+
+        const playerRegister = () => {
+            if(userToken) {
+                Axios.get("http://localhost:8000/user/", {
+                    headers: {
+                        userToken: userToken
+                    }
+                })
+                .then(response => response.data)
+                .then(response => response.includes("currently registered"))
+                .then(response => {if(response==false){
+                    Axios.post("http://localhost:8000/user/create", {
+                        data: {
+                            userToken: userToken
+                        }
+                    });
+                }})
+                .catch(err => console.log(err)) 
+            }   
+        }
+
+        useEffect(() => {
+            updateCookie();
+            playerRegister();
         });
 
-        if(userMatches == 0 && userToken){
-            document.cookie = `score=${userData.score}`
-            document.cookie = `streak=${userData.streak}`
-            document.cookie = `multiplier=${userData.multiplier}`
-            document.cookie = `difficulty=${userData.difficulty}` 
-            document.cookie = `matches=${userData.matches}`
-            
-            Axios.post("http://localhost:8000/user/create", {
-                data: {
-                    userToken: userToken
-                }
-            }).catch(err => console.log(err));
-        }
+        useEffect(() => {
+            updateCookie();
+        }, [document.cookie])
 
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
