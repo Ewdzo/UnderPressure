@@ -79,15 +79,10 @@ export const updateUser = (userToken: string, table: string, score: string, stre
                 connection.query(`CREATE TABLE ${table}(userName varchar(255) PRIMARY KEY, userScore int, userStreak int, userMultiplier int, userMatches int, userDifficulty text)`, function (error, results, fields) {
                     if (error) throw error;
                     else {
-                        connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', ${defaultScore}, ${defaultStreak}, ${defaultMultiplier}, ${defaultMatches}, '${defaultDifficulty}' )`, function (error, results, fields) {
-                            if (error) throw error;
-                            else {
-                                connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
-                                    if(error) {throw error}
-                                    else { console.log(`${userName}'s Register Updated`) }
-                                }) 
-                            }
-                        })
+                        connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
+                            if(error) {throw error}
+                            else { console.log(`${userName}'s Register Updated`) }
+                        }) 
                     }
                 })
             }
@@ -97,23 +92,10 @@ export const updateUser = (userToken: string, table: string, score: string, stre
             connection.query(`SELECT * from ${table} WHERE userName='${userName}'`, function (error, results, fields) {
                 if (error) {throw error}
                 else if(results) {
-                    if(results.toString() == '') {
-                        connection.query(`INSERT INTO ${table}(userName, userScore, userStreak, userMultiplier, userMatches, userDifficulty) VALUES ('${userName}', ${defaultScore}, ${defaultStreak}, ${defaultMultiplier}, ${defaultMatches}, '${defaultDifficulty}' )`, function (error, results, fields) {
-                            if (error) throw error;
-                            else {
-                                connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
-                                    if(error) {throw error}
-                                    else { console.log(`${userName}'s Register Updated`) }
-                                })
-                            }
-                        })
-                    }
-                    else {
-                        connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
-                            if(error) {throw error}
-                            else { console.log(`${userName}'s Register Updated`) }
-                        })
-                    }
+                    connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
+                        if(error) {throw error}
+                        else { console.log(`${userName}'s Register Updated`) }
+                    }) 
                 }
             })
         }
@@ -140,7 +122,12 @@ export const getUserData = (userToken: string, table: string, callback: Function
                 else {throw error}
             }
             else if(results){
-                return callback({score: results[0].userScore, streak: results[0].userStreak, multiplier: results[0].userMultiplier, matches: results[0].userMatches, difficulty: results[0].userDifficulty})
+                if(!(results.toString() == '')){
+                    return callback({score: results[0].userScore, streak: results[0].userStreak, multiplier: results[0].userMultiplier, matches: results[0].userMatches, difficulty: results[0].userDifficulty})
+                }
+                else {
+                    return callback({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'})
+                }     
             }
         })
     })
