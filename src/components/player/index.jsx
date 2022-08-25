@@ -235,9 +235,14 @@ function App(props) {
                 headers: {
                     userToken: userToken
                 }
-            }).then((response) => {
-                console.log(response.data)
-                setUserData(response.data)
+            })
+            .then(response => response.data)
+            .then((response) => {
+                document.cookie = `score=${response.score}`
+                document.cookie = `streak=${response.streak}`
+                document.cookie = `multiplier=${response.multiplier}`
+                document.cookie = `matches=${response.matches}`
+                document.cookie = `difficulty=${response.difficulty}`
             }).catch(err => console.log(err)) 
         }
         

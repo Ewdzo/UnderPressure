@@ -50,12 +50,13 @@ function Profile() {
             }
         });
 
-
-        Axios.post("http://localhost:8000/user/create", {
-            data: {
-                userToken: userToken
-            }
-        }).catch(err => console.log(err));
+        if(userMatches == 0){
+            Axios.post("http://localhost:8000/user/create", {
+                data: {
+                    userToken: userToken
+                }
+            }).catch(err => console.log(err));
+        }
 
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
@@ -96,23 +97,6 @@ function Profile() {
                 document.getElementById('log-out-img-hover').style.display = 'none'
             };
         })
-
-        useEffect(() => {
-            Axios.get("http://localhost:8000/user/data", {
-                headers: {
-                    userToken: userToken
-                }
-            })
-            .then(response => response.data)
-            .then((response) => {
-                setUserData(response)
-                document.cookie = `score=${response.score}`
-                document.cookie = `streak=${response.streak}`
-                document.cookie = `multiplier=${response.multiplier}`
-                document.cookie = `matches=${response.matches}`
-                document.cookie = `difficulty=${response.difficulty}`
-            }).catch(err => console.log(err));
-        });
 
         return ( 
             <>
