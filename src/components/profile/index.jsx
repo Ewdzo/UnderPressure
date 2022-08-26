@@ -24,11 +24,11 @@ const userGitInfo = await getGithubInfo();
 
 
 function Profile() {
-    const cookieScore = Number(getCookie("score"));
-    const cookieStreak = Number(getCookie("streak"));
-    const cookieMultiplier = Number(getCookie("multiplier"));
-    const cookieMatches = Number(getCookie("matches"));
-    const cookieDifficulty = getCookie("difficulty");
+    const [cookieScore, setCookieScore] = useState(Number(getCookie("score")));
+    const [cookieStreak, setCookieStreak] = useState(Number(getCookie("streak")));
+    const [cookieMultiplier, setCookieMultiplier] = useState(Number(getCookie("multiplier")));
+    const [cookieMatches, setCookieMatches] = useState(Number(getCookie("matches")));
+    const [cookieDifficulty, setCookieDifficulty] = useState(getCookie("difficulty"));
 
     if (userToken) {
         const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
