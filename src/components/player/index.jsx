@@ -252,6 +252,7 @@ function App(props) {
                             streak: getCookie('streak'),
                             multiplier: getCookie('multiplier'),
                             difficulty: getCookie('difficulty'),
+                            matches: getCookie('matches')
                         }
                     }).catch(err => console.log(err))
                 }
@@ -263,6 +264,7 @@ function App(props) {
                             streak: getCookie('streak'),
                             multiplier: getCookie('multiplier'),
                             difficulty: getCookie('difficulty'),
+                            matches: getCookie('matches')
                         }
                     }).catch(err => console.log(err))
                 }

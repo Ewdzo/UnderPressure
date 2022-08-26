@@ -64,7 +64,7 @@ export const createUser = (userToken: string, table: string) => {
 
 };
 
-export const updateUser = (userToken: string, table: string, score: string, streak: string, multiplier: string, difficulty: string) => {
+export const updateUser = (userToken: string, table: string, score: string, streak: string, multiplier: string, matches: string, difficulty: string) => {
 
     Axios.get("https://api.github.com/user", {
         headers: {
@@ -79,7 +79,7 @@ export const updateUser = (userToken: string, table: string, score: string, stre
             connection.query(`SELECT * from ${table} WHERE userName='${userName}'`, function (error, results, fields) {
                 if (error) {throw error}
                 else if(results) {
-                    connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = userMatches + 1, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
+                    connection.query(`UPDATE ${table} SET userScore = ${score}, userStreak = ${streak}, userMultiplier = ${multiplier}, userMatches = ${matches}, userDifficulty = '${difficulty}' WHERE userName = '${userName}'`, function (error, results, fields) {
                         if(error) {throw error}
                         else { console.log(`${userName}'s Register Updated`) }
                     }) 
