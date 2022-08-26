@@ -134,7 +134,7 @@ export const getUser = (userToken: string, table: string, callback: Function) =>
         connection.query(`SELECT * FROM ${table} WHERE userName='${userName}' && EXISTS (SELECT * from ${table} WHERE userName='${userName}');`, function (error, results, fields) {
             if (error) {
                 if (error.code == 'ER_NO_SUCH_TABLE') {
-                    console.log(`${table} and ${userName} not yet registered`)
+                    return callback(`${table} is not registered`)
                 }
                 else {throw error}
             }
