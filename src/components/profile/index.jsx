@@ -40,7 +40,7 @@ function Profile() {
         const [userMatches, setUserMatches] = useState(userData.matches);
         const [userDifficulty, setUserDifficulty] = useState(userData.difficulty);
 
-        const updateCookie = () => {
+        const updateProfile = () => {
             if(cookieScore){
                 if(cookieScore > userHighscore){setUserHighscore(cookieScore)};
                 if(cookieStreak > userStreak){setUserStreak(cookieStreak)};
@@ -71,13 +71,13 @@ function Profile() {
         }
 
         useEffect(() => {
-            updateCookie();
+            updateProfile();
             playerRegister();
         });
 
         useEffect(() => {
-            updateCookie();
-        }, [document.cookie])
+            updateProfile();
+        }, [/* figure out what to put here */])
 
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
