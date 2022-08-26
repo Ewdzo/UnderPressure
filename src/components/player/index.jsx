@@ -228,16 +228,46 @@ function App(props) {
             setHighscore(cookieScore)
         }
 
-        if (userToken && cookieScore) {
-            Axios.post("http://localhost:8000/user/update", {
-                data: {
-                    userToken: userToken, 
-                    score: getCookie('score'), 
-                    streak: getCookie('streak'),
-                    multiplier: getCookie('multiplier'),
-                    difficulty: getCookie('difficulty'),
+        if (userToken && cookieScore) {;
+
+            Axios.get("http://localhost:8000/user/", {
+                headers: {
+                    userToken: userToken
                 }
-            }).catch(err => console.log(err))
+            })
+            .then(response => response.data)
+            .then(response => response.includes("currently registered"))
+            .then(response => {
+                if(response == false){
+                    Axios.post("http://localhost:8000/user/create", {
+                        data: {
+                            userToken: userToken
+                        }
+                    });
+
+                    Axios.post("http://localhost:8000/user/update", {
+                        data: {
+                            userToken: userToken, 
+                            score: getCookie('score'), 
+                            streak: getCookie('streak'),
+                            multiplier: getCookie('multiplier'),
+                            difficulty: getCookie('difficulty'),
+                        }
+                    }).catch(err => console.log(err))
+                }
+                else if(response == true){
+                    Axios.post("http://localhost:8000/user/update", {
+                        data: {
+                            userToken: userToken, 
+                            score: getCookie('score'), 
+                            streak: getCookie('streak'),
+                            multiplier: getCookie('multiplier'),
+                            difficulty: getCookie('difficulty'),
+                        }
+                    }).catch(err => console.log(err))
+                }
+            })
+            .catch(err => console.log(err)) 
         }
     }, [document.cookie])
 
