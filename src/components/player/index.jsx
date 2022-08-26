@@ -14,8 +14,11 @@ function App(props) {
           return parts[0] === name ? decodeURIComponent(parts[1]) : r
         }, '')
     };
-    const userToken = getCookie("userToken");
-    const cookieScore = Number(getCookie("score"));
+    const userToken = getCookie("userToken");    
+    const [cookieScore, setCookieScore] = useState(Number(getCookie("score")));
+    const [cookieStreak, setCookieStreak] = useState(Number(getCookie("streak")));
+    const [cookieMultiplier, setCookieMultiplier] = useState(Number(getCookie("multiplier")));
+    
     const initialPrompt = {message: 'Press Any Key to Start', time: 5000};
 
     const [score, setScore] = useState(0);
@@ -43,6 +46,16 @@ function App(props) {
     };
     const lifesRef = useRef(lifes);
     lifesRef.current = lifes;
+
+    const updateCookie = () => {
+        if(cookieScore){
+            if(cookieScore < player.highscore) {document.cookie = `score=${player.highscore}`}
+            if (cookieStreak < player.highstreak) {document.cookie = `streak=${player.highstreak}`}
+            if (cookieMultiplier < player.highmultiplier) {document.cookie = `multiplier=${player.highmultiplier}`}
+            document.cookie = `difficulty=${player.difficulty}`
+            document.cookie = `matches=${Number(getCookie('matches')) + 1}`
+        }
+    };
 
     const incrementScore = value => {
     setScore(prevScore => prevScore + value)
@@ -188,13 +201,8 @@ function App(props) {
 
     useEffect(() => {
         if(lifesRef.current == 0 && prompt.message != 'You Lost') {
-            document.cookie = `score=${player.highscore}`
-            document.cookie = `streak=${player.highstreak}`
-            document.cookie = `multiplier=${player.highmultiplier}`
-            document.cookie = `difficulty=${player.difficulty}` 
-            document.cookie = `matches=${Number(getCookie('matches')) + 1}`
-
-            newPrompt()
+            updateCookie();
+            newPrompt();
             setStatus('Dead')
         }
         else if(player.lifes == 3 && prompt.message == initialPrompt.message){
@@ -223,10 +231,10 @@ function App(props) {
         }
     }, [status, lifes])
     
-    useEffect(() => {        
+    useEffect(() => {     
         if(cookieScore) {
             setHighscore(cookieScore)
-        }
+        };
 
         if (userToken && cookieScore) {;
 
@@ -270,7 +278,7 @@ function App(props) {
                 }
             })
             .catch(err => console.log(err)) 
-        }
+        };
     }, [document.cookie])
 
     useEffect(() => {
