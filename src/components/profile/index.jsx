@@ -24,11 +24,7 @@ const userGitInfo = await getGithubInfo();
 
 
 function Profile() {
-    const [cookieScore, setCookieScore] = useState(Number(getCookie("score")));
-    const [cookieStreak, setCookieStreak] = useState(Number(getCookie("streak")));
-    const [cookieMultiplier, setCookieMultiplier] = useState(Number(getCookie("multiplier")));
-    const [cookieMatches, setCookieMatches] = useState(Number(getCookie("matches")));
-    const [cookieDifficulty, setCookieDifficulty] = useState(getCookie("difficulty"));
+
 
     if (userToken) {
         const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
@@ -39,16 +35,6 @@ function Profile() {
         const [userMultiplier, setUserMultiplier] = useState(userData.multiplier);
         const [userMatches, setUserMatches] = useState(userData.matches);
         const [userDifficulty, setUserDifficulty] = useState(userData.difficulty);
-
-        const updateProfile = () => {
-            if(cookieScore){
-                if(cookieScore > userHighscore){setUserHighscore(cookieScore)};
-                if(cookieStreak > userStreak){setUserStreak(cookieStreak)};
-                if(cookieMultiplier > userMultiplier){setUserMultiplier(cookieMultiplier)};
-                if(cookieMatches > userMatches){setUserMatches(cookieMatches)};
-                if(cookieDifficulty != 'No Matches Found'){setUserDifficulty(cookieDifficulty)};
-            }
-        };
 
         const playerRegister = () => {
             if(userToken) {
@@ -71,8 +57,40 @@ function Profile() {
         };
 
         useEffect(() => {
-            updateProfile();
+            const cookieScore = Number(getCookie("score"));
+            const cookieStreak = Number(getCookie("streak"));
+            const cookieMultiplier = Number(getCookie("multiplier"));
+            const cookieMatches = Number(getCookie("matches"));
+            const cookieDifficulty = getCookie("difficulty");
+
+            if(cookieScore){
+                if(cookieScore > userHighscore){setUserHighscore(cookieScore)};
+                if(cookieStreak > userStreak){setUserStreak(cookieStreak)};
+                if(cookieMultiplier > userMultiplier){setUserMultiplier(cookieMultiplier)};
+                if(cookieMatches > userMatches){setUserMatches(cookieMatches)};
+                if(cookieDifficulty != 'No Matches Found'){setUserDifficulty(cookieDifficulty)};
+            }
+
             playerRegister();          
+        });
+
+        useEffect(() => {
+            if(userToken && !userData.synced) {
+                setUserData({synced: true});
+                Axios.get("http://localhost:8000/user/data", {
+                    headers: {
+                        userToken: userToken
+                    }
+                })
+                .then(response => response.data)
+                .then((response) => {
+                    document.cookie = `score=${response.score}`
+                    document.cookie = `streak=${response.streak}`
+                    document.cookie = `multiplier=${response.multiplier}`
+                    document.cookie = `matches=${response.matches}`
+                    document.cookie = `difficulty=${response.difficulty}`
+                }).catch(err => console.log(err)) 
+            }      
         });
 
         useEffect(() => {
@@ -113,10 +131,9 @@ function Profile() {
                 document.getElementById('log-out-img').style.display = 'flex'
                 document.getElementById('log-out-img-hover').style.display = 'none'
             };
-        })
+        });
 
 
-        
         return ( 
             <>
                 <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/hamburger_icon.png" alt="" /></div>            
