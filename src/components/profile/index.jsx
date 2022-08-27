@@ -68,16 +68,12 @@ function Profile() {
                 }})
                 .catch(err => console.log(err)) 
             }   
-        }
+        };
 
         useEffect(() => {
             updateProfile();
-            playerRegister();
+            playerRegister();          
         });
-
-        useEffect(() => {
-            updateProfile();
-        }, [/* figure out what to put here */])
 
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
@@ -119,6 +115,8 @@ function Profile() {
             };
         })
 
+
+        
         return ( 
             <>
                 <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/hamburger_icon.png" alt="" /></div>            
