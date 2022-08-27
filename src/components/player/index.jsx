@@ -265,14 +265,24 @@ function App(props) {
                     }).catch(err => console.log(err))
                 }
                 else if(response == true){
-                    Axios.post("http://localhost:8000/user/update", {
-                        data: {
-                            userToken: userToken, 
-                            score: getCookie('score'), 
-                            streak: getCookie('streak'),
-                            multiplier: getCookie('multiplier'),
-                            difficulty: getCookie('difficulty'),
-                            matches: getCookie('matches')
+                    Axios.get("http://localhost:8000/user/data", {
+                    headers: {
+                        userToken: userToken
+                    }
+                    })
+                    .then(response => response.data)
+                    .then((response) => {
+                        if(getCookie('matches') > response.matches){
+                            Axios.post("http://localhost:8000/user/update", {
+                                data: {
+                                    userToken: userToken, 
+                                    score: getCookie('score'), 
+                                    streak: getCookie('streak'),
+                                    multiplier: getCookie('multiplier'),
+                                    difficulty: getCookie('difficulty'),
+                                    matches: getCookie('matches')
+                                }
+                            }).catch(err => console.log(err))
                         }
                     }).catch(err => console.log(err))
                 }
