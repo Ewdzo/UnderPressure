@@ -281,24 +281,6 @@ function App(props) {
         };
     }, [document.cookie])
 
-    useEffect(() => {
-        if(userToken) {
-            Axios.get("http://localhost:8000/user/data", {
-                headers: {
-                    userToken: userToken
-                }
-            })
-            .then(response => response.data)
-            .then((response) => {
-                document.cookie = `score=${response.score}`
-                document.cookie = `streak=${response.streak}`
-                document.cookie = `multiplier=${response.multiplier}`
-                document.cookie = `matches=${response.matches}`
-                document.cookie = `difficulty=${response.difficulty}`
-            }).catch(err => console.log(err)) 
-        }      
-    })
-
     return(
         <div id='container'>
             <div id='scoreboard'>
