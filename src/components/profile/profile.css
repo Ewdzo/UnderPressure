@@ -102,24 +102,36 @@
 }
 
 
-/* Log-Out Button */
+/* Log-Out and Refresh Button */
 
-#log-out {
+#buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#log-out, #refresh {
     background-color: rgba(0, 0, 0, 0);
     border: none;
 
     cursor: pointer;
-    width: 20%;
 }
 
 #log-out > img {
     height: 80px;
-
-    display: flex;
 }
 
 #log-out > img:nth-child(2) {
     display: none;
+}
+
+#refresh > img {
+    height: 60px;
+}
+
+#refresh > img:hover {
+    display: inline-block;
+    transform: rotateZ(60deg);
+    transition: 1s;
 }
 
 

@@ -56,7 +56,7 @@ function Profile() {
             }   
         };
 
-        useEffect(() => {
+        const updateProfile = () => {
             const cookieScore = Number(getCookie("score"));
             const cookieStreak = Number(getCookie("streak"));
             const cookieMultiplier = Number(getCookie("multiplier"));
@@ -70,7 +70,10 @@ function Profile() {
                 if(cookieMatches > userMatches){setUserMatches(cookieMatches)};
                 if(cookieDifficulty != 'No Matches Found'){setUserDifficulty(cookieDifficulty)};
             }
+        };
 
+        useEffect(() => {
+            updateProfile();
             playerRegister();          
         });
 
@@ -120,6 +123,8 @@ function Profile() {
                 location.reload();
             };
 
+
+            document.getElementById('refresh').onclick = () => updateProfile();
             document.getElementById('log-out').onclick = () => logOut();
 
             document.getElementById('log-out').onmouseover = () => {
@@ -138,24 +143,28 @@ function Profile() {
             <>
                 <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/hamburger_icon.png" alt="" /></div>            
                 <div id="profile-container">
-                        <a href={`https://github.com/${user}`} target='blank'><img id="profile-picture" src={avatar}  alt="" /></a>
-                        <h1>{user}</h1>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td><img src="src/images/highscore.png" alt="Highscore Icon" /><h3>Highest Score</h3><br /><span>{userHighscore}</span></td>
-                                <td><img src="src/images/streak.png" alt="Streak Icon" /><h3>Highest Streak</h3><br /><span>{userStreak}</span></td>
-                            </tr>
-                            <tr>
-                                <td><img src="src/images/multiplier.png" alt="Multiplier Icon" /><h3>Highest Multiplier</h3><br /><span>{userMultiplier}</span></td>
-                                <td><img src="src/images/joystick.png" alt="Joystick Icon" /><h3>Matches Played</h3><br /><span>{userMatches}</span></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><br /><span>{userDifficulty}</span></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <a href={`https://github.com/${user}`} target='blank'><img id="profile-picture" src={avatar}  alt="" /></a>
+                    <h1>{user}</h1>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <td><img src="src/images/highscore.png" alt="Highscore Icon" /><h3>Highest Score</h3><br /><span>{userHighscore}</span></td>
+                            <td><img src="src/images/streak.png" alt="Streak Icon" /><h3>Highest Streak</h3><br /><span>{userStreak}</span></td>
+                        </tr>
+                        <tr>
+                            <td><img src="src/images/multiplier.png" alt="Multiplier Icon" /><h3>Highest Multiplier</h3><br /><span>{userMultiplier}</span></td>
+                            <td><img src="src/images/joystick.png" alt="Joystick Icon" /><h3>Matches Played</h3><br /><span>{userMatches}</span></td>
+                        </tr>
+                        <tr>
+                            <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><br /><span>{userDifficulty}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div id='buttons'>
                         <button id="log-out"><img id="log-out-img" src="src/images/log-out.png" alt="" title="Log Out"/><img id="log-out-img-hover" src="src/images/log-out-hover.png" alt="" title="Log Out"/></button>
+                        <button id="refresh"><img src="src/images/refresh.png" alt="" title="Refresh Profile"/></button>
+                    </div>
+                    
                 </div>
             </>
         );
