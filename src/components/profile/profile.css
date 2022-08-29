@@ -93,6 +93,7 @@
     border: 0;
     filter: invert();
     background-color: #ededed;
+    border-radius: 100%;
 }
 
 #game-logo {
