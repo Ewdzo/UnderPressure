@@ -141,8 +141,8 @@
 
 #refresh > img:hover {
     display: inline-block;
-    transform: rotateZ(60deg);
-    transition: 1s;
+    transform: rotateZ(360deg);
+    transition: 1.4s;
 }
 
 
