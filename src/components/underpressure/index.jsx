@@ -34,7 +34,7 @@ function App(props) {
     const [status, setStatus] = useState('Idle');
     const [prompt, setPrompt] = useState(initialPrompt);
     const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png");
-    const [countDown, setCountDown] = useState(prompt.time / 1000);
+    const [countDown, setCountDown] = useState(0);
 
     const player = {
         difficulty: difficulty,
@@ -120,7 +120,8 @@ function App(props) {
 
     const resetGame = () => {
         var id = window.setTimeout(function() {}, 0);
-        while (id--) {window.clearTimeout(id)}
+        while (id--) {window.clearTimeout(id); window.clearInterval(id)}
+
         resetLife()
         resetStreak()
         resetMultiplier()
@@ -136,7 +137,7 @@ function App(props) {
         else {
             setPrompt(generatePrompt());
             window.clearTimeout(timer);
-            if(countDownTimer){window.clearTimeout(countDownTimer);}
+            window.clearInterval(countDownTimer);
             
         
             timer = setTimeout(function() {
@@ -201,12 +202,11 @@ function App(props) {
         }
 
         window.addEventListener("keydown", checkKey); 
-        
+
         return () => {
         window.removeEventListener("keydown", checkKey);
         };
 
-        
     }, [prompt, streak, player]);
 
     useEffect(() => {
@@ -241,6 +241,13 @@ function App(props) {
         }
     }, [status, lifes])
     
+    useEffect(() => {
+        if(countDown < 0 || prompt.message == 'You Lost') {
+            window.clearInterval(countDownTimer);
+            setCountDown(0);
+        }
+    })
+
     useEffect(() => {     
         if(cookieScore) {
             setHighscore(cookieScore)
@@ -310,7 +317,7 @@ function App(props) {
                 <div id='newLife'><img src="src/images/new_heart.png" alt="New Heart Icon" /></div>
                 <div id='prompt'>
                     <h1>{prompt.message}</h1>
-                    <div id='timer'>{countDown}</div>
+                    <div id='timer'><img src={`src/images/countdown_${countDown}.png`} alt="" /></div>
                     <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
                 </div>
                 <div>
