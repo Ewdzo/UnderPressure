@@ -1,0 +1,32 @@
+#prompt > button {
+    background-color: #6C23D1DE;
+    color: white;
+}
+
+#scoreboard {
+    color: white;
+}
+
+#scoreboard > div:nth-child(5) {
+    color: black;
+}
+
+#profile-container {
+    background: #F9D94EF0;
+}
+
+#difficulty-selector label:hover{
+    color: #823FDE;
+}
+
+#difficulty-selected {
+    color: #6D23D1
+}
+
+.swal-button, .swal-button:not([disabled]):hover {
+  background-color: #6D23D1;
+}
+
+#container > div:nth-child(3) {
+    color: white;
+}

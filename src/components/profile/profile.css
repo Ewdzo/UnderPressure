@@ -37,7 +37,6 @@
     
     transform: translateY(-1000%);
 
-    background: #F9D94EF0;
     box-shadow: -4px -2px 12px 0px;
 
     text-align: center;
@@ -102,7 +101,7 @@
     justify-content: center;
 }
 
-#game-logo > img[src*='src/images/under_pressure.png'] {
+#profile-logo {
     display: flex;
     
     margin: auto;

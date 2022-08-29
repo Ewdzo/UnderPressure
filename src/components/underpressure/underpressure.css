@@ -5,7 +5,6 @@
     width: 100%;
     height: 100vh;
 
-    color: white;
     font-size: 25px;
 }
 
@@ -34,9 +33,6 @@
 
     font-size: 18px;
 
-    background-color: #6C23D1DE;
-    color: white;
-
     border: none;
     border-radius: 5px;
 
@@ -50,10 +46,6 @@
 
 #multiplier {
     margin: 0 auto;
-}
-
-#scoreboard > div:nth-child(5) {
-    color: black;
 }
 
 #scoreboard > div:nth-child(6) {

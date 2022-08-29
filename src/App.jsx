@@ -20,16 +20,20 @@ function App() {
       [...labels].forEach((label, index) => { 
         labels[index].onclick = () => {for (var i = 0; i <= (labels.length); i++) {
           document.getElementsByTagName('label')[index].className = 'animate__animated animate__bounce';
-          document.getElementsByTagName('label')[index].style.color = '#6C23D1';
+          document.getElementsByTagName('label')[index].id = 'difficulty-selected'
 
           if(i != (labels.length)){
             document.getElementsByTagName('label')[i].className = '';
-            document.getElementsByTagName('label')[i].style.color = '';
+            document.getElementsByTagName('label')[i].id = ''
           }
           
         }}
       });
     }
+
+    const theme = document.querySelector('input[name="theme"]:checked').value;
+    if(document.getElementById('logo')) {document.getElementById('logo').src = `src/images/under_pressure_${theme}.png`};
+    if(document.getElementById('home-icon')) {document.getElementById('home-icon').src = `src/images/home_${theme}.png`};
   })
 
   if (playing == false) { 
@@ -38,7 +42,7 @@ function App() {
         <div id='container'>
           <Profile />
           <div id='prompt'>
-            <div id='title'><h1>Under Pressure</h1><img src="src/images/under_pressure.png" alt="" /></div>
+            <div id='title'><h1>Under Pressure</h1><img id='logo' alt="" /></div>
             <button id="start" onClick={start}>Play</button>
             <form id="difficulty-selector" action="">
               <label htmlFor="easy">Easy</label>
@@ -56,12 +60,11 @@ function App() {
   )}
 
   else if (playing == true) {
-
     return (
       <>
         <Profile />
         <UnderPressure difficulty={document.querySelector('input[name="difficulty"]:checked').value} />
-        <div id="home"><button id="home-btn" onClick={() => {setPlaying(false)}}><img src="src/images/home.png" alt="" /></button></div>
+        <div id="home"><button id="home-btn" onClick={() => {setPlaying(false)}}><img id='home-icon' alt="" /></button></div>
       </>
   )}
 };

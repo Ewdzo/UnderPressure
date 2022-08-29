@@ -171,6 +171,7 @@ function Profile() {
     }
     else {
         useEffect(() => {
+            const theme = document.querySelector('input[name="theme"]:checked').value;
             const menuCheckbox = document.getElementById('menu-btn');
             const profileContainer = document.querySelector('#profile-container');
     
@@ -186,15 +187,18 @@ function Profile() {
                     profileContainer.classList.add('animate__animated', 'animate__bounceOutLeft')
                 };
             };
+            
+            document.getElementById('profile-logo').src = `src/images/under_pressure_${theme}.png`;
+            document.getElementById('menu-icon').src = `src/images/menu_${theme}.png`;
         });
 
         return ( 
             <>  
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/menu.png" alt="" /></div>    
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" alt="" /></div>    
                 <div id="profile-container">
                     <a href=""><img id="profile-picture" src='src/images/default_icon.png'  alt="" /></a>
                     <h1>Welcome, Guest!</h1>
-                    <div id="game-logo"><img src="src/images/under_pressure.png" alt="" /></div>
+                    <div id="game-logo"><img id="profile-logo" alt="" /></div>
                     <a href="http://localhost:8000/auth">
                         <div id="auth-btn">
                             <img id="git-logo" src="src/images/github.png" alt="" />
