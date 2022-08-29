@@ -4,8 +4,7 @@ import generatePrompt from '../prompts';
 import 'animate.css';
 import Axios from "axios";
 
-var timer;
-
+var timer, countDownTimer;
 
 // TIMER TO GAME
 
@@ -32,9 +31,10 @@ function App(props) {
     const [highscore, setHighscore] = useState(0);
     const [highstreak, setHighstreak] = useState(0);
     const [highmultiplier, setHighmultiplier] = useState(0);
-    const [status, setStatus] = useState('Idle')
+    const [status, setStatus] = useState('Idle');
     const [prompt, setPrompt] = useState(initialPrompt);
-    const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png")
+    const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png");
+    const [countDown, setCountDown] = useState(prompt.time / 1000);
 
     const player = {
         difficulty: difficulty,
@@ -136,6 +136,8 @@ function App(props) {
         else {
             setPrompt(generatePrompt());
             window.clearTimeout(timer);
+            if(countDownTimer){window.clearTimeout(countDownTimer);}
+            
         
             timer = setTimeout(function() {
                 if (lifesRef.current > 0) {
@@ -144,6 +146,11 @@ function App(props) {
                     decrementLife(1)
                 };
             },  prompt.time);
+
+            setCountDown(5);
+            countDownTimer = setInterval(function () {
+                setCountDown(prevMultiplier => prevMultiplier - 1)
+            }, 1000);
         };
     };
 
@@ -303,6 +310,7 @@ function App(props) {
                 <div id='newLife'><img src="src/images/new_heart.png" alt="New Heart Icon" /></div>
                 <div id='prompt'>
                     <h1>{prompt.message}</h1>
+                    <div id='timer'>{countDown}</div>
                     <button id="start-btn" onClick={function() {resetGame()}}>Reset</button>
                 </div>
                 <div>
