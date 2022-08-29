@@ -20,7 +20,7 @@ function App() {
       [...labels].forEach((label, index) => { 
         labels[index].onclick = () => {for (var i = 0; i <= (labels.length); i++) {
           document.getElementsByTagName('label')[index].className = 'animate__animated animate__bounce';
-          document.getElementsByTagName('label')[index].style.color = 'rgb(159 36 163)';
+          document.getElementsByTagName('label')[index].style.color = '#6C23D1';
 
           if(i != (labels.length)){
             document.getElementsByTagName('label')[i].className = '';

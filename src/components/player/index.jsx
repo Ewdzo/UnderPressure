@@ -6,6 +6,9 @@ import Axios from "axios";
 
 var timer;
 
+
+// TIMER TO GAME
+
 function App(props) {
 
     const getCookie = (name) => {
