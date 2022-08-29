@@ -1,5 +1,5 @@
 import './App.css';
-import UnderPressure from './components/player';
+import UnderPressure from './components/underpressure';
 import { useEffect, useState } from 'react';
 import Profile from './components/profile';
 import swal from 'sweetalert';

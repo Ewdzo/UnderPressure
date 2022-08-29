@@ -1,4 +1,4 @@
-import './scoreboard.css'
+import './underpressure.css'
 import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 import 'animate.css';
