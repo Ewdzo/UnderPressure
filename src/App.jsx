@@ -30,9 +30,6 @@ function App() {
         }}
       });
     }
-    else {
-      document.getElementById('menu-icon').style.filter = 'invert()'
-    }
   })
 
   if (playing == false) { 
