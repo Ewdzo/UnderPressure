@@ -73,3 +73,7 @@
     display: flex;
     margin: 0 auto;
 }
+
+#timer > img {
+    width: 200px;
+}
