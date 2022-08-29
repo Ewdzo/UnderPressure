@@ -141,22 +141,22 @@ function Profile() {
 
         return ( 
             <>
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/hamburger_icon.png" alt="" /></div>            
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/menu.png" alt="" /></div>            
                 <div id="profile-container">
                     <a href={`https://github.com/${user}`} target='blank'><img id="profile-picture" src={avatar}  alt="" /></a>
                     <h1>{user}</h1>
                     <table>
                         <tbody>
                         <tr>
-                            <td><img src="src/images/highscore.png" alt="Highscore Icon" /><h3>Highest Score</h3><br /><span>{userHighscore}</span></td>
-                            <td><img src="src/images/streak.png" alt="Streak Icon" /><h3>Highest Streak</h3><br /><span>{userStreak}</span></td>
+                            <td><img src="src/images/highscore.png" alt="Highscore Icon" /><h3>Highest Score</h3><span>{userHighscore}</span></td>
+                            <td><img src="src/images/streak.png" alt="Streak Icon" /><h3>Highest Streak</h3><span>{userStreak}</span></td>
                         </tr>
                         <tr>
-                            <td><img src="src/images/multiplier.png" alt="Multiplier Icon" /><h3>Highest Multiplier</h3><br /><span>{userMultiplier}</span></td>
-                            <td><img src="src/images/joystick.png" alt="Joystick Icon" /><h3>Matches Played</h3><br /><span>{userMatches}</span></td>
+                            <td><img src="src/images/multiplier.png" alt="Multiplier Icon" /><h3>Highest Multiplier</h3><span>{userMultiplier}</span></td>
+                            <td><img src="src/images/joystick.png" alt="Joystick Icon" /><h3>Matches Played</h3><span>{userMatches}</span></td>
                         </tr>
                         <tr>
-                            <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><br /><span>{userDifficulty}</span></td>
+                            <td colSpan={2}><img src="src/images/difficulty.png" alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><span>{userDifficulty}</span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -190,7 +190,7 @@ function Profile() {
 
         return ( 
             <>  
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/hamburger_icon.png" alt="" /></div>    
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/menu.png" alt="" /></div>    
                 <div id="profile-container">
                     <a href=""><img id="profile-picture" src='src/images/default_icon.png'  alt="" /></a>
                     <h1>Welcome, Guest!</h1>

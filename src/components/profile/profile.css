@@ -13,13 +13,13 @@
     cursor: pointer;
 
     position: absolute;
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
     z-index: 2;
 }
 
 #menu > img {
-    height: 50px;
+    height: 60px;
 }
 
 /* Profile Container */
@@ -39,7 +39,7 @@
     
     transform: translateY(-1000%);
 
-    background: linear-gradient(0deg, #f8dd5c, #6f13915c);
+    background: #e8c070;
     box-shadow: -4px -2px 12px 0px;
 
     text-align: center;
@@ -49,21 +49,31 @@
     margin: auto;
 }
 
-#profile-container > table > tbody > tr > td > img {
-    height: 85px;
-}
+
 
 #profile-picture {
-    height: 200px;
+    height: 180px;
 
-    border-radius: 100%;
-    border: solid 3px #000000;
+    border: solid 20px transparent;
+    border-image: url(src/images/border.png) round 70;
 }
 
 #profile-container > table > tbody > tr > td {
-    box-shadow: inset #00000059 0 0px 4px 0px;
     width: 50%;
 } 
+
+#profile-container > table > tbody > tr > td > img {
+    height: 70px;
+    background: #120623;
+    border: solid 10px transparent;
+    border-image: url(src/images/border.png) round 70;
+}
+
+#profile-container > table > tbody > tr > td > span {
+    display: inline-block;
+    margin: 5px 0;
+} 
+
 
 #profile-container > table {
     width: 80%;
@@ -126,6 +136,7 @@
 
 #refresh > img {
     height: 60px;
+    filter: invert(1);
 }
 
 #refresh > img:hover {
