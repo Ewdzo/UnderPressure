@@ -138,12 +138,13 @@ function Profile() {
             };
         });
 
+        const theme = () => { if(document.querySelector('input[name="theme"]:checked')){ return document.querySelector('input[name="theme"]:checked').value}};
 
         return ( 
             <>
                 <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/menu.png" alt="" /></div>            
                 <div id="profile-container">
-                    <a href={`https://github.com/${user}`} target='blank'><img id="profile-picture" src={avatar}  alt="" /></a>
+                    <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img id="profile-picture" src={avatar}  alt="" /></a>
                     <h1>{user}</h1>
                     <table>
                         <tbody>
@@ -161,7 +162,7 @@ function Profile() {
                         </tbody>
                     </table>
                     <div id='buttons'>
-                        <button id="log-out"><img id="log-out-img" src="src/images/log-out.png" alt="" title="Log Out"/><img id="log-out-img-hover" src="src/images/log-out-hover.png" alt="" title="Log Out"/></button>
+                        <button id="log-out"><img id="log-out-img" src={`src/images/log-out_${theme()}.png`} alt="" title="Log Out"/><img id="log-out-img-hover" src={`src/images/log-out-hover_${theme()}.png`} alt="" title="Log Out"/></button>
                         <button id="refresh"><img src="src/images/refresh.png" alt="" title="Refresh Profile"/></button>
                     </div>
                     
@@ -171,7 +172,6 @@ function Profile() {
     }
     else {
         useEffect(() => {
-            const theme = document.querySelector('input[name="theme"]:checked').value;
             const menuCheckbox = document.getElementById('menu-btn');
             const profileContainer = document.querySelector('#profile-container');
     
@@ -187,9 +187,6 @@ function Profile() {
                     profileContainer.classList.add('animate__animated', 'animate__bounceOutLeft')
                 };
             };
-            
-            document.getElementById('profile-logo').src = `src/images/under_pressure_${theme}.png`;
-            document.getElementById('menu-icon').src = `src/images/menu_${theme}.png`;
         });
 
         return ( 

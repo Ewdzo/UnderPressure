@@ -31,18 +31,17 @@ function App() {
       });
     }
 
-    const theme = document.querySelector('input[name="theme"]:checked').value;
-    if(document.getElementById('logo')) {document.getElementById('logo').src = `src/images/under_pressure_${theme}.png`};
-    if(document.getElementById('home-icon')) {document.getElementById('home-icon').src = `src/images/home_${theme}.png`};
   })
 
   if (playing == false) { 
+    const theme = () => { if(document.querySelector('input[name="theme"]:checked')){ return document.querySelector('input[name="theme"]:checked').value}};
+
     return (
       <> 
         <div id='container'>
           <Profile />
           <div id='prompt'>
-            <div id='title'><h1>Under Pressure</h1><img id='logo' alt="" /></div>
+            <div id='title'><h1>Under Pressure</h1><img id='logo' src={`src/images/under_pressure_${theme()}.png`} alt="" /></div>
             <button id="start" onClick={start}>Play</button>
             <form id="difficulty-selector" action="">
               <label htmlFor="easy">Easy</label>
@@ -60,11 +59,12 @@ function App() {
   )}
 
   else if (playing == true) {
+    const theme = document.querySelector('input[name="theme"]:checked').value;
     return (
       <>
         <Profile />
         <UnderPressure difficulty={document.querySelector('input[name="difficulty"]:checked').value} />
-        <div id="home"><button id="home-btn" onClick={() => {setPlaying(false)}}><img id='home-icon' alt="" /></button></div>
+        <div id="home"><button id="home-btn" onClick={() => {setPlaying(false)}}><img id='home-icon' src={`src/images/home_${theme}.png`} alt="" /></button></div>
       </>
   )}
 };

@@ -1,5 +1,5 @@
 #prompt > button {
-    background-color: #6C23D1DE;
+    background-color: #2081C3DE;
     color: white;
 }
 
@@ -12,30 +12,26 @@
 }
 
 #profile-container {
-    background: #F9D94EF0;
+    background: #63D2FFF0;
 }
 
 #difficulty-selector label:hover{
-    color: #823FDE;
+    color: #2081C3;
 }
 
 #difficulty-selected {
-    color: #6D23D1
+    color: #78D5D7;
 }
 
 .swal-button, .swal-button:not([disabled]):hover {
-  background-color: #6D23D1;
-}
-
-#container > div:nth-child(3) {
-    color: white;
+  background-color: #2081C3;
 }
 
 #profile-picture {
-    border-image: url("../../images/border_purple.png") round 70;
+    border-image: url('../../images/border_blue.png') round 70;
 }
 
 #profile-container > table > tbody > tr > td > img {
-    background: #120623;
-    border-image: url("../../images/border_purple.png") round 70;
+    background: #ADE8FF;
+    border-image: url('../../images/border_blue.png') round 70;
 }
