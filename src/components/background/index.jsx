@@ -14,6 +14,7 @@ function Background() {
             if(document.getElementById('profile-logo')) {document.getElementById('profile-logo').src = `src/images/under_pressure_${theme}.png`};
             if(document.getElementById('log-out-img')) {document.getElementById('log-out-img').src = `src/images/log-out_${theme}.png`}
             if(document.getElementById('log-out-img-hover')) {document.getElementById('log-out-img-hover').src = `src/images/log-out-hover_${theme}.png`}
+            if(document.getElementById('menu-icon')) {document.getElementById('menu-icon').src = `src/images/menu_${theme}.png`}
         }
         
         [...selectTheme].forEach((button, index) => { 

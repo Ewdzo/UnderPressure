@@ -24,8 +24,6 @@ const userGitInfo = await getGithubInfo();
 
 
 function Profile() {
-
-
     if (userToken) {
         const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
         const [user, setUser] = useState(userGitInfo.name);
@@ -35,6 +33,7 @@ function Profile() {
         const [userMultiplier, setUserMultiplier] = useState(userData.multiplier);
         const [userMatches, setUserMatches] = useState(userData.matches);
         const [userDifficulty, setUserDifficulty] = useState(userData.difficulty);
+        const [currentTheme, setTheme] = useState('Blue');
 
         const playerRegister = () => {
             if(userToken) {
@@ -138,11 +137,11 @@ function Profile() {
             };
         });
 
-        const theme = () => { if(document.querySelector('input[name="theme"]:checked')){ return document.querySelector('input[name="theme"]:checked').value}};
+        useEffect(() => { if(document.querySelector('input[name="theme"]:checked')){ setTheme(document.querySelector('input[name="theme"]:checked').value)}});
 
         return ( 
             <>
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src="src/images/menu.png" alt="" /></div>            
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={`src/images/menu_${currentTheme}.png`} alt="" /></div>            
                 <div id="profile-container">
                     <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img id="profile-picture" src={avatar}  alt="" /></a>
                     <h1>{user}</h1>
@@ -162,7 +161,7 @@ function Profile() {
                         </tbody>
                     </table>
                     <div id='buttons'>
-                        <button id="log-out"><img id="log-out-img" src={`src/images/log-out_${theme()}.png`} alt="" title="Log Out"/><img id="log-out-img-hover" src={`src/images/log-out-hover_${theme()}.png`} alt="" title="Log Out"/></button>
+                        <button id="log-out"><img id="log-out-img" src={`src/images/log-out_${currentTheme}.png`} alt="" title="Log Out"/><img id="log-out-img-hover" src={`src/images/log-out-hover_${currentTheme}.png`} alt="" title="Log Out"/></button>
                         <button id="refresh"><img src="src/images/refresh.png" alt="" title="Refresh Profile"/></button>
                     </div>
                     
@@ -171,6 +170,8 @@ function Profile() {
         );
     }
     else {
+        const [currentTheme, setTheme] = useState('Blue');
+
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
             const profileContainer = document.querySelector('#profile-container');
@@ -189,9 +190,11 @@ function Profile() {
             };
         });
 
+        useEffect(() => { if(document.querySelector('input[name="theme"]:checked')){ setTheme(document.querySelector('input[name="theme"]:checked').value)}});
+
         return ( 
             <>  
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" alt="" /></div>    
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={`src/images/menu_${currentTheme}.png`} alt="" /></div>    
                 <div id="profile-container">
                     <a href=""><img id="profile-picture" src='src/images/default_icon.png'  alt="" /></a>
                     <h1>Welcome, Guest!</h1>
