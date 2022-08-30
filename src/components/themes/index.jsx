@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import './theme_picker.css'
 
 function Background() {
 
-    const [theme, setTheme] = useState('Purple');
+    const [theme, setTheme] = useState('Blue');
 
 
     useEffect (() => {
@@ -31,11 +32,16 @@ function Background() {
     if (theme == 'Purple') {
         return(
             <>  
-                <link rel="stylesheet" href="src/components/themes/theme_purple.css" />
-                <form id="theme" style={{position: 'absolute', 'z-index': '3'}}>
-                    <input type="radio" id="blue" name="theme" value="Blue" />
-                    <input type="radio" id="purple" name="theme" defaultChecked value="Purple" />
-                </form>
+                <div id="theme-picker-container">
+                    <link rel="stylesheet" href="src/components/themes/theme_purple.css" />
+                    <form id="theme-picker">
+                        <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
+                        <input type="radio" id="blue" name="theme" value="Blue" />
+                        <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
+                        <input type="radio" id="purple" name="theme" value="Purple" />
+                        <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
+                    </form>
+                </div>
                 <video autoPlay muted loop id="background">
                     <source src="./src/videos/background.mp4" type="video/mp4" />
                 </video>
@@ -45,11 +51,16 @@ function Background() {
     else if(theme == 'Blue'){
         return(
             <>  
-                <link rel="stylesheet" href="src/components/themes/theme_blue.css" />
-                <form id="theme" style={{position: 'absolute'}}>
-                    <input type="radio" id="blue" name="theme" defaultChecked value="Blue" />
-                    <input type="radio" id="purple" name="theme" value="Purple" />
-                </form>
+                <div id="theme-picker-container">
+                    <link rel="stylesheet" href="src/components/themes/theme_blue.css" />
+                    <form id="theme-picker">
+                        <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
+                        <input type="radio" id="blue" name="theme" value="Blue" />
+                        <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
+                        <input type="radio" id="purple" name="theme" value="Purple" />
+                        <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
+                    </form>
+                </div>
                 <img src="src/images/background-blue.png" id="background" alt="" />
             </>
         )

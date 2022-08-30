@@ -15,16 +15,16 @@ function App() {
   useEffect(() => {
     if (playing == false) {
       document.getElementById('menu-icon').style.filter = ''
-      const labels = document.getElementsByTagName('label');
+      const labels = document.getElementsByName('difficulty-label');
 
       [...labels].forEach((label, index) => { 
         labels[index].onclick = () => {for (var i = 0; i <= (labels.length); i++) {
-          document.getElementsByTagName('label')[index].className = 'animate__animated animate__bounce';
-          document.getElementsByTagName('label')[index].id = 'difficulty-selected'
+          document.getElementsByName('difficulty-label')[index].className = 'animate__animated animate__bounce';
+          document.getElementsByName('difficulty-label')[index].id = 'difficulty-selected'
 
           if(i != (labels.length)){
-            document.getElementsByTagName('label')[i].className = '';
-            document.getElementsByTagName('label')[i].id = ''
+            document.getElementsByName('difficulty-label')[i].className = '';
+            document.getElementsByName('difficulty-label')[i].id = ''
           }
           
         }}
@@ -44,10 +44,10 @@ function App() {
             <div id='title'><h1>Under Pressure</h1><img id='logo' src={`src/images/under_pressure_${theme()}.png`} alt="" /></div>
             <button id="start" onClick={start}>Play</button>
             <form id="difficulty-selector" action="">
-              <label htmlFor="easy">Easy</label>
-              <label htmlFor="medium">Medium</label>
-              <label htmlFor="hard">Hard</label>
-              <label htmlFor="insane">Insane</label><br />
+              <label name="difficulty-label" htmlFor="easy">Easy</label>
+              <label name="difficulty-label" htmlFor="medium">Medium</label>
+              <label name="difficulty-label" htmlFor="hard">Hard</label>
+              <label name="difficulty-label" htmlFor="insane">Insane</label><br />
               <input type="radio" id="easy" name="difficulty" value="Easy" />
               <input type="radio" id="medium" name="difficulty" value="Medium" />
               <input type="radio" id="hard" name="difficulty" value="Hard" />  
