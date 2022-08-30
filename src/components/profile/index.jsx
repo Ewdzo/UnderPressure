@@ -8,9 +8,11 @@ const getCookie = (name) => {
       return parts[0] === name ? decodeURIComponent(parts[1]) : r
     }, '')
 };
+
 const userToken = getCookie("userToken");
+
 const getGithubInfo = async () => {
-    if (userToken){
+    if(userToken){
         const res = await fetch("https://api.github.com/user", {
             headers: {
               Authorization: "token " + userToken
@@ -20,11 +22,12 @@ const getGithubInfo = async () => {
         return res.json();
     }
 };
+
 const userGitInfo = await getGithubInfo();
 
 
 function Profile() {
-    if (userToken) {
+    if(userToken) {
         const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
         const [user, setUser] = useState(userGitInfo.name);
         const [avatar, setAvatar] = useState(`https://github.com/${userGitInfo.login}.png`);
@@ -52,7 +55,7 @@ function Profile() {
                     });
                 }})
                 .catch(err => console.log(err)) 
-            }   
+            };  
         };
 
         const updateProfile = () => {
@@ -68,15 +71,13 @@ function Profile() {
                 if(cookieMultiplier > userMultiplier){setUserMultiplier(cookieMultiplier)};
                 if(cookieMatches > userMatches){setUserMatches(cookieMatches)};
                 if(cookieDifficulty != 'No Matches Found'){setUserDifficulty(cookieDifficulty)};
-            }
+            };
         };
 
         useEffect(() => {
             updateProfile();
-            playerRegister();          
-        });
+            playerRegister(); 
 
-        useEffect(() => {
             if(userToken && !userData.synced) {
                 setUserData({synced: true});
                 Axios.get("http://localhost:8000/user/data", {
@@ -86,21 +87,19 @@ function Profile() {
                 })
                 .then(response => response.data)
                 .then((response) => {
-                    document.cookie = `score=${response.score}`
-                    document.cookie = `streak=${response.streak}`
-                    document.cookie = `multiplier=${response.multiplier}`
-                    document.cookie = `matches=${response.matches}`
-                    document.cookie = `difficulty=${response.difficulty}`
+                    document.cookie = `score=${response.score}`;
+                    document.cookie = `streak=${response.streak}`;
+                    document.cookie = `multiplier=${response.multiplier}`;
+                    document.cookie = `matches=${response.matches}`;
+                    document.cookie = `difficulty=${response.difficulty}`;
                 }).catch(err => console.log(err)) 
-            }      
-        });
+            };  
 
-        useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
             const profileContainer = document.querySelector('#profile-container');
 
             menuCheckbox.onclick = () => { 
-                if (menuCheckbox.checked == true) {
+                if(menuCheckbox.checked == true) {
                     profileContainer.style.bottom = '0'
                     profileContainer.classList.remove('animate__animated', 'animate__bounceOutLeft')
                     profileContainer.classList.add('animate__animated', 'animate__bounceInLeft')
@@ -122,7 +121,6 @@ function Profile() {
                 location.reload();
             };
 
-
             document.getElementById('refresh').onclick = () => updateProfile();
             document.getElementById('log-out').onclick = () => logOut();
 
@@ -135,15 +133,15 @@ function Profile() {
                 document.getElementById('log-out-img').style.display = 'flex'
                 document.getElementById('log-out-img-hover').style.display = 'none'
             };
-        });
 
-        useEffect(() => { if(document.querySelector('input[name="theme"]:checked')){ setTheme(document.querySelector('input[name="theme"]:checked').value)}});
+            if(document.querySelector('input[name="theme"]:checked')){ setTheme(document.querySelector('input[name="theme"]:checked').value)}
+        });
 
         return ( 
             <>
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={`src/images/menu_${currentTheme}.png`} alt="" /></div>            
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={`src/images/menu_${currentTheme}.png`} alt="Menu Icon" /></div>            
                 <div id="profile-container">
-                    <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img id="profile-picture" src={avatar}  alt="" /></a>
+                    <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img id="profile-picture" src={avatar}  alt="Profile Picture" /></a>
                     <h1>{user}</h1>
                     <table>
                         <tbody>
@@ -161,10 +159,9 @@ function Profile() {
                         </tbody>
                     </table>
                     <div id='buttons'>
-                        <button id="log-out"><img id="log-out-img" src={`src/images/log-out_${currentTheme}.png`} alt="" title="Log Out"/><img id="log-out-img-hover" src={`src/images/log-out-hover_${currentTheme}.png`} alt="" title="Log Out"/></button>
-                        <button id="refresh"><img src="src/images/refresh.png" alt="" title="Refresh Profile"/></button>
+                        <button id="log-out"><img id="log-out-img" src={`src/images/log-out_${currentTheme}.png`} alt="Log Out Icon" title="Log Out"/><img id="log-out-img-hover" src={`src/images/log-out-hover_${currentTheme}.png`} alt="Log Out Icon" title="Log Out"/></button>
+                        <button id="refresh"><img src="src/images/refresh.png" alt="Refresh Icon" title="Refresh Profile"/></button>
                     </div>
-                    
                 </div>
             </>
         );
@@ -177,7 +174,7 @@ function Profile() {
             const profileContainer = document.querySelector('#profile-container');
     
             menuCheckbox.onclick = () => { 
-                if (menuCheckbox.checked == true) {
+                if(menuCheckbox.checked == true) {
                     profileContainer.style.bottom = '0'
                     profileContainer.classList.remove('animate__animated', 'animate__bounceOutLeft')
                     profileContainer.classList.add('animate__animated', 'animate__bounceInLeft')
@@ -188,20 +185,20 @@ function Profile() {
                     profileContainer.classList.add('animate__animated', 'animate__bounceOutLeft')
                 };
             };
-        });
 
-        useEffect(() => { if(document.querySelector('input[name="theme"]:checked')){ setTheme(document.querySelector('input[name="theme"]:checked').value)}});
+            if(document.querySelector('input[name="theme"]:checked')) { setTheme(document.querySelector('input[name="theme"]:checked').value)}
+        });
 
         return ( 
             <>  
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={`src/images/menu_${currentTheme}.png`} alt="" /></div>    
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={`src/images/menu_${currentTheme}.png`} alt="Menu Icon" /></div>    
                 <div id="profile-container">
-                    <a href=""><img id="profile-picture" src='src/images/default_icon.png'  alt="" /></a>
+                    <a href=""><img id="profile-picture" src='src/images/default_icon.png'  alt="Profile Icon" /></a>
                     <h1>Welcome, Guest!</h1>
-                    <div id="game-logo"><img id="profile-logo" alt="" /></div>
+                    <div id="game-logo"><img id="profile-logo" alt="Under Pressure Icon" /></div>
                     <a href="http://localhost:8000/auth">
-                        <div id="auth-btn">
-                            <img id="git-logo" src="src/images/github.png" alt="" />
+                        <div id="log-in">
+                            <img id="git-logo" src="src/images/github.png" alt="GitHub Icon" />
                             <p>Log in with GitHub</p>
                         </div>
                     </a>

@@ -7,17 +7,15 @@ class Prompts {
         this.difficulty = "easy",
         this.time = 5000,
         this.code = key.charCodeAt(0)
-    }
-}
+    };
+};
 
 function generatePrompt() {
-    const randomNumber = (Math.floor(Math.random()*(25)) + 65)
-    const randomLetter = String.fromCharCode(randomNumber)
-    const randomPrompt = new Prompts(randomLetter)
+    const randomNumber = (Math.floor(Math.random()*(25)) + 65);
+    const randomLetter = String.fromCharCode(randomNumber);
+    const randomPrompt = new Prompts(randomLetter);
 
-    return (
-        randomPrompt
-    ) 
+    return (randomPrompt);
 };
 
 export default generatePrompt

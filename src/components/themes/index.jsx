@@ -5,10 +5,9 @@ function Background() {
 
     const [theme, setTheme] = useState('Blue');
 
-
     useEffect (() => {
-        
         const selectTheme = document.getElementsByName('theme');
+
         const updateTheme = () => {
             if(document.getElementById('logo')) {document.getElementById('logo').src = `src/images/under_pressure_${theme}.png`};
             if(document.getElementById('home-icon')) {document.getElementById('home-icon').src = `src/images/home_${theme}.png`};
@@ -16,7 +15,7 @@ function Background() {
             if(document.getElementById('log-out-img')) {document.getElementById('log-out-img').src = `src/images/log-out_${theme}.png`}
             if(document.getElementById('log-out-img-hover')) {document.getElementById('log-out-img-hover').src = `src/images/log-out-hover_${theme}.png`}
             if(document.getElementById('menu-icon')) {document.getElementById('menu-icon').src = `src/images/menu_${theme}.png`}
-        }
+        };
         
         [...selectTheme].forEach((button, index) => { 
             selectTheme[index].onclick = () => { 
@@ -28,8 +27,7 @@ function Background() {
         updateTheme();     
     });
 
-
-    if (theme == 'Purple') {
+    if(theme == 'Purple') {
         return(
             <>  
                 <div id="theme-picker-container">
@@ -48,7 +46,7 @@ function Background() {
             </>
         )
     }
-    else if(theme == 'Blue'){
+    else if(theme == 'Blue') {
         return(
             <>  
                 <div id="theme-picker-container">
@@ -61,10 +59,10 @@ function Background() {
                         <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
                     </form>
                 </div>
-                <img src="src/images/background-blue.png" id="background" alt="" />
+                <img src="src/images/background-blue.png" id="background" alt="Blue Mountains Pixel Art" />
             </>
-        )
-    }
-}
+        );
+    };
+};
 
 export default Background

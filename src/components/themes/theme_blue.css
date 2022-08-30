@@ -1,18 +1,23 @@
+#profile-container {
+    background: #63D2FFF0;
+}
+
+#profile-container > table > tbody > tr > td > img {
+    background: #ADE8FF;
+    border-image: url('../../images/border_blue.png') round 70;
+}
+
+#profile-picture {
+    border-image: url('../../images/border_blue.png') round 70;
+}
+
+.swal-button, .swal-button:not([disabled]):hover {
+    background-color: #2081C3;
+}
+
 #prompt > button {
     background-color: #2081C3DE;
     color: white;
-}
-
-#scoreboard {
-    color: white;
-}
-
-#scoreboard > div:nth-child(5) {
-    color: black;
-}
-
-#profile-container {
-    background: #63D2FFF0;
 }
 
 #difficulty-selector label:hover{
@@ -23,15 +28,10 @@
     color: #78D5D7;
 }
 
-.swal-button, .swal-button:not([disabled]):hover {
-  background-color: #2081C3;
+#scoreboard {
+    color: white;
 }
 
-#profile-picture {
-    border-image: url('../../images/border_blue.png') round 70;
-}
-
-#profile-container > table > tbody > tr > td > img {
-    background: #ADE8FF;
-    border-image: url('../../images/border_blue.png') round 70;
+#scoreboard > div:nth-child(5) {
+    color: black;
 }
