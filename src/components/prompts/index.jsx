@@ -1,3 +1,5 @@
+const promptTypes = [ key, word, phrase, button ];
+
 class Prompts {
     constructor(key) {
         this.name = `Type${key}`,
