@@ -1,5 +1,16 @@
 const promptTypes = [ 'key', 'word', 'phrase', 'button' ];
 
+class ButtonPrompts {
+    constructor(button) {
+        this.name = `TypePhrase${button}`
+        this.type = "Button",
+        this.message = `Type the work ${button}`,
+        this.value = 1,
+        this.difficulty = "easy",
+        this.time = 500
+    }
+}
+
 class KeyPrompts {
     constructor(key) {
         this.name = `Type${key}`,
@@ -17,8 +28,19 @@ class WordPrompts {
         this.name = `TypeWord${word}`
         this.type = "Word",
         this.message = `Type the work ${word}`,
-        this.value = 3,
+        this.value = 5,
         this.difficulty = "medium",
+        this.time = 10000
+    }
+}
+
+class PhrasePrompts {
+    constructor(phrase) {
+        this.name = `TypePhrase${word}`
+        this.type = "Phrase",
+        this.message = `Type the work ${word}`,
+        this.value = 10,
+        this.difficulty = "hard",
         this.time = 15000
     }
 }
