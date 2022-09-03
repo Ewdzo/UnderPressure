@@ -1,6 +1,6 @@
-const promptTypes = [ key, word, phrase, button ];
+const promptTypes = [ 'key', 'word', 'phrase', 'button' ];
 
-class Prompts {
+class KeyPrompts {
     constructor(key) {
         this.name = `Type${key}`,
         this.type = "Key",
@@ -12,12 +12,26 @@ class Prompts {
     };
 };
 
-function generatePrompt() {
-    const randomNumber = (Math.floor(Math.random()*(25)) + 65);
-    const randomLetter = String.fromCharCode(randomNumber);
-    const randomPrompt = new Prompts(randomLetter);
+class WordPrompts {
+    constructor(word) {
+        this.name = `TypeWord${word}`
+        this.type = "Word",
+        this.message = `Type the work ${word}`,
+        this.value = 3,
+        this.difficulty = "medium",
+        this.time = 15000
+    }
+}
 
-    return (randomPrompt);
+function generatePrompt(type) {
+
+    if(type == 'key') {
+        const randomNumber = (Math.floor(Math.random()*(25)) + 65);
+        const randomLetter = String.fromCharCode(randomNumber);
+        const randomPrompt = new KeyPrompts(randomLetter);
+        return (randomPrompt);
+    };
+
 };
 
 export default generatePrompt

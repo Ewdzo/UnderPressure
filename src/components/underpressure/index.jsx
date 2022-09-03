@@ -101,7 +101,7 @@ function App(props) {
             setPrompt({message: 'You Lost'});
         }
         else {
-            setPrompt(generatePrompt());
+            setPrompt(generatePrompt('key'));
             window.clearTimeout(timer);
             window.clearInterval(countDownTimer);    
         
