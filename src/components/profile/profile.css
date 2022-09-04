@@ -140,7 +140,7 @@
     transition: 1.4s;
 }
 
-#login {
+#log-in {
     background-color: rgb(37, 37, 37);
     border-radius: 5px;
     border: solid 2px rgb(248, 248, 248);
@@ -155,7 +155,7 @@
     margin: 10% auto;
 }
 
-#login > img {
+#log-in > img {
     padding: 5px;
     padding-right: 8px;
 
@@ -164,6 +164,6 @@
     filter: invert();
 }
 
-#login > p {
+#log-in > p {
     flex-grow: 1;
 }
