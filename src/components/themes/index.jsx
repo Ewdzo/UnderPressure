@@ -36,7 +36,7 @@ function Background() {
                         <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
                         <input type="radio" id="blue" name="theme" value="Blue" />
                         <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
-                        <input type="radio" id="purple" name="theme" value="Purple" />
+                        <input type="radio" id="purple" name="theme" defaultChecked value="Purple" />
                         <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
                     </form>
                 </div>
@@ -53,7 +53,7 @@ function Background() {
                     <link rel="stylesheet" href="src/components/themes/theme_blue.css" />
                     <form id="theme-picker">
                         <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
-                        <input type="radio" id="blue" name="theme" value="Blue" />
+                        <input type="radio" id="blue" name="theme" defaultChecked value="Blue" />
                         <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
                         <input type="radio" id="purple" name="theme" value="Purple" />
                         <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
