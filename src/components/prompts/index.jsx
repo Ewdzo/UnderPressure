@@ -1,3 +1,5 @@
+const promptWords = ['aglet', 'agile', 'adventure', 'Alabasta', 'absolute', 'Brook', 'brownish', 'Baratie', 'backpack', 'Blackbeard', 'Chopper', 'cringe', 'cronometer', 'cascade', 'clockwork', 'Dressrosa', 'dangerous', 'dinasty', 'demogorgon', 'demonic', 'Elbaf', 'elucity', 'episode', 'energic', 'epifany', 'facility', 'Franky', 'fiesta', 'factoid', 'firefighter', 'gamer', 'Gastino', 'gangster', 'guillotine', 'gnocchi', 'Hancock', 'hammer', 'habitant', 'hemoglobin', 'hertz', 'indigo', 'Inuarashi', 'island', 'icon', 'ideal', 'Jinbe', 'jacket', 'jetpack', 'join', 'justify', 'Kozuki', 'Kaido', 'know', 'keynote', 'knot', 'Luffy', 'Loguetown', 'level', 'liberty', 'light', 'Marineford', 'machine', 'monkey', 'monster', 'multiplier', 'Nami', 'nanometer', 'necromancer', 'night', 'Newgate', 'objectivism', 'ocean', 'ocular', 'omnipotent', 'Onigashima', 'Poneglyph', 'paint', 'paleozoic', 'peppermint', 'perfect', 'queue', 'quote', 'quitter', 'quiz', 'quantum', 'Robin', 'rocket', 'rampage', 'racoon', 'restless', 'Sogeking', 'Sanji', 'sample', 'sugestive', 'Skypiea', 'thousand', 'time', 'tempest', 'temperature', 'Teach', 'Usopp', 'unity', 'ukulele', 'ultimate', 'Uranus', 'Vinsmoke', 'vintage', 'volcano', 'volume', 'voice', 'Whitebeard', 'Wano', 'water', 'wedding', 'waypoint', 'Xebec', 'xenobiotic', 'xenophobic', 'x-ray', 'Xerxes', 'Zoro', 'zoomer', 'zucchini', 'zebra', 'zombie'];
+
 class ButtonPrompt {
     constructor(button) {
         this.name = `TypePhrase${button}`
@@ -34,9 +36,9 @@ class WordPrompt {
 
 class PhrasePrompt {
     constructor(phrase) {
-        this.name = `TypePhrase${word}`
+        this.name = `TypePhrase${phrase}`
         this.type = "Phrase",
-        this.message = `Type the work ${word}`,
+        this.message = `Type the work ${phrase}`,
         this.value = 10,
         this.difficulty = "hard",
         this.time = 15000
