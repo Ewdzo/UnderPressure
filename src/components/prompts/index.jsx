@@ -36,7 +36,7 @@ class WordPrompt {
     constructor(word) {
         this.name = `TypeWord${word}`
         this.type = "Word",
-        this.message = `Type the work ${word}`,
+        this.message = `Type the word ${word}`,
         this.value = 5,
         this.difficulty = "medium",
         this.time = 10000,
@@ -48,7 +48,7 @@ class PhrasePrompt {
     constructor(phrase) {
         this.name = `TypePhrase${phrase}`
         this.type = "Phrase",
-        this.message = `Type the work ${phrase}`,
+        this.message = `Type the phrase ${phrase}`,
         this.value = 10,
         this.difficulty = "hard",
         this.time = 15000
@@ -57,23 +57,23 @@ class PhrasePrompt {
 
 function generatePrompt(type) {
 
-    if(type == 'key') {
+    if(type == "Key") {
         const randomNumber = (Math.floor(Math.random()*(25)) + 65);
         const randomLetter = String.fromCharCode(randomNumber);
         const randomPrompt = new KeyPrompt(randomLetter);
         return (randomPrompt);
     }
-    else if(type == 'button') {
-        const randomPrompt = new ButtonPrompt('button');
+    else if(type == "Button") {
+        const randomPrompt = new ButtonPrompt("Button");
         return (randomPrompt);
     }
-    else if(type == 'word') {
+    else if(type == "Word") {
         const randomNumber = (Math.floor(Math.random()*(25)));
         const randomWord = promptWords[randomNumber];
         const randomPrompt = new WordPrompt(randomWord);
         return (randomPrompt);
     }
-    else if(type == 'phrase') {
+    else if(type == "Phrase") {
         const randomNumber = (Math.floor(Math.random()*(25)));
         const randomPhrase= promptPhrase[randomNumber];
         const randomPrompt = new PhrasePrompt(randomPhrase);
