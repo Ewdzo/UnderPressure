@@ -195,7 +195,7 @@ function Profile() {
                 <div id="profile-container">
                     <a href=""><img id="profile-picture" src='src/images/default_icon.png'  alt="Profile Icon" /></a>
                     <h1>Welcome, Guest!</h1>
-                    <div id="game-logo"><img id="profile-logo" alt="Under Pressure Icon" /></div>
+                    <div id="game-logo"><img id="profile-logo" src={`src/images/under_pressure_${currentTheme}.png`} alt="Under Pressure Icon" /></div>
                     <a href="http://localhost:8000/auth">
                         <div id="log-in">
                             <img id="git-logo" src="src/images/github.png" alt="GitHub Icon" />
