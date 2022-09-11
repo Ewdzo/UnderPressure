@@ -40,7 +40,8 @@ class WordPrompt {
         this.value = 5,
         this.difficulty = "medium",
         this.time = 10000,
-        this.code = textToCode(word)
+        this.code = textToCode(word),
+        this.current = 0
     }
 };
 
@@ -68,13 +69,13 @@ function generatePrompt(type) {
         return (randomPrompt);
     }
     else if(type == "Word") {
-        const randomNumber = (Math.floor(Math.random()*(25)));
+        const randomNumber = (Math.floor(Math.random()*(125)));
         const randomWord = promptWords[randomNumber];
         const randomPrompt = new WordPrompt(randomWord);
         return (randomPrompt);
     }
     else if(type == "Phrase") {
-        const randomNumber = (Math.floor(Math.random()*(25)));
+        const randomNumber = (Math.floor(Math.random()*(125)));
         const randomPhrase= promptPhrase[randomNumber];
         const randomPrompt = new PhrasePrompt(randomPhrase);
         return (randomPrompt);
