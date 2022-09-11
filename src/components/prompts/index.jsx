@@ -4,7 +4,7 @@ const textToCode = (text) => {
     const charArray = [];
 
     for(let i=0; i < text.length; i++) {
-        charArray.push(text.charCodeAt(i))
+        charArray.push(text.toUpperCase().charCodeAt(i))
     };
 
     return charArray;
