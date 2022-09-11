@@ -52,7 +52,9 @@ class PhrasePrompt {
         this.message = `Type the phrase ${phrase}`,
         this.value = 10,
         this.difficulty = "hard",
-        this.time = 15000
+        this.time = 15000,
+        this.code = textToCode(phrase),
+        this.current = 0
     }
 };
 
