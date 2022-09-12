@@ -1,4 +1,5 @@
 const promptWords = ['aglet', 'agile', 'adventure', 'Alabasta', 'absolute', 'Brook', 'brownish', 'Baratie', 'backpack', 'Blackbeard', 'Chopper', 'cringe', 'cronometer', 'cascade', 'clockwork', 'Dressrosa', 'dangerous', 'dinasty', 'demogorgon', 'demonic', 'Elbaf', 'elucity', 'episode', 'energic', 'epifany', 'facility', 'Franky', 'fiesta', 'factoid', 'firefighter', 'gamer', 'Gastino', 'gangster', 'guillotine', 'gnocchi', 'Hancock', 'hammer', 'habitant', 'hemoglobin', 'hertz', 'indigo', 'Inuarashi', 'island', 'icon', 'ideal', 'Jinbe', 'jacket', 'jetpack', 'join', 'justify', 'Kozuki', 'Kaido', 'know', 'keynote', 'knot', 'Luffy', 'Loguetown', 'level', 'liberty', 'light', 'Marineford', 'machine', 'monkey', 'monster', 'multiplier', 'Nami', 'nanometer', 'necromancer', 'night', 'Newgate', 'objectivism', 'ocean', 'ocular', 'omnipotent', 'Onigashima', 'Poneglyph', 'paint', 'paleozoic', 'peppermint', 'perfect', 'queue', 'quote', 'quitter', 'quiz', 'quantum', 'Robin', 'rocket', 'rampage', 'racoon', 'restless', 'Sogeking', 'Sanji', 'sample', 'sugestive', 'Skypiea', 'thousand', 'time', 'tempest', 'temperature', 'Teach', 'Usopp', 'unity', 'ukulele', 'ultimate', 'Uranus', 'Vinsmoke', 'vintage', 'volcano', 'volume', 'voice', 'Whitebeard', 'Wano', 'water', 'wedding', 'waypoint', 'Xebec', 'xenobiotic', 'xenophobic', 'x-ray', 'Xerxes', 'Zoro', 'zoomer', 'zucchini', 'zebra', 'zombie'];
+const promptPhrases = ['One Piece is real']
 
 const textToCode = (text) => {
     const charArray = [];
@@ -77,8 +78,8 @@ function generatePrompt(type) {
         return (randomPrompt);
     }
     else if(type == "Phrase") {
-        const randomNumber = (Math.floor(Math.random()*(125)));
-        const randomPhrase= promptPhrase[randomNumber];
+        const randomNumber = (Math.floor(Math.random()*(1)));
+        const randomPhrase= promptPhrases[randomNumber];
         const randomPrompt = new PhrasePrompt(randomPhrase);
         return (randomPrompt);
     }

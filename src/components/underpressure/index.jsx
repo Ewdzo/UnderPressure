@@ -101,8 +101,8 @@ function App(props) {
             setPrompt({message: 'You Lost'});
         }
         else {
-            setPrompt(generatePrompt("Word"));
             window.clearTimeout(timer);
+            setPrompt(generatePrompt("Phrase"));
             window.clearInterval(countDownTimer);    
         
             timer = setTimeout(function() {
@@ -116,7 +116,7 @@ function App(props) {
             setCountDown(5);
             countDownTimer = setInterval(function () {
                 setCountDown(prevMultiplier => prevMultiplier - 1)
-            }, 1000);
+            }, (prompt.time / 5));
         };
     };
 
@@ -149,6 +149,7 @@ function App(props) {
             break;
             
             case "Word":
+            case "Phrase":
                 if (event.keyCode == prompt.code[prompt.current] && lifesRef.current > 0) {
                     if (prompt.code[prompt.current + 1] == undefined) {
                         incrementScore(prompt.value * multiplier);
