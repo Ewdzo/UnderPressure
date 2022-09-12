@@ -96,27 +96,39 @@ function App(props) {
         resetPrompt();
     };
 
+    const resetTimer = (prompt) => {
+        timer = setTimeout(function() {
+            if (lifesRef.current > 0) {
+                resetStreak()
+                newPrompt()
+                decrementLife(1)
+            };
+        },  prompt.time);
+
+        setCountDown(5);
+        countDownTimer = setInterval(function () {
+            setCountDown(prevMultiplier => prevMultiplier - 1)
+        }, (prompt.time / 5));
+    }
+
     const newPrompt = () => {
         if (lifesRef.current != 0 ) {
             window.clearTimeout(timer);
             window.clearInterval(countDownTimer);
 
-            setPrompt(generatePrompt("Phrase"));
-            const refPrompt = generatePrompt("Phrase");    
-        
-            timer = setTimeout(function() {
-                if (lifesRef.current > 0) {
-                    resetStreak()
-                    newPrompt()
-                    decrementLife(1)
-                };
-            },  refPrompt.time);
+            if(player.difficulty == "Easy") {
+                setPrompt(generatePrompt("Key"));
+                const refPrompt = generatePrompt("Key");  
+                resetTimer(refPrompt);
+            }
+            else if(player.difficulty == "Medium") {
+                const promptTypes = ["Key", "Word"];
+                const randomIndex = (Math.floor(Math.random()*(2)));
+                const mediumPrompt = generatePrompt(promptTypes[randomIndex]);
 
-            setCountDown(5);
-            countDownTimer = setInterval(function () {
-                setCountDown(prevMultiplier => prevMultiplier - 1)
-            }, (refPrompt.time / 5));
-            
+                setPrompt(mediumPrompt);
+                resetTimer(mediumPrompt);
+            }         
         }
         else {
             setPrompt({message: 'You Lost'});
