@@ -10,16 +10,6 @@ const textToCode = (text) => {
 
     return charArray;
 };
-class ButtonPrompt {
-    constructor(button) {
-        this.name = `TypePhrase${button}`
-        this.type = "Button",
-        this.message = `Type the work ${button}`,
-        this.value = 1,
-        this.difficulty = "easy",
-        this.time = 500
-    }
-}
 
 class KeyPrompt {
     constructor(key) {
@@ -79,7 +69,7 @@ function generatePrompt(type) {
     }
     else if(type == "Phrase") {
         const randomNumber = (Math.floor(Math.random()*(1)));
-        const randomPhrase= promptPhrases[randomNumber];
+        const randomPhrase = promptPhrases[randomNumber];
         const randomPrompt = new PhrasePrompt(randomPhrase);
         return (randomPrompt);
     }
