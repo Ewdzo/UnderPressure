@@ -128,7 +128,15 @@ function App(props) {
 
                 setPrompt(mediumPrompt);
                 resetTimer(mediumPrompt);
-            }         
+            }
+            else if(player.difficulty == "Hard") {
+                const promptTypes = ["Key", "Word", "Phrase"];
+                const randomIndex = (Math.floor(Math.random()*(3)));
+                const hardPrompt = generatePrompt(promptTypes[randomIndex]);
+
+                setPrompt(hardPrompt);
+                resetTimer(hardPrompt);
+            }       
         }
         else {
             setPrompt({message: 'You Lost'});
