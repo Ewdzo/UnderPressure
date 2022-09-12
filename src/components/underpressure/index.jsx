@@ -97,13 +97,12 @@ function App(props) {
     };
 
     const newPrompt = () => {
-        if (lifesRef.current == 0 ) {
-            setPrompt({message: 'You Lost'});
-        }
-        else {
+        if (lifesRef.current != 0 ) {
             window.clearTimeout(timer);
+            window.clearInterval(countDownTimer);
+
             setPrompt(generatePrompt("Phrase"));
-            window.clearInterval(countDownTimer);    
+            const refPrompt = generatePrompt("Phrase");    
         
             timer = setTimeout(function() {
                 if (lifesRef.current > 0) {
@@ -111,12 +110,16 @@ function App(props) {
                     newPrompt()
                     decrementLife(1)
                 };
-            },  prompt.time);
+            },  refPrompt.time);
 
             setCountDown(5);
             countDownTimer = setInterval(function () {
                 setCountDown(prevMultiplier => prevMultiplier - 1)
-            }, (prompt.time / 5));
+            }, (refPrompt.time / 5));
+            
+        }
+        else {
+            setPrompt({message: 'You Lost'});
         };
     };
 
