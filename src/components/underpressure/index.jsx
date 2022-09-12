@@ -101,7 +101,7 @@ function App(props) {
             setPrompt({message: 'You Lost'});
         }
         else {
-            setPrompt(generatePrompt('key'));
+            setPrompt(generatePrompt("Word"));
             window.clearTimeout(timer);
             window.clearInterval(countDownTimer);    
         
@@ -128,21 +128,56 @@ function App(props) {
 
     const checkKey = event => {
         if (prompt.code == undefined) { newPrompt(); }
-        else if (event.keyCode == prompt.code && lifesRef.current > 0) {
-            incrementScore(prompt.value * multiplier);
-            incrementStreak(1);
-            newPrompt();
-            playSound();
-        }
-        else if (event.keyCode != prompt.code && lifesRef.current > 0) {
-            resetStreak();
-            newPrompt();
-            decrementLife(1);
-        }
-        else if (event.keyCode != prompt.code || event.keyCode == prompt.code  && lifesRef.current == 0) {
-            newPrompt();
-        };
 
+        switch (prompt.type) {
+            case "Key": 
+                if (event.keyCode == prompt.code && lifesRef.current > 0) {
+                    incrementScore(prompt.value * multiplier);
+                    incrementStreak(1);
+                    newPrompt();
+                    playSound();
+                }
+                else if (event.keyCode != prompt.code && lifesRef.current > 0) {
+                    resetStreak();
+                    newPrompt();
+                    decrementLife(1);
+                }
+                else if (event.keyCode && lifesRef.current == 0) {
+                    newPrompt();
+                };
+
+            break;
+            
+            case "Word":
+                if (event.keyCode == prompt.code[prompt.current] && lifesRef.current > 0) {
+                    if (prompt.code[prompt.current + 1] == undefined) {
+                        incrementScore(prompt.value * multiplier);
+                        incrementStreak(1);
+                        newPrompt();
+                        playSound();
+                    }
+                    else {
+                        prompt.current = prompt.current + 1;
+                        playSound();
+                    }
+                }
+                else if (prompt.code[prompt.current + 1] == undefined) {
+                    incrementScore(prompt.value * multiplier);
+                    incrementStreak(1);
+                    newPrompt();
+                }
+                else if (event.keyCode != prompt.code[prompt.current] && lifesRef.current > 0) {
+                    resetStreak();
+                    newPrompt();
+                    decrementLife(1);
+                }
+                else if (event.keyCode && lifesRef.current == 0) {
+                    newPrompt();
+                };
+
+            break;
+        }
+        
         defineHighstreak();
         defineHighmultiplier();
         defineHighscore();
