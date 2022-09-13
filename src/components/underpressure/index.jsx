@@ -143,7 +143,7 @@ function App(props) {
                 const hardPrompt = generatePrompt(promptTypes[randomIndex]);
 
                 setPrompt(hardPrompt);
-                hardPrompt.time = hardPrompt.time / 5;
+                hardPrompt.time = hardPrompt.time / 2;
                 hardPrompt.value = hardPrompt.value * 2;
                 resetTimer(hardPrompt);
             }     

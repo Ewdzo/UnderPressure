@@ -43,7 +43,7 @@ class PhrasePrompt {
         this.message = `Type the phrase ${phrase}`,
         this.value = 15,
         this.difficulty = "hard",
-        this.time = 10000,
+        this.time = 8000,
         this.code = textToCode(phrase),
         this.current = 0
     }
