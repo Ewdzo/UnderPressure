@@ -136,7 +136,17 @@ function App(props) {
 
                 setPrompt(hardPrompt);
                 resetTimer(hardPrompt);
-            }       
+            }
+            else if(player.difficulty == "Insane") {
+                const promptTypes = ["Key", "Word", "Phrase"];
+                const randomIndex = (Math.floor(Math.random()*(3)));
+                const hardPrompt = generatePrompt(promptTypes[randomIndex]);
+
+                setPrompt(hardPrompt);
+                hardPrompt.time = hardPrompt.time / 5;
+                hardPrompt.value = hardPrompt.value * 2;
+                resetTimer(hardPrompt);
+            }     
         }
         else {
             setPrompt({message: 'You Lost'});
