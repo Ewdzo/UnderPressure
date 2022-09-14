@@ -1,22 +1,37 @@
 # Under Pressure
 
-Under Pressure is a WIP arcade-based game that consists in responding to prompts given in the least time possible.
+Under Pressure is a prompt-based game that consists in responding correctly to prompts in the least time possible.
 
-As of know it works on a time-demand base, in which you will have a certain time to respond to prompts, which as of know consists in pressing singular keys.
+Currently it works with prompts asking to type a key, word or phrase.
+
+It counts with 4 different difficulties: Easy, Medium, Hard and Insane.
+
+
 
 <h1>Features:</h1>
 
-Score, Streak, Multiplier of Points, Increasing Difficulty, Countdown Timer, Alternative GUI Themes
+<ul>
+    <li>Scoreboard</li>
+    <li>Key, Word and Phrase Prompts</li>
+    <li>Difficulty in 4 Levels</li>
+    <li>GUI Themes</li>
+    <li>MySQL Interaction via API</li>
+    <li>User Creation via GitHub Authentication</li>
+</ul>
 
-<h1>Intended Features</h1>
-
-Ranking, Difficulty Levels, Copypasta-Based Gameplay
 
 <h1>Instructions</h1>
 
-To run this project, you'll need to create an OAuth app in (https://github.com/settings/developers) with homepage url: Ex:(http://localhost:8000) and authorization callback url: Ex:(http://localhost:8000/auth/oauth-callback).
+<ul>Requirements: 
+    <li>OAuth App</li>
+    <li>MySQL Database</li>
+</ul>
 
-You will also need a MySQL server for full funcionality, providing access to it via .env as show in .env.example;
+
+Create an OAuth app in (https://github.com/settings/developers) with a homepage url, Ex:(http://localhost:8000), and a authorization callback url, Ex:(http://localhost:8000/auth/oauth-callback).
+Acess to a MySQL Database is needed to for full funcionality, providing it's credentials via .env as show in .env.example.
+
+After setting up, you can start the project with: 
 
 ```bash
 npm install
