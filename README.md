@@ -22,7 +22,7 @@ It counts with 4 different difficulties: Easy, Medium, Hard and Insane.
 
 <h1>Instructions</h1>
 
-<ul>Requirements: 
+<ul><h3>Requirements:</h3> 
     <li>OAuth App</li>
     <li>MySQL Database</li>
 </ul>
