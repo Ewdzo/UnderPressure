@@ -19,6 +19,12 @@ It counts with 4 different difficulties: Easy, Medium, Hard and Insane.
     <li>User Creation via GitHub Authentication</li>
 </ul>
 
+<h3>Profile via Github</h3>
+<img src="src/images/profile.gif" title="Profile via Github"></img>
+
+<h3>GUI Themes</h3>
+<img src="src/images/theme.gif" title="GUI Themes"></img>
+
 
 <h1>Instructions</h1>
 
