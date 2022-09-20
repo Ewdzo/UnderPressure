@@ -19,12 +19,12 @@ function App() {
 
       [...labels].forEach((label, index) => { 
         labels[index].onclick = () => {for (var i = 0; i <= (labels.length); i++) {
-          document.getElementsByName('difficulty-label')[index].className = 'animate__animated animate__bounce';
-          document.getElementsByName('difficulty-label')[index].id = 'difficulty-selected'
+          labels[index].className = 'animate__animated animate__bounce';
+          labels[index].id = 'difficulty-selected'
 
           if(i != (labels.length)){
-            document.getElementsByName('difficulty-label')[i].className = '';
-            document.getElementsByName('difficulty-label')[i].id = ''
+            labels[i].className = '';
+            labels[i].id = ''
           }
           
         }}
@@ -34,14 +34,17 @@ function App() {
   })
 
   if (playing == false) { 
-    const theme = () => { if(document.querySelector('input[name="theme"]:checked')){ return document.querySelector('input[name="theme"]:checked').value}};
+    const theme = (() => { 
+      if(document.querySelector('input[name="theme"]:checked')) { return document.querySelector('input[name="theme"]:checked').value }
+      else { return 'Blue'} 
+    })();
 
     return (
       <> 
         <div id='container'>
           <Profile />
           <div id='prompt'>
-            <div id='title'><h1>Under Pressure</h1><img id='logo' src={`src/images/under_pressure_${theme()}.png`} alt="" /></div>
+            <div id='title'><h1>Under Pressure</h1><img id='logo' src={`src/images/under_pressure_${theme}.png`} alt="" /></div>
             <button id="start" onClick={start}>Play</button>
             <form id="difficulty-selector" action="">
               <label name="difficulty-label" htmlFor="easy">Easy</label>
@@ -59,7 +62,7 @@ function App() {
   )}
 
   else if (playing == true) {
-    const theme = document.querySelector('input[name="theme"]:checked').value;
+    const theme = (() => { if(document.querySelector('input[name="theme"]:checked')){ return document.querySelector('input[name="theme"]:checked').value}})();
     return (
       <>
         <Profile />
