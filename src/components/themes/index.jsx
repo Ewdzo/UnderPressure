@@ -3,7 +3,7 @@ import './theme_picker.css'
 
 function Background() {
 
-    const [theme, setTheme] = useState('Blue');
+    const [theme, setTheme] = useState('blue');
 
     useEffect (() => {
         const selectTheme = document.getElementsByName('theme');
@@ -27,16 +27,16 @@ function Background() {
         updateTheme();     
     });
 
-    if(theme == 'Purple') {
+    if(theme == 'purple') {
         return(
             <>  
                 <div id="theme-picker-container">
                     <link rel="stylesheet" href="src/components/themes/theme_purple.css" />
                     <form id="theme-picker">
                         <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
-                        <input type="radio" id="blue" name="theme" value="Blue" />
+                        <input type="radio" id="blue" name="theme" value="blue" />
                         <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
-                        <input type="radio" id="purple" name="theme" defaultChecked value="Purple" />
+                        <input type="radio" id="purple" name="theme" defaultChecked value="purple" />
                         <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
                     </form>
                 </div>
@@ -46,16 +46,16 @@ function Background() {
             </>
         )
     }
-    else if(theme == 'Blue') {
+    else if(theme == 'blue') {
         return(
             <>  
                 <div id="theme-picker-container">
                     <link rel="stylesheet" href="src/components/themes/theme_blue.css" />
                     <form id="theme-picker">
                         <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
-                        <input type="radio" id="blue" name="theme" defaultChecked value="Blue" />
+                        <input type="radio" id="blue" name="theme" defaultChecked value="blue" />
                         <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
-                        <input type="radio" id="purple" name="theme" value="Purple" />
+                        <input type="radio" id="purple" name="theme" value="purple" />
                         <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
                     </form>
                 </div>
