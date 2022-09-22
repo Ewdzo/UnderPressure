@@ -3,7 +3,7 @@ import './theme_picker.css'
 
 function Background() {
 
-    const [theme, setTheme] = useState('blue');
+    const [theme, setTheme] = useState('purple');
 
     useEffect (() => {
         const selectTheme = document.getElementsByName('theme');
