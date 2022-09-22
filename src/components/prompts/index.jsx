@@ -33,7 +33,7 @@ class WordPrompt {
         this.time = 5000,
         this.code = textToCode(word),
         this.current = 0
-    }
+    };
 };
 
 class PhrasePrompt {
@@ -46,10 +46,10 @@ class PhrasePrompt {
         this.time = 8000,
         this.code = textToCode(phrase),
         this.current = 0
-    }
+    };
 };
 
-function generatePrompt(type) {
+export function generatePrompt(type) {
 
     if(type == "Key") {
         const randomNumber = (Math.floor(Math.random()*(25)) + 65);
@@ -72,9 +72,7 @@ function generatePrompt(type) {
         const randomPhrase = promptPhrases[randomNumber];
         const randomPrompt = new PhrasePrompt(randomPhrase);
         return (randomPrompt);
-    }
-
-
+    };
 };
 
-export default generatePrompt
+export const defaultPrompt = {message: 'Press Any Key to Start', time: 5000};

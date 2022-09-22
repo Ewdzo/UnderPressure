@@ -1,6 +1,6 @@
 import './underpressure.css'
 import { useEffect, useRef, useState } from "react";
-import generatePrompt from '../prompts';
+import { defaultPrompt, generatePrompt } from '../prompts';
 import 'animate.css';
 import Axios from "axios";
 import { getCookie, userToken } from '../cookies';
@@ -8,22 +8,6 @@ import { getCookie, userToken } from '../cookies';
 var timer, countDownTimer;
 
 function App(props) {
-    const updateCookie = () => {
-        if(cookieScore != null){
-            if(cookieScore < player.highscore) {document.cookie = `score=${player.highscore}`};
-            if (cookieStreak < player.highstreak) {document.cookie = `streak=${player.highstreak}`};
-            if (cookieMultiplier < player.highmultiplier) {document.cookie = `multiplier=${player.highmultiplier}`};
-            document.cookie = `difficulty=${player.difficulty}`;
-            document.cookie = `matches=${Number(getCookie('matches')) + 1}`;
-        };
-    };
-
-
-    const [cookieScore, setCookieScore] = useState(Number(getCookie("score")));
-    const [cookieStreak, setCookieStreak] = useState(Number(getCookie("streak")));
-    const [cookieMultiplier, setCookieMultiplier] = useState(Number(getCookie("multiplier")));
-    
-    const initialPrompt = {message: 'Press Any Key to Start', time: 5000};
 
     const [score, setScore] = useState(0);
     const [difficulty, setDifficulty] = useState(props.difficulty);
@@ -34,9 +18,12 @@ function App(props) {
     const [highstreak, setHighstreak] = useState(0);
     const [highmultiplier, setHighmultiplier] = useState(0);
     const [status, setStatus] = useState('Idle');
-    const [prompt, setPrompt] = useState(initialPrompt);
+    const [prompt, setPrompt] = useState(defaultPrompt);
     const [currentLife, setCurrentLife] = useState("src/images/3_hearts.png");
     const [countDown, setCountDown] = useState(0);
+    const [cookieScore] = useState(Number(getCookie("score")));
+    const [cookieStreak] = useState(Number(getCookie("streak")));
+    const [cookieMultiplier] = useState(Number(getCookie("multiplier")));
 
     const player = {
         difficulty: difficulty,
@@ -77,7 +64,7 @@ function App(props) {
 
     const defineHighmultiplier = () => { if (player.highmultiplier < player.multiplier) { setHighmultiplier(multiplier) }; };
 
-    const resetPrompt = () => { setPrompt(initialPrompt) };
+    const resetPrompt = () => { setPrompt(defaultPrompt) };
 
     const resetGame = () => {
         var id = window.setTimeout(function() {}, 0);
@@ -103,7 +90,7 @@ function App(props) {
         countDownTimer = setInterval(function () {
             setCountDown(prevMultiplier => prevMultiplier - 1)
         }, (prompt.time / 5));
-    }
+    };
 
     const newPrompt = () => {
         if (lifesRef.current != 0 ) {
@@ -211,6 +198,16 @@ function App(props) {
         defineHighscore();
     };
 
+    const updateCookie = () => {
+        if(cookieScore != null){
+            if(cookieScore < player.highscore) {document.cookie = `score=${player.highscore}`};
+            if (cookieStreak < player.highstreak) {document.cookie = `streak=${player.highstreak}`};
+            if (cookieMultiplier < player.highmultiplier) {document.cookie = `multiplier=${player.highmultiplier}`};
+            document.cookie = `difficulty=${player.difficulty}`;
+            document.cookie = `matches=${Number(getCookie('matches')) + 1}`;
+        };
+    };
+
     useEffect(() => {
         if(player.streak == 0) { setMultiplier(1) };
 
@@ -235,8 +232,8 @@ function App(props) {
             newPrompt();
             setStatus('Dead');
         }
-        else if(player.lifes == 3 && prompt.message == initialPrompt.message){ setStatus('Idle') }
-        else if(player.lifes != 0 && (prompt.message != initialPrompt.message)) { setStatus('Playing') };
+        else if(player.lifes == 3 && prompt.message == defaultPrompt.message){ setStatus('Idle') }
+        else if(player.lifes != 0 && (prompt.message != defaultPrompt.message)) { setStatus('Playing') };
 
     }, [player, lifes]);
 
