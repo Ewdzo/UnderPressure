@@ -3,18 +3,22 @@ import { useEffect, useRef, useState } from "react";
 import generatePrompt from '../prompts';
 import 'animate.css';
 import Axios from "axios";
+import { getCookie, userToken } from '../cookies';
 
 var timer, countDownTimer;
 
 function App(props) {
-
-    const getCookie = (name) => {
-        return document.cookie.split('; ').reduce((r, v) => {
-          const parts = v.split('=')
-          return parts[0] === name ? decodeURIComponent(parts[1]) : r
-        }, '')
+    const updateCookie = () => {
+        if(cookieScore != null){
+            if(cookieScore < player.highscore) {document.cookie = `score=${player.highscore}`};
+            if (cookieStreak < player.highstreak) {document.cookie = `streak=${player.highstreak}`};
+            if (cookieMultiplier < player.highmultiplier) {document.cookie = `multiplier=${player.highmultiplier}`};
+            document.cookie = `difficulty=${player.difficulty}`;
+            document.cookie = `matches=${Number(getCookie('matches')) + 1}`;
+        };
     };
-    const userToken = getCookie("userToken");    
+
+
     const [cookieScore, setCookieScore] = useState(Number(getCookie("score")));
     const [cookieStreak, setCookieStreak] = useState(Number(getCookie("streak")));
     const [cookieMultiplier, setCookieMultiplier] = useState(Number(getCookie("multiplier")));
@@ -48,16 +52,6 @@ function App(props) {
 
     const lifesRef = useRef(lifes);
     lifesRef.current = lifes;
-
-    const updateCookie = () => {
-        if(cookieScore){
-            if(cookieScore < player.highscore) {document.cookie = `score=${player.highscore}`};
-            if (cookieStreak < player.highstreak) {document.cookie = `streak=${player.highstreak}`};
-            if (cookieMultiplier < player.highmultiplier) {document.cookie = `multiplier=${player.highmultiplier}`};
-            document.cookie = `difficulty=${player.difficulty}`;
-            document.cookie = `matches=${Number(getCookie('matches')) + 1}`;
-        };
-    };
 
     const incrementScore = value => { setScore(prevScore => prevScore + value); };
 

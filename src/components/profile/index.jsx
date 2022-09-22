@@ -1,30 +1,8 @@
 import { useEffect, useState } from "react";
 import './profile.css'
 import Axios from "axios";
-
-const getCookie = (name) => {
-    return document.cookie.split('; ').reduce((r, v) => {
-      const parts = v.split('=')
-      return parts[0] === name ? decodeURIComponent(parts[1]) : r
-    }, '')
-};
-
-const userToken = getCookie("userToken");
-
-const getGithubInfo = async () => {
-    if(userToken){
-        const res = await fetch("https://api.github.com/user", {
-            headers: {
-              Authorization: "token " + userToken
-            }
-        });
-      
-        return res.json();
-    }
-};
-
-const userGitInfo = await getGithubInfo();
-
+import { getCookie, userToken } from "../cookies";
+import { userGitInfo } from "./data";
 
 function Profile() {
     if(userToken) {
