@@ -1,9 +1,8 @@
-import './App.css';
-import UnderPressure from './components/underpressure';
 import { useEffect, useState } from 'react';
+import UnderPressure from './components/underpressure';
 import Profile from './components/profile';
 import swal from 'sweetalert';
-
+import './App.css';
 
 function App() {
   const [playing, setPlaying] = useState(false);

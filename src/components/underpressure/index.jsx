@@ -1,16 +1,16 @@
-import './underpressure.css'
 import { useEffect, useRef, useState } from "react";
 import { defaultPrompt, generatePrompt } from '../prompts';
-import 'animate.css';
-import Axios from "axios";
 import { getCookie, userToken } from '../cookies';
+import Axios from "axios";
+import './underpressure.css'
+import 'animate.css';
 
 var timer, countDownTimer;
 
 function App(props) {
 
     const [score, setScore] = useState(0);
-    const [difficulty, setDifficulty] = useState(props.difficulty);
+    const [difficulty] = useState(props.difficulty);
     const [streak, setStreak] = useState(0);
     const [lifes, setLifes] = useState(3);
     const [multiplier, setMultiplier] = useState(1);

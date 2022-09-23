@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
-import './profile.css'
-import Axios from "axios";
 import { getCookie, userToken } from "../cookies";
 import { userGitInfo } from "./data";
+import Axios from "axios";
+import './profile.css'
 
 function Profile() {
     if(userToken) {
         const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
-        const [user, setUser] = useState(userGitInfo.name);
-        const [avatar, setAvatar] = useState(`https://github.com/${userGitInfo.login}.png`);
+        const [user] = useState(userGitInfo.name);
+        const [avatar] = useState(`https://github.com/${userGitInfo.login}.png`);
         const [userHighscore, setUserHighscore] = useState(userData.score);
         const [userStreak, setUserStreak] = useState(userData.streak);
         const [userMultiplier, setUserMultiplier] = useState(userData.multiplier);
         const [userMatches, setUserMatches] = useState(userData.matches);
         const [userDifficulty, setUserDifficulty] = useState(userData.difficulty);
-        const [currentTheme, setTheme] = useState('Blue');
+        const [currentTheme, setTheme] = useState('blue');
 
         const playerRegister = () => {
             if(userToken) {
@@ -145,7 +145,7 @@ function Profile() {
         );
     }
     else {
-        const [currentTheme, setTheme] = useState('Blue');
+        const [currentTheme, setTheme] = useState('blue');
 
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
