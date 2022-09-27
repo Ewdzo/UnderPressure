@@ -3,7 +3,23 @@ import './theme_picker.css'
 
 function Background() {
 
-    const [theme, setTheme] = useState('purple');
+    const [theme, setTheme] = useState('blue');
+
+    const blueBackground = document.createElement("image");
+    blueBackground.id = "background";
+    blueBackground.setAttribute("src", "src/images/background-blue.png");
+    blueBackground.alt = "Blue Mountains Pixel Art";
+
+    const purpleBackground = document.createElement("video");
+    purpleBackground.src = "./src/videos/background.mp4";
+    purpleBackground.id = "background";
+    purpleBackground.muted = true;
+    purpleBackground.autoplay = true;
+    purpleBackground.loop = true;
+
+    const cssTheme = document.createElement("link");
+    cssTheme.rel = "stylesheet";
+    cssTheme.href = `src/components/themes/theme_${theme}.css`;
 
     useEffect (() => {
         const selectTheme = document.getElementsByName('theme');
@@ -24,45 +40,36 @@ function Background() {
             }
         });
 
+        document.getElementById(theme).checked = true;
+
         updateTheme();     
     });
 
     if(theme == 'purple') {
-        return(
-            <>  
-                <div id="theme-picker-container">
-                    <link rel="stylesheet" href="src/components/themes/theme_purple.css" />
-                    <form id="theme-picker">
-                        <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
-                        <input type="radio" id="blue" name="theme" value="blue" />
-                        <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
-                        <input type="radio" id="purple" name="theme" defaultChecked value="purple" />
-                        <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
-                    </form>
-                </div>
-                <video autoPlay muted loop id="background">
-                    <source src="./src/videos/background.mp4" type="video/mp4" />
-                </video>
-            </>
-        )
+        useEffect(() => {
+            document.getElementById("theme-picker-container").after(purpleBackground);
+        })
     }
     else if(theme == 'blue') {
-        return(
-            <>  
-                <div id="theme-picker-container">
-                    <link rel="stylesheet" href="src/components/themes/theme_blue.css" />
-                    <form id="theme-picker">
-                        <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
-                        <input type="radio" id="blue" name="theme" defaultChecked value="blue" />
-                        <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
-                        <input type="radio" id="purple" name="theme" value="purple" />
-                        <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
-                    </form>
-                </div>
-                <img src="src/images/background-blue.png" id="background" alt="Blue Mountains Pixel Art" />
-            </>
-        );
+        useEffect(() => {
+            document.getElementById("theme-picker-container").after(blueBackground);
+        })
     };
+
+    return(
+        <>  
+        <div id="theme-picker-container">
+            <link rel="stylesheet" href={`src/components/themes/theme_${theme}.css`} />
+            <form id="theme-picker">
+                <button id="palette"><img id="palette-icon" src="src/images/palette.png" alt="Palette" /></button>
+                <input type="radio" id="blue" name="theme" value="blue" />
+                <label id='blue-label' htmlFor="blue"><img src="src/images/theme_1.png" alt="Blue Theme" /></label>
+                <input type="radio" id="purple" name="theme" value="purple" />
+                <label id='purple-label' htmlFor="purple"><img src="src/images/theme_2.png" alt="Purple Theme" /></label>
+            </form>
+        </div>
+    </>
+    )
 };
 
 export default Background
