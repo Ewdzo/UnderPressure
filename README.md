@@ -39,7 +39,7 @@ It counts with 4 different difficulties: Easy, Medium, Hard and Insane.
 
 
 Create an OAuth app in (https://github.com/settings/developers) with a homepage url, Ex:(http://localhost:8000), and a authorization callback url, Ex:(http://localhost:8000/auth/oauth-callback).
-Acess to a MySQL Database is needed to for full funcionality, providing it's credentials via .env as show in .env.example.
+Access to a MySQL Database is needed to for full functionality, providing it's credentials via .env as show in .env.example.
 
 After setting up, you can start the project with: 
 
