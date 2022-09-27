@@ -5,9 +5,9 @@ function Background() {
 
     const [theme, setTheme] = useState('blue');
 
-    const blueBackground = document.createElement("image");
+    const blueBackground = document.createElement("img");
     blueBackground.id = "background";
-    blueBackground.setAttribute("src", "src/images/background-blue.png");
+    blueBackground.src = "src/images/background_blue.png";
     blueBackground.alt = "Blue Mountains Pixel Art";
 
     const purpleBackground = document.createElement("video");
@@ -16,10 +16,6 @@ function Background() {
     purpleBackground.muted = true;
     purpleBackground.autoplay = true;
     purpleBackground.loop = true;
-
-    const cssTheme = document.createElement("link");
-    cssTheme.rel = "stylesheet";
-    cssTheme.href = `src/components/themes/theme_${theme}.css`;
 
     useEffect (() => {
         const selectTheme = document.getElementsByName('theme');
@@ -47,11 +43,13 @@ function Background() {
 
     if(theme == 'purple') {
         useEffect(() => {
+            if(document.getElementById("background")) {document.getElementById("background").remove()};
             document.getElementById("theme-picker-container").after(purpleBackground);
         })
     }
     else if(theme == 'blue') {
         useEffect(() => {
+            if(document.getElementById("background")) {document.getElementById("background").remove()};
             document.getElementById("theme-picker-container").after(blueBackground);
         })
     };
