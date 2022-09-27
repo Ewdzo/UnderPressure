@@ -17,6 +17,12 @@ function Background() {
     purpleBackground.autoplay = true;
     purpleBackground.loop = true;
 
+    const iconTheme = document.createElement("link");
+    iconTheme.rel = "icon";
+    iconTheme.href = `src/images/under_pressure_${theme}.png`;
+    iconTheme.type = "image/x-icon";
+    iconTheme.id = 'windowIcon'
+
     useEffect (() => {
         const selectTheme = document.getElementsByName('theme');
 
@@ -44,13 +50,17 @@ function Background() {
     if(theme == 'purple') {
         useEffect(() => {
             if(document.getElementById("background")) {document.getElementById("background").remove()};
+            if(document.getElementById("windowIcon")) {document.getElementById("windowIcon").remove()};
             document.getElementById("theme-picker-container").after(purpleBackground);
+            document.getElementsByTagName("head")[0].appendChild(iconTheme);
         })
     }
     else if(theme == 'blue') {
         useEffect(() => {
             if(document.getElementById("background")) {document.getElementById("background").remove()};
+            if(document.getElementById("windowIcon")) {document.getElementById("windowIcon").remove()};
             document.getElementById("theme-picker-container").after(blueBackground);
+            document.getElementsByTagName("head")[0].appendChild(iconTheme);
         })
     };
 
