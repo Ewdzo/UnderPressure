@@ -1,5 +1,6 @@
 {
   "name": "underpressure",
+  "homepage": "https://ewdzo.github.io/UnderPressure",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +8,9 @@
     "preinstall": "npm --prefix ./src/server install",
     "dev": "concurrently --kill-others \"npx vite\" \"npm --prefix ./src/server/ run dev\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run dev",
+    "deploy": "npm run dev"
   },
   "dependencies": {
     "animate.css": "^4.1.1",
