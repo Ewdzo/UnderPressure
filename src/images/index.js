@@ -1,5 +1,5 @@
 import Hearts0 from "./hearts_0.png";
-import Hearts1 from "./hearts_1.png";
+import Heart1 from "./heart_1.png";
 import Hearts2 from "./hearts_2.png";
 import Hearts3 from "./hearts_3.png";
 import BackgroundBlue from "./background_blue.png";
@@ -36,6 +36,6 @@ import UnderPressureBlue from "./under_pressure_blue.png";
 import UnderPressurePurple from "./under_pressure_purple.png";
 import UnderPressureRed from "./under_pressure_red.png";
 
-const images = [ Hearts0, Hearts1, Hearts2, Hearts3, BackgroundBlue, BorderBlue, BorderPurple, Countdown0, Countdown1, Countdown2, Countdown3, Countdown4, Countdown5, DefaultIcon, DifficultyIcon, GitHub, Heart, Highscore, HomeBlue, HomePurple, Joystick, LogOutBlue, LogOutPurple, LogOutHoverBlue, LogOutHoverPurple, MenuBlue, MenuPurple, Multiplier, NewHeart, Palette, Refresh, Streak, ThemeBlue, ThemePurple, UnderPressureBlue, UnderPressurePurple, UnderPressureRed];
+const images = [ Hearts0, Heart1, Hearts2, Hearts3, BackgroundBlue, BorderBlue, BorderPurple, Countdown0, Countdown1, Countdown2, Countdown3, Countdown4, Countdown5, DefaultIcon, DifficultyIcon, GitHub, Heart, Highscore, HomeBlue, HomePurple, Joystick, LogOutBlue, LogOutPurple, LogOutHoverBlue, LogOutHoverPurple, MenuBlue, MenuPurple, Multiplier, NewHeart, Palette, Refresh, Streak, ThemeBlue, ThemePurple, UnderPressureBlue, UnderPressurePurple, UnderPressureRed];
 
 export default images;
