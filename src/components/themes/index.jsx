@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import './theme_picker.css';
 import images from "../../images";
+import backgroundVideo from "../../videos/background.mp4";
 
 function Background() {
 
@@ -13,7 +14,7 @@ function Background() {
     blueBackground.alt = "Blue Mountains Pixel Art";
 
     const purpleBackground = document.createElement("video");
-    purpleBackground.src = "./src/videos/background.mp4";
+    purpleBackground.src = backgroundVideo;
     purpleBackground.id = "background";
     purpleBackground.muted = true;
     purpleBackground.autoplay = true;
