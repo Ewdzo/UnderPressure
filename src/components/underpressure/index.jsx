@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { defaultPrompt, generatePrompt } from '../prompts';
 import { getCookie, userToken } from '../cookies';
+import RightKey from '../../audio/key_press.mp3';
 import Axios from "axios";
 import images from "../../images";
 import './underpressure.css'
@@ -140,7 +141,7 @@ function App(props) {
     };
 
     const playSound = () => {
-        const audio = new Audio('src/audio/key_press.mp3')
+        const audio = new Audio(RightKey)
         audio.volume = 0.2
         audio.play();
     };
