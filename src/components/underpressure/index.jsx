@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { defaultPrompt, generatePrompt } from '../prompts';
 import { getCookie, userToken } from '../cookies';
 import Axios from "axios";
+import images from "../../images";
 import './underpressure.css'
 import 'animate.css';
 
@@ -91,6 +92,10 @@ function App(props) {
             setCountDown(prevMultiplier => prevMultiplier - 1)
         }, (prompt.time / 5));
     };
+
+    const currentCountdown = () => {
+        return images[7 + countDown];
+    }
 
     const newPrompt = () => {
         if (lifesRef.current != 0 ) {
@@ -375,16 +380,16 @@ function App(props) {
                 <div id='score'>{player.score}</div>
                 <div id='multiplier'>{player.multiplier}x</div>
                 <div id='lifes'><img src={currentLife} alt=""/></div>
-                <div id='newLife'><img src="src/images/new_heart.png" alt="New Heart Icon" /></div>
+                <div id='newLife'><img src={images[28]} alt="New Heart Icon" /></div>
                 <div id='prompt'>
                     <h1>{prompt.message}</h1>
-                    <div id='timer'><img src={`src/images/countdown_${countDown}.png`} alt="CountDown Timer" /></div>
+                    <div id='timer'><img src={currentCountdown()} alt="CountDown Timer" /></div>
                     <button id="start-btn" onClick={() => { resetGame() }}>Reset</button>
                 </div>
                 <div>
-                    <div id='difficulty'><img src="src/images/difficulty.png" alt="Difficulty Icon" />Difficulty<br></br>{player.difficulty}</div>
-                    <div id='streak'><img src="src/images/streak.png" alt="Streak Icon" /> Streak<br></br>{player.streak}</div>
-                    <div id='highscore'><img src="src/images/highscore.png" alt="Highscore Icon" /> Highscore<br></br>{player.highscore}</div> 
+                    <div id='difficulty'><img src={images[14]} alt="Difficulty Icon" />Difficulty<br></br>{player.difficulty}</div>
+                    <div id='streak'><img src={images[31]}alt="Streak Icon" /> Streak<br></br>{player.streak}</div>
+                    <div id='highscore'><img src={images[17]} alt="Highscore Icon" /> Highscore<br></br>{player.highscore}</div> 
                 </div>  
             </div> 
         </div>
