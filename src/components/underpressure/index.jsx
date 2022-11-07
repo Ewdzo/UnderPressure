@@ -304,10 +304,10 @@ function App(props) {
         if (player.status == 'Playing' || player.status == 'Idle') { document.getElementById('start-btn').style.display = 'none' }
         else if (player.status == 'Dead') { document.getElementById('start-btn').style.display = '' };
         
-        if (lifes == 3) { setCurrentLife("src/images/3_hearts.png") }
-        else if (lifes == 2) { setCurrentLife("src/images/2_hearts.png") }
-        else if (lifes == 1) { setCurrentLife("src/images/1_heart.png")  }
-        else if (lifes == 0) { setCurrentLife("src/images/0_hearts.png") };
+        if (lifes == 3) { setCurrentLife(images[3]) }
+        else if (lifes == 2) { setCurrentLife(images[2]) }
+        else if (lifes == 1) { setCurrentLife(images[1])  }
+        else if (lifes == 0) { setCurrentLife(images[0]) };
 
     }, [status, lifes]);
     
