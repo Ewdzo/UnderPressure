@@ -3,7 +3,7 @@ import './theme_picker.css';
 import images from "../../images";
 import backgroundVideo from "../../videos/background.mp4";
 
-function Background() {
+function ThemeSrc() {
 
     const [theme, setTheme] = useState('blue');
     const [themeIndex, setThemeIndex] = useState('0');
@@ -103,4 +103,4 @@ const ThemeBlue = {
 
 export const Themes = [ ]
 
-export default Background
+export default ThemeSrc
