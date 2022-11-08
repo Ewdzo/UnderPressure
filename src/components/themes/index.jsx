@@ -119,5 +119,6 @@ const ThemePurple = {
     scoreboardChild: { color: "black" }
 };
 
+export const Themes = [ ThemeBlue, ThemePurple ];
 
 export default ThemeSrc
