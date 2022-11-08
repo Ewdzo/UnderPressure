@@ -101,6 +101,23 @@ const ThemeBlue = {
     scoreboardChild: { color: "black" }
 };
 
-export const Themes = [ ]
+const ThemePurple = {
+    profileContainer: { background: "#F9D94EF0" },
+    profileContainerImage: {
+        background: "#120623",
+        borderImage: `${images[6]} round 70`
+    },
+    profilePicture: {
+        borderImage: `${images[6 ]} round 70`
+    },
+    swalButton: { backgroundColor: "#6D23D1" },
+    promptButton: { backgroundColor: "#6C23D1DE", color: "white" },
+    difficultyHover: { color: "#823FDE" },
+    difficultySelected: { color: "#6D23D1" },
+    containerChild: { color: "white" },
+    scoreboard: { color: "white" },
+    scoreboardChild: { color: "black" }
+};
+
 
 export default ThemeSrc
