@@ -26,11 +26,6 @@ function Background() {
     iconTheme.id = 'windowIcon';
     iconTheme.href = images[34 + themeIndex];
 
-    const themeCSS = document.createElement("link");
-    themeCSS.rel = "stylesheet";
-    themeCSS.id = 'windowIcon';
-    themeCSS.href = `src/components/themes/theme_${theme}.css`;
-
     const updateTheme = () => {
         if(theme == 'blue'){ setThemeIndex(0) }
         else if(theme == 'purple'){ setThemeIndex(1) };
@@ -63,7 +58,6 @@ function Background() {
             if(document.getElementById("windowIcon")) {document.getElementById("windowIcon").remove()};
             document.getElementById("theme-picker-container").after(purpleBackground);
             document.getElementsByTagName("head")[0].appendChild(iconTheme);
-            document.getElementsByTagName("head")[0].appendChild(themeCSS);
         })
     }
     else if(theme == 'blue') {
@@ -72,7 +66,6 @@ function Background() {
             if(document.getElementById("windowIcon")) {document.getElementById("windowIcon").remove()};
             document.getElementById("theme-picker-container").after(blueBackground);
             document.getElementsByTagName("head")[0].appendChild(iconTheme);
-            document.getElementsByTagName("head")[0].appendChild(themeCSS);
         })
     };
 
@@ -90,5 +83,24 @@ function Background() {
     </>
     )
 };
+
+const ThemeBlue = {
+    profileContainer: { background: "#63D2FFF0" },
+    profileContainerImage: {
+        background: "#ADE8FF",
+        borderImage: `${images[5]} round 70`
+    },
+    profilePicture: {
+        borderImage: `${images[5]} round 70`
+    },
+    swalButton: { backgroundColor: "#2081C3" },
+    promptButton: { backgroundColor: "#2081C3DE", color: "white" },
+    difficultyHover: { color: "#2081C3" },
+    difficultySelected: { color: "#78D5D7" },
+    scoreboard: { color: "white" },
+    scoreboardChild: { color: "black" }
+};
+
+export const Themes = [ ]
 
 export default Background
