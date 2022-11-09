@@ -86,12 +86,18 @@ function ThemeSrc() {
 
 const ThemeBlue = {
     profileContainer: { background: "#63D2FFF0" },
-    profileContainerImage: {
-        background: "#ADE8FF",
-        borderImage: `${images[5]} round 70`
+    profileContainerImage: () => { 
+        const cssObject = {
+            background: "#ADE8FF",
+            borderImage: `url(${images[5]}) round 70`  
+        }
+        return cssObject
     },
-    profilePicture: {
-        borderImage: `${images[5]} round 70`
+    profilePicture: () => { 
+        const cssObject = {
+            borderImage: `url(${images[5]}) round 70`  
+        }
+        return cssObject
     },
     swalButton: { backgroundColor: "#2081C3" },
     promptButton: { backgroundColor: "#2081C3DE", color: "white" },
@@ -103,12 +109,18 @@ const ThemeBlue = {
 
 const ThemePurple = {
     profileContainer: { background: "#F9D94EF0" },
-    profileContainerImage: {
-        background: "#120623",
-        borderImage: `${images[6]} round 70`
+    profileContainerImage: () => { 
+        const cssObject = {
+            background: "#120623",
+            borderImage: `url(${images[6]}) round 70`  
+        }
+        return cssObject
     },
-    profilePicture: {
-        borderImage: `${images[6 ]} round 70`
+    profilePicture: () => { 
+        const cssObject = {
+            borderImage: `url(${images[6]}) round 70`  
+        }
+        return cssObject
     },
     swalButton: { backgroundColor: "#6D23D1" },
     promptButton: { backgroundColor: "#6C23D1DE", color: "white" },
