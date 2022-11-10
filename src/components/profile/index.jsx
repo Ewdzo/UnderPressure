@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { getCookie, userToken } from "../cookies";
 import { userGitInfo } from "./data";
+import { Themes } from "../themes";
 import Axios from "axios";
-import './profile.css'
 import images from "../../images";
+import './profile.css'
 
 function Profile() {
     if(userToken) {
@@ -15,7 +16,6 @@ function Profile() {
         const [userMultiplier, setUserMultiplier] = useState(userData.multiplier);
         const [userMatches, setUserMatches] = useState(userData.matches);
         const [userDifficulty, setUserDifficulty] = useState(userData.difficulty);
-        const [currentTheme, setTheme] = useState('blue');
         const [themeIndex, setThemeIndex] = useState('0');
 
         const playerRegister = () => {
@@ -54,22 +54,9 @@ function Profile() {
             };
         };
 
-        const updateTheme = () => {
-            if(currentTheme == 'blue'){ setThemeIndex(0) }
-            else if(currentTheme == 'purple'){ setThemeIndex(1) };
-    
-            if(document.getElementById('logo')) {document.getElementById('logo').src = images[34 + themeIndex]};
-            if(document.getElementById('home-icon')) {document.getElementById('home-icon').src = images[18 + themeIndex]};
-            if(document.getElementById('profile-logo')) {document.getElementById('profile-logo').src = images[34 + themeIndex]};
-            if(document.getElementById('log-out-img')) {document.getElementById('log-out-img').src = images[21 + themeIndex]}
-            if(document.getElementById('log-out-img-hover')) {document.getElementById('log-out-img-hover').src = images[23 + themeIndex]}
-            if(document.getElementById('menu-icon')) {document.getElementById('menu-icon').src = images[25 + themeIndex]}
-        };
-
         useEffect(() => {
             updateProfile();
             playerRegister(); 
-            updateTheme();
 
             if(userToken && !userData.synced) {
                 setUserData({synced: true});
@@ -126,28 +113,26 @@ function Profile() {
                 document.getElementById('log-out-img').style.display = 'flex'
                 document.getElementById('log-out-img-hover').style.display = 'none'
             };
-
-            if(document.querySelector('input[name="theme"]:checked')){ setTheme(document.querySelector('input[name="theme"]:checked').value)}
         });
 
         return ( 
             <>
                 <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={images[25 + themeIndex]} alt="Menu Icon" /></div>            
-                <div id="profile-container">
-                    <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img id="profile-picture" src={avatar}  alt="Profile Picture" /></a>
+                <div id="profile-container" style={Themes[themeIndex].profileContainer}>
+                    <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img style={Themes[themeIndex].profilePicture()} id="profile-picture" src={avatar}  alt="Profile Picture" /></a>
                     <h1>{user}</h1>
                     <table>
                         <tbody>
                         <tr>
-                            <td><img src={images[17]} alt="Highscore Icon" /><h3>Highest Score</h3><span>{userHighscore}</span></td>
-                            <td><img src={images[31]}alt="Streak Icon" /><h3>Highest Streak</h3><span>{userStreak}</span></td>
+                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[17]} alt="Highscore Icon" /><h3>Highest Score</h3><span>{userHighscore}</span></td>
+                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[31]} alt="Streak Icon" /><h3>Highest Streak</h3><span>{userStreak}</span></td>
                         </tr>
                         <tr>
-                            <td><img src={images[27]} alt="Multiplier Icon" /><h3>Highest Multiplier</h3><span>{userMultiplier}</span></td>
-                            <td><img src={images[20]} alt="Joystick Icon" /><h3>Matches Played</h3><span>{userMatches}</span></td>
+                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[27]} alt="Multiplier Icon" /><h3>Highest Multiplier</h3><span>{userMultiplier}</span></td>
+                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[20]} alt="Joystick Icon" /><h3>Matches Played</h3><span>{userMatches}</span></td>
                         </tr>
                         <tr>
-                            <td colSpan={2}><img src={images[14]} alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><span>{userDifficulty}</span></td>
+                            <td colSpan={2}><img style={Themes[themeIndex].profileContainerImage()} src={images[14]} alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><span>{userDifficulty}</span></td>
                         </tr>
                         </tbody>
                     </table>
@@ -160,20 +145,7 @@ function Profile() {
         );
     }
     else {
-        const [currentTheme, setTheme] = useState('blue');
         const [themeIndex, setThemeIndex] = useState('0');
-
-        const updateTheme = () => {
-            if(currentTheme == 'blue'){ setThemeIndex(0) }
-            else if(currentTheme == 'purple'){ setThemeIndex(1) };
-    
-            if(document.getElementById('logo')) {document.getElementById('logo').src = images[34 + themeIndex]};
-            if(document.getElementById('home-icon')) {document.getElementById('home-icon').src = images[18 + themeIndex]};
-            if(document.getElementById('profile-logo')) {document.getElementById('profile-logo').src = images[34 + themeIndex]};
-            if(document.getElementById('log-out-img')) {document.getElementById('log-out-img').src = images[21 + themeIndex]}
-            if(document.getElementById('log-out-img-hover')) {document.getElementById('log-out-img-hover').src = images[23 + themeIndex]}
-            if(document.getElementById('menu-icon')) {document.getElementById('menu-icon').src = images[25 + themeIndex]}
-        };
 
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
@@ -191,16 +163,12 @@ function Profile() {
                     profileContainer.classList.add('animate__animated', 'animate__bounceOutLeft')
                 };
             };
-
-            if(document.querySelector('input[name="theme"]:checked')) { setTheme(document.querySelector('input[name="theme"]:checked').value)}
-        
-            updateTheme();
         });
 
         return ( 
             <>  
                 <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={images[25 + themeIndex]} alt="Menu Icon" /></div>    
-                <div id="profile-container">
+                <div id="profile-container" style={Themes.profileContainer}>
                     <a href=""><img id="profile-picture" src={images[13]}  alt="Profile Icon" /></a>
                     <h1>Welcome, Guest!</h1>
                     <div id="game-logo"><img id="profile-logo" src={images[34 + themeIndex]} alt="Under Pressure Icon" /></div>
