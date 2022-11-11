@@ -13,7 +13,6 @@ function App() {
 
   useEffect(() => {
     if (playing == false) {
-      document.getElementById('menu-icon').style.filter = ''
       const labels = document.getElementsByName('difficulty-label');
 
       [...labels].forEach((label, index) => { 
@@ -29,7 +28,6 @@ function App() {
         }}
       });
     }
-
   })
 
   if (playing == false) { 
