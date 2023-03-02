@@ -31,11 +31,3 @@
 #container > div:nth-child(3) {
     color: white;
 }
-
-#scoreboard {
-    color: white;
-}
-
-#scoreboard > div:nth-child(5) {
-    color: black;
-}

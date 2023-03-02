@@ -27,11 +27,3 @@
 #difficulty-selected {
     color: #78D5D7;
 }
-
-#scoreboard {
-    color: white;
-}
-
-#scoreboard > div:nth-child(5) {
-    color: black;
-}

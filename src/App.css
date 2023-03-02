@@ -82,3 +82,73 @@
 
   text-align: center;
 };
+
+#scoreboard {
+  color: white;
+}
+
+#scoreboard > div:nth-child(5) {
+  color: black;
+}
+
+/* Blue Theme */ 
+
+.blue-theme-profile-container {
+  background: #63D2FFF0;
+}
+
+.blue-theme-profile-container > table > tbody > tr > td > img, .blue-theme-profile-picture {
+  background: #ADE8FF;
+  border-image: url('../../images/border_blue.png') round 70;
+}
+
+.swal-button-blue, .swal-button-blue:not([disabled]):hover {
+  background-color: #2081C3;
+}
+
+.prompt-button-blue {
+  background-color: #2081C3DE;
+  color: white;
+}
+
+.difficulty-selector-blue label:hover{
+  color: #2081C3;
+}
+ 
+.difficulty-selected-blue label:hover{
+  color: #78D5D7;
+}
+
+
+
+/* Purple Theme */ 
+
+.purple-theme-profile-container {
+  background: #F9D94EF0;
+}
+
+.purple-theme-profile-container > table > tbody > tr > td > img, .purple-theme-profile-picture {
+  background: #120623;
+  border-image: url("../../images/border_purple.png") round 70;
+}
+
+.swal-button-purple, .swal-button-purple:not([disabled]):hover {
+  background-color: #6D23D1;
+}
+
+.prompt-button-purple {
+  background-color: #6C23D1DE;
+  color: white;
+}
+
+.difficulty-selector-purple label:hover{
+  color: #823FDE;
+}
+ 
+.difficulty-selected-purple label:hover{
+  color: #6D23D1
+}
+
+.container-purple > div:nth-child(3) {
+  color: white;
+}
