@@ -97,7 +97,7 @@
   background: #63D2FFF0;
 }
 
-.blue-theme-profile-container > table > tbody > tr > td > img, .blue-theme-profile-picture {
+.blue-theme-profile-container-image, .blue-theme-profile-picture {
   background: #ADE8FF;
   border-image: url('../../images/border_blue.png') round 70;
 }
