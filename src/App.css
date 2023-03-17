@@ -97,7 +97,7 @@
   background: #63D2FFF0;
 }
 
-.blue-theme-profile-container-image, .blue-theme-profile-picture {
+.blue-theme-profile-container-image {
   background: #ADE8FF;
   border-image: url('../../images/border_blue.png') round 70;
 }
@@ -127,7 +127,7 @@
   background: #F9D94EF0;
 }
 
-.purple-theme-profile-container > table > tbody > tr > td > img, .purple-theme-profile-picture {
+.purple-theme-profile-container-image {
   background: #120623;
   border-image: url("../../images/border_purple.png") round 70;
 }
