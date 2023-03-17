@@ -85,3 +85,19 @@ function ThemeSrc() {
 };
 
 export default ThemeSrc
+
+class ThemeCSSClasses {
+    construct(profileContainerClass, profileContainerImagesClass, swallButtonClass, promptButtonClass, difficultySelectorClass, difficultySelectedClass){
+        this.profileContainer = profileContainerClass;
+        this.profileContainerImages = profileContainerImagesClass;
+        this.profilePicture = profileContainerImagesClass;
+        this.swallButton = swallButtonClass;
+        this.promptButton = promptButtonClass;
+        this.difficultySelector = difficultySelectorClass;
+        this.difficultySelected = difficultySelectedClass;
+    }
+}
+
+export const blueThemeClasses = new ThemeCSSClasses("blue-theme-profile-container", "blue-theme-profile-container-image", "swal-button-blue", "prompt-button-blue", "difficulty-selector-blue", "difficulty-selected-blue");
+
+export const purpleThemeClasses = new ThemeCSSClasses("purple-theme-profile-container", "purple-theme-profile-container-image", "swal-button-purple", "prompt-button-purple", "difficulty-selector-purple", "difficulty-selected-purple");
