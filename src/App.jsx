@@ -3,6 +3,7 @@ import UnderPressure from './components/underpressure';
 import Profile from './components/profile';
 import swal from 'sweetalert';
 import './App.css';
+import { pickTheme } from './components/themes';
 
 function App() {
   const [playing, setPlaying] = useState(false);
@@ -14,17 +15,14 @@ function App() {
   useEffect(() => {
     if (playing == false) {
       const labels = document.getElementsByName('difficulty-label');
-
       [...labels].forEach((label, index) => { 
         labels[index].onclick = () => {for (var i = 0; i <= (labels.length); i++) {
           labels[index].className = 'animate__animated animate__bounce';
-          labels[index].id = 'difficulty-selected'
 
           if(i != (labels.length)){
             labels[i].className = '';
-            labels[i].id = ''
+            labels[i].id = '';
           }
-          
         }}
       });
     }
@@ -57,7 +55,6 @@ function App() {
         </div>
       </>
   )}
-
   else if (playing == true) {
     const theme = (() => { if(document.querySelector('input[name="theme"]:checked')){ return document.querySelector('input[name="theme"]:checked').value}})();
     return (
