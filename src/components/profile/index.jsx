@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import { getCookie, userToken } from "../cookies";
 import { userGitInfo } from "./data";
-import { Themes } from "../themes";
 import Axios from "axios";
 import images from "../../images";
 import './profile.css'
+import { blueThemeClasses, purpleThemeClasses} from "../themes";
 
-function Profile() {
+function Profile(props) {
+    const themeClasses = [ blueThemeClasses, purpleThemeClasses];
+
+    
     if(userToken) {
         const [userData, setUserData] = useState({score: 0, streak: 0, multiplier: 0, matches: 0, difficulty: 'No Matches Found'});
         const [user] = useState(userGitInfo.name);
@@ -16,8 +19,7 @@ function Profile() {
         const [userMultiplier, setUserMultiplier] = useState(userData.multiplier);
         const [userMatches, setUserMatches] = useState(userData.matches);
         const [userDifficulty, setUserDifficulty] = useState(userData.difficulty);
-        const [themeIndex, setThemeIndex] = useState('0');
-
+        
         const playerRegister = () => {
             if(userToken) {
                 Axios.get("http://localhost:8000/user/", {
@@ -117,27 +119,27 @@ function Profile() {
 
         return ( 
             <>
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={images[25 + themeIndex]} alt="Menu Icon" /></div>            
-                <div id="profile-container" style={Themes[themeIndex].profileContainer}>
-                    <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img style={Themes[themeIndex].profilePicture()} id="profile-picture" src={avatar}  alt="Profile Picture" /></a>
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={images[25 + props.theme]} alt="Menu Icon" /></div>            
+                <div id="profile-container" className={themeClasses[props.theme].profileContainer}>
+                    <a href={`https://github.com/${userGitInfo.login}`} target='blank'><img id="profile-picture" className={themeClasses[props.theme].profileContainerImages} src={avatar}  alt="Profile Picture" /></a>
                     <h1>{user}</h1>
                     <table>
                         <tbody>
                         <tr>
-                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[17]} alt="Highscore Icon" /><h3>Highest Score</h3><span>{userHighscore}</span></td>
-                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[31]} alt="Streak Icon" /><h3>Highest Streak</h3><span>{userStreak}</span></td>
+                            <td><img className={themeClasses[props.theme].profileContainerImages} src={images[17]} alt="Highscore Icon" /><h3>Highest Score</h3><span>{userHighscore}</span></td>
+                            <td><img className={themeClasses[props.theme].profileContainerImages} src={images[31]} alt="Streak Icon" /><h3>Highest Streak</h3><span>{userStreak}</span></td>
                         </tr>
                         <tr>
-                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[27]} alt="Multiplier Icon" /><h3>Highest Multiplier</h3><span>{userMultiplier}</span></td>
-                            <td><img style={Themes[themeIndex].profileContainerImage()} src={images[20]} alt="Joystick Icon" /><h3>Matches Played</h3><span>{userMatches}</span></td>
+                            <td><img className={themeClasses[props.theme].profileContainerImages} src={images[27]} alt="Multiplier Icon" /><h3>Highest Multiplier</h3><span>{userMultiplier}</span></td>
+                            <td><img className={themeClasses[props.theme].profileContainerImages} src={images[20]} alt="Joystick Icon" /><h3>Matches Played</h3><span>{userMatches}</span></td>
                         </tr>
                         <tr>
-                            <td colSpan={2}><img style={Themes[themeIndex].profileContainerImage()} src={images[14]} alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><span>{userDifficulty}</span></td>
+                            <td colSpan={2}><img className={themeClasses[props.theme].profileContainerImages} src={images[14]} alt="Difficulty Icon" /><h3>Last Played Difficulty</h3><span>{userDifficulty}</span></td>
                         </tr>
                         </tbody>
                     </table>
                     <div id='buttons'>
-                        <button id="log-out"><img id="log-out-img" src={images[21 + themeIndex]} alt="Log Out Icon" title="Log Out"/><img id="log-out-img-hover" src={images[23 + themeIndex]} alt="Log Out Icon" title="Log Out"/></button>
+                        <button id="log-out"><img id="log-out-img" src={images[21 + props.theme]} alt="Log Out Icon" title="Log Out"/><img id="log-out-img-hover" src={images[23 + props.theme]} alt="Log Out Icon" title="Log Out"/></button>
                         <button id="refresh"><img src={images[30]} alt="Refresh Icon" title="Refresh Profile"/></button>
                     </div>
                 </div>
@@ -145,12 +147,11 @@ function Profile() {
         );
     }
     else {
-        const [themeIndex, setThemeIndex] = useState('0');
 
         useEffect(() => {
             const menuCheckbox = document.getElementById('menu-btn');
             const profileContainer = document.querySelector('#profile-container');
-    
+
             menuCheckbox.onclick = () => { 
                 if(menuCheckbox.checked == true) {
                     profileContainer.style.bottom = '0'
@@ -167,11 +168,11 @@ function Profile() {
 
         return ( 
             <>  
-                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={images[25 + themeIndex]} alt="Menu Icon" /></div>    
-                <div id="profile-container" style={Themes.profileContainer}>
-                    <a href=""><img id="profile-picture" src={images[13]}  alt="Profile Icon" /></a>
+                <div id='menu'><input id="menu-btn" type='checkbox' /><img id="menu-icon" src={images[25 + props.theme]} alt="Menu Icon" /></div>    
+                <div id="profile-container" className={themeClasses[props.theme].profileContainer}>
+                    <a href=""><img id="profile-picture" className={themeClasses[props.theme].profilePicture} src={images[13]}  alt="Profile Icon" /></a>
                     <h1>Welcome, Guest!</h1>
-                    <div id="game-logo"><img id="profile-logo" src={images[34 + themeIndex]} alt="Under Pressure Icon" /></div>
+                    <div id="game-logo"><img id="profile-logo" src={images[34 + props.theme]} alt="Under Pressure Icon" /></div>
                     <a href="http://localhost:8000/auth">
                         <div id="log-in">
                             <img id="git-logo" src={images[15]} alt="GitHub Icon" />
