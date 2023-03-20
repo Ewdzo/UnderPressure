@@ -3,7 +3,6 @@ import UnderPressure from './components/underpressure';
 import Profile from './components/profile';
 import swal from 'sweetalert';
 import './App.css';
-import { pickTheme } from './components/themes';
 
 function App() {
   const [playing, setPlaying] = useState(false);
