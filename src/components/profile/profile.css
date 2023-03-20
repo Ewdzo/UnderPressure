@@ -67,7 +67,6 @@
 
 #profile-container > table > tbody > tr > td > img {
     height: 70px;
-    border: solid 10px transparent;
 }
 
 #profile-container > table > tbody > tr > td > span {
@@ -79,8 +78,6 @@
 
 #profile-picture {
     height: 180px;
-
-    border: solid 20px transparent;
 }
 
 #profile-picture[src*='src/images/default_icon.png'] {

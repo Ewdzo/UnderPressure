@@ -99,8 +99,11 @@
 
 .blue-theme-profile-container-image {
   background: #ADE8FF;
-  border-image: url('../../images/border_blue.png') round 70;
+  border: solid 15px transparent;
+  border-image: url('./images/border_blue.png') round 70;
 }
+
+
 
 .swal-button-blue, .swal-button-blue:not([disabled]):hover {
   background-color: #2081C3;
@@ -129,7 +132,8 @@
 
 .purple-theme-profile-container-image {
   background: #120623;
-  border-image: url("../../images/border_purple.png") round 70;
+  border-image: url("./images/border_purple.png") round 70;
+  border: solid 15px transparent;
 }
 
 .swal-button-purple, .swal-button-purple:not([disabled]):hover {
