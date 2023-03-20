@@ -87,7 +87,7 @@ function ThemeSrc() {
 export default ThemeSrc
 
 class ThemeCSSClasses {
-    construct(profileContainerClass, profileContainerImagesClass, swallButtonClass, promptButtonClass, difficultySelectorClass, difficultySelectedClass){
+    constructor(profileContainerClass, profileContainerImagesClass, swallButtonClass, promptButtonClass, difficultySelectorClass, difficultySelectedClass) {
         this.profileContainer = profileContainerClass;
         this.profileContainerImages = profileContainerImagesClass;
         this.profilePicture = profileContainerImagesClass;
