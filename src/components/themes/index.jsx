@@ -27,15 +27,8 @@ function ThemeSrc() {
     iconTheme.href = images[34 + themeIndex];
 
     const updateTheme = () => {
-        if(theme == 'blue'){ setThemeIndex(0) }
-        else if(theme == 'purple'){ setThemeIndex(1) };
-
-        if(document.getElementById('logo')) {document.getElementById('logo').src = images[34 + themeIndex]};
-        if(document.getElementById('home-icon')) {document.getElementById('home-icon').src = images[18 + themeIndex]};
-        if(document.getElementById('profile-logo')) {document.getElementById('profile-logo').src = images[34 + themeIndex]};
-        if(document.getElementById('log-out-img')) {document.getElementById('log-out-img').src = images[21 + themeIndex]}
-        if(document.getElementById('log-out-img-hover')) {document.getElementById('log-out-img-hover').src = images[23 + themeIndex]}
-        if(document.getElementById('menu-icon')) {document.getElementById('menu-icon').src = images[25 + themeIndex]}
+        if(theme == 'blue') setThemeIndex(0);
+        else if(theme == 'purple') setThemeIndex(1);
     };
 
     useEffect (() => {
@@ -49,7 +42,8 @@ function ThemeSrc() {
         });
 
         document.getElementById(theme).checked = true;
-        updateTheme();     
+        updateTheme();
+        document.cookie = `theme=${document.querySelector('input[name="theme"]:checked').value}`;
     });
 
     if(theme == 'purple') {
