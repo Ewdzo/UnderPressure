@@ -81,17 +81,17 @@ function ThemeSrc() {
 export default ThemeSrc
 
 class ThemeCSSClasses {
-    constructor(profileContainerClass, profileContainerImagesClass, swallButtonClass, promptButtonClass, difficultySelectorClass, difficultySelectedClass) {
-        this.profileContainer = profileContainerClass;
-        this.profileContainerImages = profileContainerImagesClass;
-        this.profilePicture = profileContainerImagesClass;
-        this.swallButton = swallButtonClass;
-        this.promptButton = promptButtonClass;
-        this.difficultySelector = difficultySelectorClass;
-        this.difficultySelected = difficultySelectedClass;
+    constructor(themeName) {
+        this.profileContainer = themeName + "-theme-profile-container";
+        this.profileContainerImages = themeName + "-theme-profile-container-image";
+        this.profilePicture = themeName + "-theme-profile-container-image";
+        this.swallButton = "swal-button-" + themeName;
+        this.promptButton = "prompt-button-" + themeName;
+        this.difficultySelector = "difficulty-selector-" + themeName;
+        this.difficultySelected = "difficulty-selected-" + themeName;
     }
 }
 
-export const blueThemeClasses = new ThemeCSSClasses("blue-theme-profile-container", "blue-theme-profile-container-image", "swal-button-blue", "prompt-button-blue", "difficulty-selector-blue", "difficulty-selected-blue");
+export const blueThemeClasses = new ThemeCSSClasses("blue");
 
-export const purpleThemeClasses = new ThemeCSSClasses("purple-theme-profile-container", "purple-theme-profile-container-image", "swal-button-purple", "prompt-button-purple", "difficulty-selector-purple", "difficulty-selected-purple");
+export const purpleThemeClasses = new ThemeCSSClasses("purple");
