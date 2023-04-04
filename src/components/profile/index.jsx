@@ -4,7 +4,7 @@ import { userGitInfo } from "./data";
 import Axios from "axios";
 import images from "../../images";
 import './profile.css'
-import { blueThemeClasses, purpleThemeClasses} from "../themes";
+import { blueThemeClasses, purpleThemeClasses } from "../themes/ThemeCSSClasses";
 
 function Profile(props) {
     const themeClasses = [ blueThemeClasses, purpleThemeClasses];
